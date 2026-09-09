@@ -1,0 +1,13 @@
+{
+  "status": "ACCEPTED",
+  "assessmentId": "ASS-DEMO-PRACTICAL-001",
+  "provenance": "MOCK_BEHAVIOUR",
+  "updates": [
+    {
+      "competencyId": "COMP-SAMPLING",
+      "before": 2,
+      "after": 3
+    }
+  ],
+  "notice": "Simulated practical-rubric evidence, not percentage-to-level conversion or official certification."
+}

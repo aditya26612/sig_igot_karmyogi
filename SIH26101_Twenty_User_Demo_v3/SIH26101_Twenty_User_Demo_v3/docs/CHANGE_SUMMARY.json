@@ -1,0 +1,163 @@
+{
+  "version": "3.0.0",
+  "tables": [
+    {
+      "table": "sources",
+      "before": 11,
+      "after": 13,
+      "delta": 2
+    },
+    {
+      "table": "mdos",
+      "before": 1,
+      "after": 1,
+      "delta": 0
+    },
+    {
+      "table": "divisions",
+      "before": 6,
+      "after": 6,
+      "delta": 0
+    },
+    {
+      "table": "competencies",
+      "before": 18,
+      "after": 32,
+      "delta": 14
+    },
+    {
+      "table": "competency_levels",
+      "before": 90,
+      "after": 160,
+      "delta": 70
+    },
+    {
+      "table": "roles",
+      "before": 8,
+      "after": 15,
+      "delta": 7
+    },
+    {
+      "table": "activities",
+      "before": 13,
+      "after": 34,
+      "delta": 21
+    },
+    {
+      "table": "activity_competencies",
+      "before": 40,
+      "after": 94,
+      "delta": 54
+    },
+    {
+      "table": "role_competencies",
+      "before": 35,
+      "after": 85,
+      "delta": 50
+    },
+    {
+      "table": "positions",
+      "before": 14,
+      "after": 28,
+      "delta": 14
+    },
+    {
+      "table": "position_role",
+      "before": 20,
+      "after": 41,
+      "delta": 21
+    },
+    {
+      "table": "users",
+      "before": 10,
+      "after": 20,
+      "delta": 10
+    },
+    {
+      "table": "user_competencies",
+      "before": 77,
+      "after": 202,
+      "delta": 125
+    },
+    {
+      "table": "competency_evidence",
+      "before": 74,
+      "after": 199,
+      "delta": 125
+    },
+    {
+      "table": "courses",
+      "before": 20,
+      "after": 30,
+      "delta": 10
+    },
+    {
+      "table": "course_competencies",
+      "before": 19,
+      "after": 46,
+      "delta": 27
+    },
+    {
+      "table": "course_learning_outcomes",
+      "before": 24,
+      "after": 59,
+      "delta": 35
+    },
+    {
+      "table": "learning_outcome_competency",
+      "before": 24,
+      "after": 58,
+      "delta": 34
+    },
+    {
+      "table": "course_prerequisites",
+      "before": 1,
+      "after": 1,
+      "delta": 0
+    },
+    {
+      "table": "training_records",
+      "before": 4,
+      "after": 50,
+      "delta": 46
+    },
+    {
+      "table": "knowledge_resources",
+      "before": 1,
+      "after": 2,
+      "delta": 1
+    },
+    {
+      "table": "course_resources",
+      "before": 1,
+      "after": 2,
+      "delta": 1
+    },
+    {
+      "table": "competency_gaps",
+      "before": 138,
+      "after": 338,
+      "delta": 200
+    },
+    {
+      "table": "course_recommendations",
+      "before": 4,
+      "after": 10,
+      "delta": 6
+    },
+    {
+      "table": "learning_paths",
+      "before": 10,
+      "after": 20,
+      "delta": 10
+    },
+    {
+      "table": "learning_path_items",
+      "before": 82,
+      "after": 391,
+      "delta": 309
+    }
+  ],
+  "preservation": "All original user profiles, position/role/activity chains, levels, evidence, four history rows and course records retained. COMP-011 description clarified. Derived snapshots recomputed.",
+  "schema": "Both SQL schema files remain byte-identical to v2. All table/column names and types retained."
+}

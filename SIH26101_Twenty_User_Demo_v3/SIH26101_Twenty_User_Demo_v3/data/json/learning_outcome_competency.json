@@ -1,0 +1,582 @@
+[
+  {
+    "learning_outcome_id": "LO-001-01",
+    "competency_id": "COMP-002",
+    "target_level": 3,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-001-02",
+    "competency_id": "COMP-002",
+    "target_level": 3,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-002-01",
+    "competency_id": "COMP-013",
+    "target_level": 3,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-002-02",
+    "competency_id": "COMP-013",
+    "target_level": 3,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-101-01",
+    "competency_id": "COMP-SAMPLING",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-101-02",
+    "competency_id": "COMP-SAMPLING",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-102-01",
+    "competency_id": "COMP-003",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-102-02",
+    "competency_id": "COMP-003",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-104-01",
+    "competency_id": "COMP-005",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-104-02",
+    "competency_id": "COMP-005",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-108-01",
+    "competency_id": "COMP-009",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-108-02",
+    "competency_id": "COMP-009",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-109-01",
+    "competency_id": "COMP-010",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-109-02",
+    "competency_id": "COMP-010",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-112-01",
+    "competency_id": "COMP-014",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-112-02",
+    "competency_id": "COMP-014",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-113-01",
+    "competency_id": "COMP-015",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-113-02",
+    "competency_id": "COMP-015",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-114-01",
+    "competency_id": "COMP-016",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-114-02",
+    "competency_id": "COMP-016",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-115-01",
+    "competency_id": "COMP-017",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-115-02",
+    "competency_id": "COMP-017",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-116-01",
+    "competency_id": "COMP-018",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-116-02",
+    "competency_id": "COMP-018",
+    "target_level": 4,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-003-01",
+    "competency_id": "COMP-005",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-004-01",
+    "competency_id": "COMP-014",
+    "target_level": 2,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-005-01",
+    "competency_id": "COMP-014",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-006-01",
+    "competency_id": "COMP-009",
+    "target_level": 2,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-007-01",
+    "competency_id": "COMP-009",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-008-01",
+    "competency_id": "COMP-008",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-009-01",
+    "competency_id": "COMP-008",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-011-01",
+    "competency_id": "COMP-019",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-011-02",
+    "competency_id": "COMP-010",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-012-01",
+    "competency_id": "COMP-020",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-013-01",
+    "competency_id": "COMP-021",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-014-01",
+    "competency_id": "COMP-026",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-014-02",
+    "competency_id": "COMP-028",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-014-03",
+    "competency_id": "COMP-011",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-015-01",
+    "competency_id": "COMP-025",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-015-02",
+    "competency_id": "COMP-029",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-016-01",
+    "competency_id": "COMP-012",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-017-01",
+    "competency_id": "COMP-007",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-117-01",
+    "competency_id": "COMP-027",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-117-02",
+    "competency_id": "COMP-011",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-117-03",
+    "competency_id": "COMP-022",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-118-01",
+    "competency_id": "COMP-030",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-118-02",
+    "competency_id": "COMP-031",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-118-03",
+    "competency_id": "COMP-032",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-119-01",
+    "competency_id": "COMP-022",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-119-02",
+    "competency_id": "COMP-024",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-101-03",
+    "competency_id": "COMP-023",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-101-04",
+    "competency_id": "COMP-006",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-101-05",
+    "competency_id": "COMP-004",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-113-03",
+    "competency_id": "COMP-024",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-108-03",
+    "competency_id": "COMP-022",
+    "target_level": 4,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-004-02",
+    "competency_id": "COMP-032",
+    "target_level": 2,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-005-02",
+    "competency_id": "COMP-032",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "learning_outcome_id": "LO-007-02",
+    "competency_id": "COMP-022",
+    "target_level": 3,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  }
+]

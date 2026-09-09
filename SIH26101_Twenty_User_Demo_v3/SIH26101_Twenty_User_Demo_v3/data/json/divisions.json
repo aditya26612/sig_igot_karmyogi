@@ -1,0 +1,68 @@
+[
+  {
+    "division_id": "DIV-001",
+    "mdo_id": "MDO-001",
+    "name": "Field Operations Division",
+    "abbreviation": "FOD",
+    "source_id": "SRC-001",
+    "provenance": "PUBLIC_OFFICIAL",
+    "source_type": "PUBLIC_OFFICIAL",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "division_id": "DIV-002",
+    "mdo_id": "MDO-001",
+    "name": "Household Survey Division",
+    "abbreviation": "HSD",
+    "source_id": "SRC-001",
+    "provenance": "PUBLIC_OFFICIAL",
+    "source_type": "PUBLIC_OFFICIAL",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "division_id": "DIV-003",
+    "mdo_id": "MDO-001",
+    "name": "Enterprise Survey Division",
+    "abbreviation": "EnSD",
+    "source_id": "SRC-001",
+    "provenance": "PUBLIC_OFFICIAL",
+    "source_type": "PUBLIC_OFFICIAL",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "division_id": "DIV-004",
+    "mdo_id": "MDO-001",
+    "name": "Price Statistics Division",
+    "abbreviation": "PSD",
+    "source_id": "SRC-001",
+    "provenance": "PUBLIC_OFFICIAL",
+    "source_type": "PUBLIC_OFFICIAL",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "division_id": "DIV-005",
+    "mdo_id": "MDO-001",
+    "name": "National Accounts Division",
+    "abbreviation": "NAD",
+    "source_id": "SRC-001",
+    "provenance": "PUBLIC_OFFICIAL",
+    "source_type": "PUBLIC_OFFICIAL",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "division_id": "DIV-006",
+    "mdo_id": "MDO-001",
+    "name": "Data Informatics and Innovation Division",
+    "abbreviation": "DIID",
+    "source_id": "SRC-001",
+    "provenance": "PUBLIC_OFFICIAL",
+    "source_type": "PUBLIC_OFFICIAL",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  }
+]

@@ -1,0 +1,1012 @@
+{
+  "scope": "Local HTTP checks for every persona, course and competency. No external integration or production security claims. DB restored after tests.",
+  "tests_run": 251,
+  "passed": 251,
+  "failed": 0,
+  "results": [
+    {
+      "test": "Catalogue count users",
+      "status": "PASS"
+    },
+    {
+      "test": "Catalogue count positions",
+      "status": "PASS"
+    },
+    {
+      "test": "Catalogue count roles",
+      "status": "PASS"
+    },
+    {
+      "test": "Catalogue count competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Catalogue count courses",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-001 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-002 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-003 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-004 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-005 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-006 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-007 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-008 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-009 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-010 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-011 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-012 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-013 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-014 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-015 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-016 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-017 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-018 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-019 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 profile IDs preserved",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 competencies count and camelCase",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 training history",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 current gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 current recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 target gaps and decoded trace arrays",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 target recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 target learning path",
+      "status": "PASS"
+    },
+    {
+      "test": "USR-020 full journey",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-SAMPLING five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-002 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-003 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-004 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-005 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-006 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-007 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-008 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-009 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-010 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-011 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-012 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-013 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-014 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-015 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-016 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-017 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-018 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-019 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-020 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-021 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-022 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-023 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-024 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-025 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-026 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-027 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-028 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-029 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-030 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-031 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "COMP-032 five levels",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-001 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-002 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-003 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-004 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-005 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-006 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-007 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-008 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-009 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-010 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-101 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-102 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-104 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-108 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-109 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-112 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-113 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-114 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-115 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-116 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-011 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-012 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-013 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-014 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-015 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-016 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-017 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-117 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-118 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-119 course context and objectives",
+      "status": "PASS"
+    },
+    {
+      "test": "CRS-010 remains explicitly unmapped",
+      "status": "PASS"
+    },
+    {
+      "test": "Invalid scope is rejected",
+      "status": "PASS"
+    },
+    {
+      "test": "Sampling rubric cannot promote cybersecurity",
+      "status": "PASS"
+    },
+    {
+      "test": "Rejected assessment leaves evidence count intact",
+      "status": "PASS"
+    }
+  ]
+}

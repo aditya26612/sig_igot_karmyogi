@@ -1,0 +1,167 @@
+[
+  {
+    "role_id": "ROLE-001",
+    "name": "Survey Field Operations",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-002",
+    "name": "Survey Data Quality",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-003",
+    "name": "Price Statistics",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-004",
+    "name": "National Accounts",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-005",
+    "name": "Survey Methodology",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-006",
+    "name": "Statistical Data Governance",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-007",
+    "name": "Survey Field Supervision",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "SUPERVISORY",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-008",
+    "name": "Statistical Capability Leadership",
+    "description": "Project role, not a published MoSPI job specification.",
+    "tier": "MANAGERIAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "role_id": "ROLE-009",
+    "name": "Labour Statistics Analysis",
+    "description": "Derived statistical work role for fictional integration personas; no official staffing claim.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "role_id": "ROLE-010",
+    "name": "Agricultural Statistics Analysis",
+    "description": "Derived statistical work role for fictional integration personas; no official staffing claim.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "role_id": "ROLE-011",
+    "name": "SDG and Statistical Quality Assurance",
+    "description": "Derived statistical work role for fictional integration personas; no official staffing claim.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "role_id": "ROLE-012",
+    "name": "Reproducible Statistical Programming",
+    "description": "Derived statistical work role for fictional integration personas; no official staffing claim.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "role_id": "ROLE-013",
+    "name": "Survey Design and Metadata Standards",
+    "description": "Derived statistical work role for fictional integration personas; no official staffing claim.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "role_id": "ROLE-014",
+    "name": "Cloud Statistical Data Platforms",
+    "description": "Derived statistical work role for fictional integration personas; no official staffing claim.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "role_id": "ROLE-015",
+    "name": "Cybersecurity for Statistical Services",
+    "description": "Derived statistical work role for fictional integration personas; no official staffing claim.",
+    "tier": "TECHNICAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  }
+]

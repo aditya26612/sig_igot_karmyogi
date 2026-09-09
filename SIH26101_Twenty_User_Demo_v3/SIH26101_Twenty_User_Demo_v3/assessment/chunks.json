@@ -1,0 +1,72 @@
+[
+  {
+    "chunk_id": "CHK-DEMO-001",
+    "document_id": "DOC-DEMO-SAMPLING-001",
+    "resource_id": "RES-DEMO-001",
+    "page": 1,
+    "slide": null,
+    "section": "Stratified sampling",
+    "chunk_index": 0,
+    "text": "In stratified sampling, a population is divided into nonoverlapping strata, and a sample is selected within each stratum. With proportional allocation, the sample share for a stratum equals its population share. For two strata of 800 and 400 units and a total sample of 120, proportional allocation selects 80 and 40 units respectively.",
+    "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+    "provenance": "SYNTHETIC",
+    "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+    "not_official_igot_material": true
+  },
+  {
+    "chunk_id": "CHK-DEMO-002",
+    "document_id": "DOC-DEMO-SAMPLING-001",
+    "resource_id": "RES-DEMO-001",
+    "page": 1,
+    "slide": null,
+    "section": "Stratified sampling",
+    "chunk_index": 1,
+    "text": "For a stratified population mean, stratum sample means are combined using the population shares of the strata. If two strata contain 800 and 400 units, their population shares are two-thirds and one-third. A simple unweighted average of the two stratum means is generally not the same as this population-weighted mean.",
+    "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+    "provenance": "SYNTHETIC",
+    "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+    "not_official_igot_material": true
+  },
+  {
+    "chunk_id": "CHK-DEMO-003",
+    "document_id": "DOC-DEMO-SAMPLING-001",
+    "resource_id": "RES-DEMO-001",
+    "page": 2,
+    "slide": null,
+    "section": "Sampling weights",
+    "chunk_index": 2,
+    "text": "A basic design weight is the reciprocal of a unit's selection probability. If a unit has selection probability 0.10, its design weight is 10. A design weight represents how many population units the sampled unit represents under the sampling design; it is not a score for the quality of a response.",
+    "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+    "provenance": "SYNTHETIC",
+    "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+    "not_official_igot_material": true
+  },
+  {
+    "chunk_id": "CHK-DEMO-004",
+    "document_id": "DOC-DEMO-SAMPLING-001",
+    "resource_id": "RES-DEMO-001",
+    "page": 2,
+    "slide": null,
+    "section": "Frames and coverage",
+    "chunk_index": 3,
+    "text": "A sampling frame should identify eligible sampling units without duplicates or omissions. Duplicated units can receive unintended selection opportunities. Missing eligible units create undercoverage. These are frame-quality problems and cannot be fixed merely by increasing the sample size from the same defective frame.",
+    "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+    "provenance": "SYNTHETIC",
+    "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+    "not_official_igot_material": true
+  },
+  {
+    "chunk_id": "CHK-DEMO-005",
+    "document_id": "DOC-DEMO-SAMPLING-001",
+    "resource_id": "RES-DEMO-001",
+    "page": 3,
+    "slide": null,
+    "section": "Strata and clusters",
+    "chunk_index": 4,
+    "text": "Stratification selects samples within every stratum. In one-stage cluster sampling, a sample of clusters is selected and all units in those selected clusters are observed. These designs differ in which groups are selected and which units within those groups are observed.",
+    "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+    "provenance": "SYNTHETIC",
+    "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+    "not_official_igot_material": true
+  }
+]

@@ -1,0 +1,3 @@
+resource_id,title,type,url,local_path,description,provider,ingestion_allowed,source_id,provenance,source_type,created_at,updated_at
+RES-DEMO-001,Synthetic sampling practice handbook,PDF,,assessment/sampling_practice.pdf,"Original project-authored three-page teaching fixture, not iGOT content or an official MoSPI document.",Fictional Statistical Learning Studio,1,SRC-PROJECT,SYNTHETIC,SYNTHETIC,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+RES-DEMO-002,Synthetic SQL statistical query practice,TXT,,assessment/sql_practice.txt,"Original project-authored SQL NULL and join-grain fixture, not a live AI output or approved practical rubric.",Fictional Statistical Learning Studio,1,SRC-EXPANSION,SYNTHETIC,SYNTHETIC,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z

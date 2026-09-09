@@ -1,0 +1,317 @@
+{
+  "timestamp": "2026-09-09T19:26:24",
+  "rounds_per_scenario": 2,
+  "context_lesson": "Lesson 3: Stratified Sampling & Proportional Allocation",
+  "results": {
+    "openai/gpt-oss-120b": {
+      "GROUNDED": {
+        "mean_latency_s": 1.59,
+        "latencies": [
+          1.63,
+          1.55
+        ],
+        "jitter_s": 0.06,
+        "tokens_per_s": 349.2,
+        "chars": 1718,
+        "qualities": [
+          "WEAK",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "COMPETENCY": {
+        "mean_latency_s": 0.76,
+        "latencies": [
+          0.71,
+          0.8
+        ],
+        "jitter_s": 0.06,
+        "tokens_per_s": 180.4,
+        "chars": 72,
+        "qualities": [
+          "FAIL",
+          "FAIL"
+        ],
+        "failures": 0
+      },
+      "GUARDRAIL": {
+        "mean_latency_s": 0.59,
+        "latencies": [
+          0.58,
+          0.6
+        ],
+        "jitter_s": 0.01,
+        "tokens_per_s": 143.0,
+        "chars": 72,
+        "qualities": [
+          "PASS",
+          "PASS"
+        ],
+        "failures": 0
+      }
+    },
+    "openai/gpt-oss-20b": {
+      "GROUNDED": {
+        "mean_latency_s": 0.8,
+        "latencies": [
+          0.86,
+          0.75
+        ],
+        "jitter_s": 0.08,
+        "tokens_per_s": 480.6,
+        "chars": 1037,
+        "qualities": [
+          "WEAK",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "COMPETENCY": {
+        "mean_latency_s": 0.57,
+        "latencies": [
+          0.54,
+          0.61
+        ],
+        "jitter_s": 0.05,
+        "tokens_per_s": 221.1,
+        "chars": 72,
+        "qualities": [
+          "FAIL",
+          "FAIL"
+        ],
+        "failures": 0
+      },
+      "GUARDRAIL": {
+        "mean_latency_s": 0.59,
+        "latencies": [
+          0.58,
+          0.6
+        ],
+        "jitter_s": 0.01,
+        "tokens_per_s": 172.8,
+        "chars": 72,
+        "qualities": [
+          "PASS",
+          "PASS"
+        ],
+        "failures": 0
+      }
+    },
+    "groq/compound": {
+      "GROUNDED": {
+        "mean_latency_s": 1.94,
+        "latencies": [
+          1.99,
+          1.89
+        ],
+        "jitter_s": 0.07,
+        "tokens_per_s": 236.4,
+        "chars": 1523,
+        "qualities": [
+          "WEAK",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "COMPETENCY": {
+        "mean_latency_s": 7.75,
+        "latencies": [
+          5.6,
+          9.89
+        ],
+        "jitter_s": 3.03,
+        "tokens_per_s": 236.0,
+        "chars": 2642,
+        "qualities": [
+          "WEAK",
+          "PASS"
+        ],
+        "failures": 0
+      }
+    },
+    "groq/compound-mini": {
+      "GROUNDED": {
+        "mean_latency_s": 2.65,
+        "latencies": [
+          2.33,
+          2.96
+        ],
+        "jitter_s": 0.45,
+        "tokens_per_s": 330.2,
+        "chars": 1932,
+        "qualities": [
+          "WEAK",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "COMPETENCY": {
+        "mean_latency_s": 4.38,
+        "latencies": [
+          4.38
+        ],
+        "jitter_s": 0,
+        "tokens_per_s": 98.3,
+        "chars": 72,
+        "qualities": [
+          "FAIL"
+        ],
+        "failures": 1
+      },
+      "GUARDRAIL": {
+        "mean_latency_s": 2.58,
+        "latencies": [
+          2.58
+        ],
+        "jitter_s": 0,
+        "tokens_per_s": 35.6,
+        "chars": 72,
+        "qualities": [
+          "PASS"
+        ],
+        "failures": 1
+      }
+    },
+    "qwen/qwen3.6-27b": {
+      "GROUNDED": {
+        "mean_latency_s": 7.25,
+        "latencies": [
+          1.5,
+          13.0
+        ],
+        "jitter_s": 8.13,
+        "tokens_per_s": 222.8,
+        "chars": 2288,
+        "qualities": [
+          "PASS",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "COMPETENCY": {
+        "mean_latency_s": 36.06,
+        "latencies": [
+          35.45,
+          36.67
+        ],
+        "jitter_s": 0.86,
+        "tokens_per_s": 16.6,
+        "chars": 1370,
+        "qualities": [
+          "WEAK",
+          "FAIL"
+        ],
+        "failures": 0
+      },
+      "GUARDRAIL": {
+        "mean_latency_s": 35.98,
+        "latencies": [
+          35.49,
+          36.46
+        ],
+        "jitter_s": 0.69,
+        "tokens_per_s": 16.7,
+        "chars": 1410,
+        "qualities": [
+          "PASS",
+          "FAIL"
+        ],
+        "failures": 0
+      }
+    },
+    "qwen/qwen3.8-27b": {
+      "GROUNDED": {
+        "mean_latency_s": 1.52,
+        "latencies": [
+          1.69,
+          1.34
+        ],
+        "jitter_s": 0.25,
+        "tokens_per_s": 335.3,
+        "chars": 2094,
+        "qualities": [
+          "PASS",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "COMPETENCY": {
+        "mean_latency_s": 23.87,
+        "latencies": [
+          25.91,
+          21.82
+        ],
+        "jitter_s": 2.89,
+        "tokens_per_s": 9.3,
+        "chars": 1071,
+        "qualities": [
+          "PASS",
+          "PASS"
+        ],
+        "failures": 0
+      },
+      "GUARDRAIL": {
+        "mean_latency_s": 6.58,
+        "latencies": [
+          12.72,
+          0.45
+        ],
+        "jitter_s": 8.68,
+        "tokens_per_s": 88.0,
+        "chars": 455,
+        "qualities": [
+          "PASS",
+          "PASS"
+        ],
+        "failures": 0
+      }
+    },
+    "allam-2-7b": {
+      "GROUNDED": {
+        "mean_latency_s": 0.69,
+        "latencies": [
+          0.92,
+          0.46
+        ],
+        "jitter_s": 0.33,
+        "tokens_per_s": 722.3,
+        "chars": 1692,
+        "qualities": [
+          "WEAK",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "COMPETENCY": {
+        "mean_latency_s": 0.63,
+        "latencies": [
+          0.37,
+          0.89
+        ],
+        "jitter_s": 0.37,
+        "tokens_per_s": 821.0,
+        "chars": 1653,
+        "qualities": [
+          "WEAK",
+          "WEAK"
+        ],
+        "failures": 0
+      },
+      "GUARDRAIL": {
+        "mean_latency_s": 0.29,
+        "latencies": [
+          0.17,
+          0.4
+        ],
+        "jitter_s": 0.16,
+        "tokens_per_s": 375.4,
+        "chars": 500,
+        "qualities": [
+          "FAIL",
+          "FAIL"
+        ],
+        "failures": 0
+      }
+    }
+  }
+}

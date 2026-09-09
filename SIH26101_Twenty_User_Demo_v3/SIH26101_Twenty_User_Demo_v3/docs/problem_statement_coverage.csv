@@ -1,0 +1,34 @@
+domain,problem_statement_item,competency_id,status,limitation
+Statistical,Survey Design,COMP-023,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,Sampling,COMP-SAMPLING,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,National Accounts,COMP-012,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,Price Statistics,COMP-010,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,Labour Statistics,COMP-019,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,Agricultural Statistics,COMP-020,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,Industrial Statistics,COMP-008,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,SDG Indicators,COMP-021,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,Metadata Standards,COMP-024,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Statistical,Data Quality Frameworks,COMP-022,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,Python,COMP-025,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,R,COMP-026,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,SQL,COMP-027,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,Stata,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Technical,SPSS,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Technical,SAS,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Technical,GIS,COMP-007,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,Data Visualization,COMP-028,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,AI/ML,COMP-029,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,Cloud Computing,COMP-030,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,APIs,COMP-031,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Technical,Open Data,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Digital Governance,Cybersecurity,COMP-032,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Digital Governance,Data Privacy,COMP-014,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Digital Governance,Digital Signatures,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Digital Governance,Government Cloud,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Digital Governance,Digital Public Infrastructure,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Behavioural and Managerial,Leadership,COMP-016,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Behavioural and Managerial,Communication,COMP-005,MODELED_NOT_OFFICIALLY_VALIDATED,Course alignment is separate from modeled coverage.
+Behavioural and Managerial,Project Management,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Behavioural and Managerial,Ethics,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Behavioural and Managerial,Decision Making,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.
+Behavioural and Managerial,Change Management,,DEFERRED_OUTSIDE_32_COMPETENCY_SCOPE,No separate competency or assessed coverage claimed.

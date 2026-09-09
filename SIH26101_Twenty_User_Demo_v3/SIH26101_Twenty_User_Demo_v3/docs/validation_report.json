@@ -1,0 +1,274 @@
+{
+  "provenance": "MOCK_BEHAVIOUR",
+  "validation_scope": "Deterministic structural and functional demo tests. NOT human subject-matter validation, course syllabus/live enrollment verification, PostgreSQL execution, security certification, or performance testing.",
+  "tests_run": 53,
+  "passed": 53,
+  "failed": 0,
+  "results": [
+    {
+      "test": "Exactly twenty users, USR-001 through USR-020",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All users explicitly synthetic with reserved invalid-domain emails",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No orphan foreign keys, duplicate primary keys or violated SQL constraints",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every stored record has one allowed provenance and matching source_type",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every nonsource record links a provenance source",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Original ten activities preserved with 24 explicit extensions",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every role requirement equals activity MAX and preserves complete trace",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All activities have requirements and all roles have activities",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Fixed five-level names and exactly five rows per competency",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Competency types are B/D/F only",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every position has exactly one primary role",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All user MDO/division assignments agree with current position",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Each target advances one project career band only",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Three explicit unknown competencies across two users",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No fabricated evidence for withheld competency states",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Known states supported by separately stored mock evidence",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Both current-role and target-role scopes exist for each user",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All numeric gaps and HIGH/MEDIUM/NO_GAP labels correct",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Unknown gaps preserve null arithmetic and require evidence",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Negative signed gaps do not create negative unmet gaps",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All five readiness statuses exercised",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All 17 public metadata rows have official sources and unknown syllabus fields",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Only the four source-documented, permitted deep links populate course_url",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No synthetic course has a URL or verified destination",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No claim of live course verification",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All recommendations have a positive gap and eligible mapping",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No completed courses recommended",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Excel has no statistical/domain competency mappings",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Cybersecurity mappings never certify advanced privacy and stay pending",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every recommended outcome maps to the recommended competency",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No generated learning outcome presented as published iGOT text",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Approvals explicitly simulated; no production approval",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Fallback NO_VERIFIED_COURSE is exercised",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Production mode refuses all unvalidated course mappings",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All real recommendations have planned bridge-gap accounting",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Learning paths do not disguise synthetic courses as iGOT learning",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Ready user gets no unnecessary course or remedial path",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Recomputation produces byte-equivalent derived row structures",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Changing confidence does not change gap priority",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Practical rubric updates sampling L2 to L3, target gap 2 to 1",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Evidence retries are idempotent",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Same assessment ID with changed payload is rejected",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Five-question 80% practice stores evidence without promoting level",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Low-confidence practical evidence does not promote competency",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid competencyId",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid estimatedLevel",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid confidence",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid coverage",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid score",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject path/payload user mismatch",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Stale evidence is stored without overwriting newer state",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Five hand-authored fixture MCQs each have exactly one correct answer",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every fixture question has a valid competency, outcome and exact stored source chunk",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    }
+  ]
+}

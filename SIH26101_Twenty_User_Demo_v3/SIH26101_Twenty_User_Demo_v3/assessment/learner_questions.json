@@ -1,0 +1,142 @@
+[
+  {
+    "question_id": "Q-DEMO-001",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "A population has strata of 800 and 400 units. For a proportional stratified sample of 120, which allocation is correct?",
+    "difficulty": "MEDIUM",
+    "question_type": "APPLICATION",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "provenance": "SYNTHETIC",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "80 and 40"
+      },
+      {
+        "option_id": "B",
+        "text": "60 and 60"
+      },
+      {
+        "option_id": "C",
+        "text": "40 and 80"
+      },
+      {
+        "option_id": "D",
+        "text": "100 and 20"
+      }
+    ]
+  },
+  {
+    "question_id": "Q-DEMO-002",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "For strata containing 800 and 400 units, which weights combine their sample means into the stratified population mean estimate?",
+    "difficulty": "MEDIUM",
+    "question_type": "DATA_INTERPRETATION",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "provenance": "SYNTHETIC",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "One-half and one-half"
+      },
+      {
+        "option_id": "B",
+        "text": "Two-thirds and one-third"
+      },
+      {
+        "option_id": "C",
+        "text": "One-third and two-thirds"
+      },
+      {
+        "option_id": "D",
+        "text": "Three-quarters and one-quarter"
+      }
+    ]
+  },
+  {
+    "question_id": "Q-DEMO-003",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "A sampled unit has selection probability 0.10. What is its basic design weight?",
+    "difficulty": "MEDIUM",
+    "question_type": "APPLICATION",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "provenance": "SYNTHETIC",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "0.10"
+      },
+      {
+        "option_id": "B",
+        "text": "1"
+      },
+      {
+        "option_id": "C",
+        "text": "10"
+      },
+      {
+        "option_id": "D",
+        "text": "100"
+      }
+    ]
+  },
+  {
+    "question_id": "Q-DEMO-004",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "A frame omits eligible units. What is the main problem?",
+    "difficulty": "MEDIUM",
+    "question_type": "CONCEPTUAL",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "provenance": "SYNTHETIC",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "Undercoverage"
+      },
+      {
+        "option_id": "B",
+        "text": "A higher response-quality score"
+      },
+      {
+        "option_id": "C",
+        "text": "Automatic proportional allocation"
+      },
+      {
+        "option_id": "D",
+        "text": "Guaranteed unbiased selection"
+      }
+    ]
+  },
+  {
+    "question_id": "Q-DEMO-005",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "Which statement describes one-stage cluster sampling?",
+    "difficulty": "MEDIUM",
+    "question_type": "COMPARISON",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "provenance": "SYNTHETIC",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "Select units within every stratum"
+      },
+      {
+        "option_id": "B",
+        "text": "Select clusters and observe all units in the selected clusters"
+      },
+      {
+        "option_id": "C",
+        "text": "Observe only the largest unit in every cluster"
+      },
+      {
+        "option_id": "D",
+        "text": "Select every cluster and observe only one unit per cluster"
+      }
+    ]
+  }
+]

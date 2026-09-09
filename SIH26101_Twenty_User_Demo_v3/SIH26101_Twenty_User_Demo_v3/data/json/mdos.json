@@ -1,0 +1,13 @@
+[
+  {
+    "mdo_id": "MDO-001",
+    "name": "Ministry of Statistics and Programme Implementation",
+    "description": null,
+    "status": "REFERENCE_ONLY",
+    "source_id": "SRC-001",
+    "provenance": "PUBLIC_OFFICIAL",
+    "source_type": "PUBLIC_OFFICIAL",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  }
+]

@@ -1,0 +1,910 @@
+{
+  "scope": "Inherited functional tests plus expanded data contracts. Not syllabus, live enrollment, production security, PostgreSQL execution or load testing.",
+  "tests_run": 212,
+  "passed": 212,
+  "failed": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "test": "Exactly twenty users, USR-001 through USR-020",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All users explicitly synthetic with reserved invalid-domain emails",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No orphan foreign keys, duplicate primary keys or violated SQL constraints",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every stored record has one allowed provenance and matching source_type",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every nonsource record links a provenance source",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Original ten activities preserved with 24 explicit extensions",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every role requirement equals activity MAX and preserves complete trace",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All activities have requirements and all roles have activities",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Fixed five-level names and exactly five rows per competency",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Competency types are B/D/F only",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every position has exactly one primary role",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All user MDO/division assignments agree with current position",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Each target advances one project career band only",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Three explicit unknown competencies across two users",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No fabricated evidence for withheld competency states",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Known states supported by separately stored mock evidence",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Both current-role and target-role scopes exist for each user",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All numeric gaps and HIGH/MEDIUM/NO_GAP labels correct",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Unknown gaps preserve null arithmetic and require evidence",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Negative signed gaps do not create negative unmet gaps",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All five readiness statuses exercised",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All 17 public metadata rows have official sources and unknown syllabus fields",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Only the four source-documented, permitted deep links populate course_url",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No synthetic course has a URL or verified destination",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No claim of live course verification",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All recommendations have a positive gap and eligible mapping",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No completed courses recommended",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Excel has no statistical/domain competency mappings",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Cybersecurity mappings never certify advanced privacy and stay pending",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every recommended outcome maps to the recommended competency",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "No generated learning outcome presented as published iGOT text",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Approvals explicitly simulated; no production approval",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Fallback NO_VERIFIED_COURSE is exercised",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Production mode refuses all unvalidated course mappings",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "All real recommendations have planned bridge-gap accounting",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Learning paths do not disguise synthetic courses as iGOT learning",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Ready user gets no unnecessary course or remedial path",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Recomputation produces byte-equivalent derived row structures",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Changing confidence does not change gap priority",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Practical rubric updates sampling L2 to L3, target gap 2 to 1",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Evidence retries are idempotent",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Same assessment ID with changed payload is rejected",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Five-question 80% practice stores evidence without promoting level",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Low-confidence practical evidence does not promote competency",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid competencyId",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid estimatedLevel",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid confidence",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid coverage",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject invalid score",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Reject path/payload user mismatch",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Stale evidence is stored without overwriting newer state",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Five hand-authored fixture MCQs each have exactly one correct answer",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Every fixture question has a valid competency, outcome and exact stored source chunk",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "32 competencies, 160 levels, 30 courses, 46 mappings, 50 histories",
+      "status": "PASS"
+    },
+    {
+      "test": "26 canonical tables and exact same fields in each row",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: users",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: roles",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: activities",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: activity_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: role_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: positions",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: position_role",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: user_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: competency_evidence",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: courses",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: course_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: course_learning_outcomes",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: learning_outcome_competency",
+      "status": "PASS"
+    },
+    {
+      "test": "Original rows retained unchanged: training_records",
+      "status": "PASS"
+    },
+    {
+      "test": "Only COMP-011 description/timestamp differs among original competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Original 10 current/target requirements unchanged",
+      "status": "PASS"
+    },
+    {
+      "test": "Unchanged DDL hash: schema.sql",
+      "status": "PASS"
+    },
+    {
+      "test": "Unchanged DDL hash: schema_postgresql.sql",
+      "status": "PASS"
+    },
+    {
+      "test": "Every competency has a role requirement and course candidate",
+      "status": "PASS"
+    },
+    {
+      "test": "Each added competency has user state, evidence, a positive target gap, a course mapping and a path item",
+      "status": "PASS"
+    },
+    {
+      "test": "All 30 courses have at least one explicit project objective",
+      "status": "PASS"
+    },
+    {
+      "test": "Every mapping has an outcome at its mapped target level",
+      "status": "PASS"
+    },
+    {
+      "test": "Only CRS-010 deliberately unmapped; no fabricated level objective",
+      "status": "PASS"
+    },
+    {
+      "test": "New mappings are pending, never production-approved",
+      "status": "PASS"
+    },
+    {
+      "test": "Every new blueprint mapping participates in a positive gap somewhere",
+      "status": "PASS"
+    },
+    {
+      "test": "No duplicate user/course training events",
+      "status": "PASS"
+    },
+    {
+      "test": "Each original user has 2 histories and each new user has 3",
+      "status": "PASS"
+    },
+    {
+      "test": "No training events falsely assigned to fictional blueprint courses",
+      "status": "PASS"
+    },
+    {
+      "test": "Training status, dates, progress and unverified completion agree",
+      "status": "PASS"
+    },
+    {
+      "test": "Current and target required skills have explicit states for every persona",
+      "status": "PASS"
+    },
+    {
+      "test": "Second local source exists and is authorized project content",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-001",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-002",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-003",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-004",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-005",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-006",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-007",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-008",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-009",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-010",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-011",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-012",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-013",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-014",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-015",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-016",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-017",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-018",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-019",
+      "status": "PASS"
+    },
+    {
+      "test": "Journey snapshot matches recomputation: USR-020",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: sources",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: sources",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: mdos",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: mdos",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: divisions",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: divisions",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: competency_levels",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: competency_levels",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: roles",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: roles",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: activities",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: activities",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: activity_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: activity_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: role_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: role_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: positions",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: positions",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: position_role",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: position_role",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: users",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: users",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: user_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: user_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: competency_evidence",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: competency_evidence",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: courses",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: courses",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: course_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: course_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: course_learning_outcomes",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: course_learning_outcomes",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: learning_outcome_competency",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: learning_outcome_competency",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: course_prerequisites",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: course_prerequisites",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: training_records",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: training_records",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: knowledge_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: knowledge_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: course_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: course_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: competency_gaps",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: competency_gaps",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: course_recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: course_recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: learning_paths",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: learning_paths",
+      "status": "PASS"
+    },
+    {
+      "test": "JSON export matches seed: learning_path_items",
+      "status": "PASS"
+    },
+    {
+      "test": "CSV export matches seed: learning_path_items",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: sources",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: mdos",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: divisions",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: competency_levels",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: roles",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: activities",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: activity_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: role_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: positions",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: position_role",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: users",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: user_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: competency_evidence",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: courses",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: course_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: course_learning_outcomes",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: learning_outcome_competency",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: course_prerequisites",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: training_records",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: knowledge_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: course_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: competency_gaps",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: course_recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: learning_paths",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite rows match seed: learning_path_items",
+      "status": "PASS"
+    },
+    {
+      "test": "SQLite integrity and foreign keys",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: sources",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: mdos",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: divisions",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: competency_levels",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: roles",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: activities",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: activity_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: role_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: positions",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: position_role",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: users",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: user_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: competency_evidence",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: courses",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: course_competencies",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: course_learning_outcomes",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: learning_outcome_competency",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: course_prerequisites",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: training_records",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: knowledge_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: course_resources",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: competency_gaps",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: course_recommendations",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: learning_paths",
+      "status": "PASS"
+    },
+    {
+      "test": "Workbook table equals seed: learning_path_items",
+      "status": "PASS"
+    },
+    {
+      "test": "Problem-statement audit records 33 items, 22 modeled and 11 deferred",
+      "status": "PASS"
+    }
+  ]
+}

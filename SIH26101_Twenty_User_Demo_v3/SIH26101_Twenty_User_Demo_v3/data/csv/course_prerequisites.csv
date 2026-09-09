@@ -1,0 +1,2 @@
+course_id,prerequisite_course_id,is_mandatory,note,source_id,provenance,source_type,created_at,updated_at
+CRS-005,CRS-004,0,"Project-suggested order only, not a verified provider prerequisite; both mappings remain pending.",SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z

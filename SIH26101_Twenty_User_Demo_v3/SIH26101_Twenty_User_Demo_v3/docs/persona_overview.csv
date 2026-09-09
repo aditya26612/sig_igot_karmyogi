@@ -1,0 +1,21 @@
+user_id,name,preserved,scenario,current_roles,introduced_competencies,target_readiness,training_records
+USR-001,Aarav Demo,True,Field to supervisory field,Survey Field Operations,,CRITICAL_GAPS,2
+USR-002,Isha Demo,True,Entry technical to senior quality analyst,Survey Data Quality,,NEAR_READY,2
+USR-003,Kabir Demo,True,Price-data analyst to senior index analyst,Price Statistics,,CRITICAL_GAPS,2
+USR-004,Meera Demo,True,Senior national-accounts specialist to technical supervisor,National Accounts,,DEVELOPMENT_REQUIRED,2
+USR-005,Dev Demo,True,Data steward to governance supervisor,Statistical Data Governance,,CRITICAL_GAPS,2
+USR-006,Tara Demo,True,Survey-methods analyst to senior technical role,Survey Methodology,,INSUFFICIENT_EVIDENCE,2
+USR-007,Nikhil Demo,True,Field supervisor to operations manager,Survey Field Supervision; Survey Field Operations,,CRITICAL_GAPS,2
+USR-008,Sana Demo,True,Technical supervisor to unit leadership,Statistical Data Governance; Statistical Capability Leadership,,NEAR_READY,2
+USR-009,Vivaan Demo,True,Experienced field official to supervisory field,Survey Field Operations,,INSUFFICIENT_EVIDENCE,2
+USR-010,Anaya Demo,True,Experienced supervisor ready for capability leadership,Statistical Data Governance; Statistical Capability Leadership,,READY,2
+USR-011,Rohan Demo,False,Labour statistics analyst to labour-statistics capability lead,Labour Statistics Analysis,Labour Statistics; Data Quality Frameworks; Survey Design; Metadata Standards,CRITICAL_GAPS,3
+USR-012,Kavya Demo,False,Agricultural statistics analyst to crop-statistics capability lead,Agricultural Statistics Analysis,Agricultural Statistics; Data Quality Frameworks; Survey Design; Data Visualization,CRITICAL_GAPS,3
+USR-013,Arjun Demo,False,SDG indicator analyst to indicator-quality capability lead,SDG and Statistical Quality Assurance,SDG Indicators; Data Quality Frameworks; Metadata Standards; Data Visualization,CRITICAL_GAPS,3
+USR-014,Diya Demo,False,Data quality reviewer to cross-programme assurance lead,SDG and Statistical Quality Assurance,SDG Indicators; Data Quality Frameworks; Metadata Standards; Data Visualization,CRITICAL_GAPS,3
+USR-015,Reyansh Demo,False,Python analyst to reproducible data-science lead,Reproducible Statistical Programming,Python; R; SQL; Data Visualization; AI/ML,CRITICAL_GAPS,3
+USR-016,Aditi Demo,False,R analyst to statistical programming lead,Reproducible Statistical Programming,Python; R; SQL; Data Visualization; AI/ML,DEVELOPMENT_REQUIRED,3
+USR-017,Ishaan Demo,False,SQL analyst to analytical data-products lead,Reproducible Statistical Programming,Python; R; SQL; Data Visualization; AI/ML,CRITICAL_GAPS,3
+USR-018,Navya Demo,False,Questionnaire and metadata analyst to survey-design lead,Survey Design and Metadata Standards,Data Quality Frameworks; Survey Design; Metadata Standards,CRITICAL_GAPS,3
+USR-019,Atharv Demo,False,Cloud and API engineer to statistical platform lead,Cloud Statistical Data Platforms,Metadata Standards; Python; SQL; Cloud Computing; APIs; Cybersecurity,CRITICAL_GAPS,3
+USR-020,Anika Demo,False,Cybersecurity reviewer to statistical-service security lead,Cybersecurity for Statistical Services,Cloud Computing; APIs; Cybersecurity,CRITICAL_GAPS,3

@@ -1,0 +1,20 @@
+SQL Statistical Query Practice
+Original synthetic teaching fixture, version 1. Not official course content.
+
+1. Keys and grain
+Households has one row per household_id. Members has one row per person and a
+household_id foreign key. Joining households to members repeats a household weight
+for each matching person. To estimate a household total, return to one row per
+household or aggregate households directly. Do not sum repeated household weights.
+
+2. Missing values
+SQL NULL means missing or unknown, not zero. Test with IS NULL, not = NULL.
+COUNT(*) counts rows. COUNT(income) counts non-NULL income values. AVG(income)
+excludes NULL values. Replacing NULL with zero changes the estimand and requires
+an explicit justified rule. A left join retains unmatched left rows, but a WHERE
+filter on a right-side column can remove them.
+
+3. Validation
+Check row counts and key uniqueness before and after joins. Reconcile totals with
+an independent calculation. Document reference period, units and missing-value
+handling. Use fictional data only. A short quiz score does not certify a level.

@@ -1,0 +1,32 @@
+[
+  {
+    "resource_id": "RES-DEMO-001",
+    "title": "Synthetic sampling practice handbook",
+    "type": "PDF",
+    "url": null,
+    "local_path": "assessment/sampling_practice.pdf",
+    "description": "Original project-authored three-page teaching fixture, not iGOT content or an official MoSPI document.",
+    "provider": "Fictional Statistical Learning Studio",
+    "ingestion_allowed": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "SYNTHETIC",
+    "source_type": "SYNTHETIC",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "resource_id": "RES-DEMO-002",
+    "title": "Synthetic SQL statistical query practice",
+    "type": "TXT",
+    "url": null,
+    "local_path": "assessment/sql_practice.txt",
+    "description": "Original project-authored SQL NULL and join-grain fixture, not a live AI output or approved practical rubric.",
+    "provider": "Fictional Statistical Learning Studio",
+    "ingestion_allowed": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "SYNTHETIC",
+    "source_type": "SYNTHETIC",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  }
+]

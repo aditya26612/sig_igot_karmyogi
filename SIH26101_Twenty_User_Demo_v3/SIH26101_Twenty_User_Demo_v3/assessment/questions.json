@@ -1,0 +1,317 @@
+[
+  {
+    "question_id": "Q-DEMO-001",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "A population has strata of 800 and 400 units. For a proportional stratified sample of 120, which allocation is correct?",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "80 and 40",
+        "is_correct": true
+      },
+      {
+        "option_id": "B",
+        "text": "60 and 60",
+        "is_correct": false
+      },
+      {
+        "option_id": "C",
+        "text": "40 and 80",
+        "is_correct": false
+      },
+      {
+        "option_id": "D",
+        "text": "100 and 20",
+        "is_correct": false
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation": "Proportional allocation uses the population shares: 120*800/1200=80 and 120*400/1200=40.",
+    "difficulty": "MEDIUM",
+    "question_type": "APPLICATION",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "learning_outcome_id": "LO-101-01",
+    "source": {
+      "chunk_id": "CHK-DEMO-001",
+      "document_id": "DOC-DEMO-SAMPLING-001",
+      "resource_id": "RES-DEMO-001",
+      "page": 1,
+      "slide": null,
+      "section": "Stratified sampling",
+      "chunk_index": 0,
+      "text": "In stratified sampling, a population is divided into nonoverlapping strata, and a sample is selected within each stratum. With proportional allocation, the sample share for a stratum equals its population share. For two strata of 800 and 400 units and a total sample of 120, proportional allocation selects 80 and 40 units respectively.",
+      "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+      "provenance": "SYNTHETIC",
+      "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+      "not_official_igot_material": true
+    },
+    "review_status": "DEMO_APPROVED",
+    "reviewer_id": "MOCK-TRAINER-001",
+    "review_provenance": "MOCK_BEHAVIOUR",
+    "quality_scores": {
+      "grounding_score": 0.95,
+      "distractor_score": 0.8,
+      "competency_match_score": 0.9,
+      "ambiguity_risk": 0.1,
+      "difficulty_score": 0.8,
+      "overall_quality_score": 0.87,
+      "provenance": "MOCK_BEHAVIOUR",
+      "notice": "Illustrative fixture values, not measured LLM validation scores"
+    },
+    "provenance": "SYNTHETIC",
+    "generation_method": "HAND_AUTHORED_FIXTURE_NOT_LIVE_AI"
+  },
+  {
+    "question_id": "Q-DEMO-002",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "For strata containing 800 and 400 units, which weights combine their sample means into the stratified population mean estimate?",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "One-half and one-half",
+        "is_correct": false
+      },
+      {
+        "option_id": "B",
+        "text": "Two-thirds and one-third",
+        "is_correct": true
+      },
+      {
+        "option_id": "C",
+        "text": "One-third and two-thirds",
+        "is_correct": false
+      },
+      {
+        "option_id": "D",
+        "text": "Three-quarters and one-quarter",
+        "is_correct": false
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation": "The population shares are 800/1200 and 400/1200.",
+    "difficulty": "MEDIUM",
+    "question_type": "DATA_INTERPRETATION",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "learning_outcome_id": "LO-101-01",
+    "source": {
+      "chunk_id": "CHK-DEMO-002",
+      "document_id": "DOC-DEMO-SAMPLING-001",
+      "resource_id": "RES-DEMO-001",
+      "page": 1,
+      "slide": null,
+      "section": "Stratified sampling",
+      "chunk_index": 1,
+      "text": "For a stratified population mean, stratum sample means are combined using the population shares of the strata. If two strata contain 800 and 400 units, their population shares are two-thirds and one-third. A simple unweighted average of the two stratum means is generally not the same as this population-weighted mean.",
+      "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+      "provenance": "SYNTHETIC",
+      "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+      "not_official_igot_material": true
+    },
+    "review_status": "DEMO_APPROVED",
+    "reviewer_id": "MOCK-TRAINER-001",
+    "review_provenance": "MOCK_BEHAVIOUR",
+    "quality_scores": {
+      "grounding_score": 0.95,
+      "distractor_score": 0.8,
+      "competency_match_score": 0.9,
+      "ambiguity_risk": 0.1,
+      "difficulty_score": 0.8,
+      "overall_quality_score": 0.87,
+      "provenance": "MOCK_BEHAVIOUR",
+      "notice": "Illustrative fixture values, not measured LLM validation scores"
+    },
+    "provenance": "SYNTHETIC",
+    "generation_method": "HAND_AUTHORED_FIXTURE_NOT_LIVE_AI"
+  },
+  {
+    "question_id": "Q-DEMO-003",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "A sampled unit has selection probability 0.10. What is its basic design weight?",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "0.10",
+        "is_correct": false
+      },
+      {
+        "option_id": "B",
+        "text": "1",
+        "is_correct": false
+      },
+      {
+        "option_id": "C",
+        "text": "10",
+        "is_correct": true
+      },
+      {
+        "option_id": "D",
+        "text": "100",
+        "is_correct": false
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation": "The basic design weight is 1/0.10=10.",
+    "difficulty": "MEDIUM",
+    "question_type": "APPLICATION",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "learning_outcome_id": "LO-101-02",
+    "source": {
+      "chunk_id": "CHK-DEMO-003",
+      "document_id": "DOC-DEMO-SAMPLING-001",
+      "resource_id": "RES-DEMO-001",
+      "page": 2,
+      "slide": null,
+      "section": "Sampling weights",
+      "chunk_index": 2,
+      "text": "A basic design weight is the reciprocal of a unit's selection probability. If a unit has selection probability 0.10, its design weight is 10. A design weight represents how many population units the sampled unit represents under the sampling design; it is not a score for the quality of a response.",
+      "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+      "provenance": "SYNTHETIC",
+      "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+      "not_official_igot_material": true
+    },
+    "review_status": "DEMO_APPROVED",
+    "reviewer_id": "MOCK-TRAINER-001",
+    "review_provenance": "MOCK_BEHAVIOUR",
+    "quality_scores": {
+      "grounding_score": 0.95,
+      "distractor_score": 0.8,
+      "competency_match_score": 0.9,
+      "ambiguity_risk": 0.1,
+      "difficulty_score": 0.8,
+      "overall_quality_score": 0.87,
+      "provenance": "MOCK_BEHAVIOUR",
+      "notice": "Illustrative fixture values, not measured LLM validation scores"
+    },
+    "provenance": "SYNTHETIC",
+    "generation_method": "HAND_AUTHORED_FIXTURE_NOT_LIVE_AI"
+  },
+  {
+    "question_id": "Q-DEMO-004",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "A frame omits eligible units. What is the main problem?",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "Undercoverage",
+        "is_correct": true
+      },
+      {
+        "option_id": "B",
+        "text": "A higher response-quality score",
+        "is_correct": false
+      },
+      {
+        "option_id": "C",
+        "text": "Automatic proportional allocation",
+        "is_correct": false
+      },
+      {
+        "option_id": "D",
+        "text": "Guaranteed unbiased selection",
+        "is_correct": false
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation": "Missing eligible units creates undercoverage. Increasing sample size within that same frame does not restore omitted units.",
+    "difficulty": "MEDIUM",
+    "question_type": "CONCEPTUAL",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "learning_outcome_id": "LO-101-02",
+    "source": {
+      "chunk_id": "CHK-DEMO-004",
+      "document_id": "DOC-DEMO-SAMPLING-001",
+      "resource_id": "RES-DEMO-001",
+      "page": 2,
+      "slide": null,
+      "section": "Frames and coverage",
+      "chunk_index": 3,
+      "text": "A sampling frame should identify eligible sampling units without duplicates or omissions. Duplicated units can receive unintended selection opportunities. Missing eligible units create undercoverage. These are frame-quality problems and cannot be fixed merely by increasing the sample size from the same defective frame.",
+      "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+      "provenance": "SYNTHETIC",
+      "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+      "not_official_igot_material": true
+    },
+    "review_status": "DEMO_APPROVED",
+    "reviewer_id": "MOCK-TRAINER-001",
+    "review_provenance": "MOCK_BEHAVIOUR",
+    "quality_scores": {
+      "grounding_score": 0.95,
+      "distractor_score": 0.8,
+      "competency_match_score": 0.9,
+      "ambiguity_risk": 0.1,
+      "difficulty_score": 0.8,
+      "overall_quality_score": 0.87,
+      "provenance": "MOCK_BEHAVIOUR",
+      "notice": "Illustrative fixture values, not measured LLM validation scores"
+    },
+    "provenance": "SYNTHETIC",
+    "generation_method": "HAND_AUTHORED_FIXTURE_NOT_LIVE_AI"
+  },
+  {
+    "question_id": "Q-DEMO-005",
+    "assessment_id": "ASS-DEMO-PRACTICE-001",
+    "question": "Which statement describes one-stage cluster sampling?",
+    "options": [
+      {
+        "option_id": "A",
+        "text": "Select units within every stratum",
+        "is_correct": false
+      },
+      {
+        "option_id": "B",
+        "text": "Select clusters and observe all units in the selected clusters",
+        "is_correct": true
+      },
+      {
+        "option_id": "C",
+        "text": "Observe only the largest unit in every cluster",
+        "is_correct": false
+      },
+      {
+        "option_id": "D",
+        "text": "Select every cluster and observe only one unit per cluster",
+        "is_correct": false
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation": "One-stage cluster sampling selects clusters and observes all units within those selected clusters.",
+    "difficulty": "MEDIUM",
+    "question_type": "COMPARISON",
+    "competency_id": "COMP-SAMPLING",
+    "target_competency_level": 3,
+    "learning_outcome_id": "LO-101-02",
+    "source": {
+      "chunk_id": "CHK-DEMO-005",
+      "document_id": "DOC-DEMO-SAMPLING-001",
+      "resource_id": "RES-DEMO-001",
+      "page": 3,
+      "slide": null,
+      "section": "Strata and clusters",
+      "chunk_index": 4,
+      "text": "Stratification selects samples within every stratum. In one-stage cluster sampling, a sample of clusters is selected and all units in those selected clusters are observed. These designs differ in which groups are selected and which units within those groups are observed.",
+      "document_sha256": "8708bef1917dad8ea946419b3c3c7e3ae9054a0f5c664c67e0398ce002f07cc5",
+      "provenance": "SYNTHETIC",
+      "ingestion_authority": "ORIGINAL_PROJECT_FIXTURE",
+      "not_official_igot_material": true
+    },
+    "review_status": "DEMO_APPROVED",
+    "reviewer_id": "MOCK-TRAINER-001",
+    "review_provenance": "MOCK_BEHAVIOUR",
+    "quality_scores": {
+      "grounding_score": 0.95,
+      "distractor_score": 0.8,
+      "competency_match_score": 0.9,
+      "ambiguity_risk": 0.1,
+      "difficulty_score": 0.8,
+      "overall_quality_score": 0.87,
+      "provenance": "MOCK_BEHAVIOUR",
+      "notice": "Illustrative fixture values, not measured LLM validation scores"
+    },
+    "provenance": "SYNTHETIC",
+    "generation_method": "HAND_AUTHORED_FIXTURE_NOT_LIVE_AI"
+  }
+]

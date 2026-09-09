@@ -1,0 +1,33 @@
+{
+  "provenance": "MOCK_BEHAVIOUR",
+  "version": "2.0.0",
+  "seed_rows": 745,
+  "table_count": 26,
+  "users": 10,
+  "official_course_metadata_rows": 10,
+  "synthetic_blueprints": 10,
+  "documentary_course_destinations": 4,
+  "live_verified_course_destinations": 0,
+  "readiness_distribution": {
+    "CRITICAL_GAPS": 4,
+    "NEAR_READY": 2,
+    "DEVELOPMENT_REQUIRED": 1,
+    "INSUFFICIENT_EVIDENCE": 2,
+    "READY": 1
+  },
+  "checks": [
+    "53 structural/functional tests passed",
+    "33 local HTTP tests passed",
+    "Final workbook reopened: 30 sheets, 10 users, 20 courses",
+    "PDF: three pages; stored source passages matched extracted page text",
+    "Synthetic blueprints limited to competencies with known positive gaps",
+    "Seed reset after all HTTP tests"
+  ],
+  "unverified": [
+    "Official syllabus coverage and real trainer approval",
+    "Live iGOT login, enrollment and availability",
+    "PostgreSQL execution",
+    "Live LLM/RAG generation",
+    "Production security, scalability and psychometric calibration"
+  ]
+}

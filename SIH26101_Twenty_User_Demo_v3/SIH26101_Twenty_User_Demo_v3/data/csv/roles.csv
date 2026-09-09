@@ -1,0 +1,16 @@
+role_id,name,description,tier,source_id,provenance,source_type,created_at,updated_at
+ROLE-001,Survey Field Operations,"Project role, not a published MoSPI job specification.",TECHNICAL,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-002,Survey Data Quality,"Project role, not a published MoSPI job specification.",TECHNICAL,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-003,Price Statistics,"Project role, not a published MoSPI job specification.",TECHNICAL,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-004,National Accounts,"Project role, not a published MoSPI job specification.",TECHNICAL,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-005,Survey Methodology,"Project role, not a published MoSPI job specification.",TECHNICAL,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-006,Statistical Data Governance,"Project role, not a published MoSPI job specification.",TECHNICAL,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-007,Survey Field Supervision,"Project role, not a published MoSPI job specification.",SUPERVISORY,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-008,Statistical Capability Leadership,"Project role, not a published MoSPI job specification.",MANAGERIAL,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ROLE-009,Labour Statistics Analysis,Derived statistical work role for fictional integration personas; no official staffing claim.,TECHNICAL,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ROLE-010,Agricultural Statistics Analysis,Derived statistical work role for fictional integration personas; no official staffing claim.,TECHNICAL,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ROLE-011,SDG and Statistical Quality Assurance,Derived statistical work role for fictional integration personas; no official staffing claim.,TECHNICAL,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ROLE-012,Reproducible Statistical Programming,Derived statistical work role for fictional integration personas; no official staffing claim.,TECHNICAL,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ROLE-013,Survey Design and Metadata Standards,Derived statistical work role for fictional integration personas; no official staffing claim.,TECHNICAL,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ROLE-014,Cloud Statistical Data Platforms,Derived statistical work role for fictional integration personas; no official staffing claim.,TECHNICAL,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ROLE-015,Cybersecurity for Statistical Services,Derived statistical work role for fictional integration personas; no official staffing claim.,TECHNICAL,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z

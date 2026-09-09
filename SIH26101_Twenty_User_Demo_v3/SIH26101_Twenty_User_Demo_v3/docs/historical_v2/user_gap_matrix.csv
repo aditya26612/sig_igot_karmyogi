@@ -1,0 +1,78 @@
+user_id,name,current_position,target_position,competency,current_level,required_level,signed_gap,unmet_gap,gap_status,recommendation,readiness,provenance
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Digital Tools,2,3,1,1,MEDIUM,Microsoft Excel Advanced,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Survey Data Collection,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Communication,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Frames and UFS,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Geospatial Tools,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Leadership,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Collaboration,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Methodology,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-002,Isha Demo,Junior Statistical Officer: Enterprise Data,Senior Statistical Officer: Enterprise Quality,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-002,Isha Demo,Junior Statistical Officer: Enterprise Data,Senior Statistical Officer: Enterprise Quality,Industrial Statistics,3,3,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-002,Isha Demo,Junior Statistical Officer: Enterprise Data,Senior Statistical Officer: Enterprise Quality,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,NEAR_READY,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Statistical Analysis,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Price Statistics,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Statistical Computing,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,National Accounts,4,4,0,0,NO_GAP,NOT_NEEDED,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Critical Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Statistical Computing,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Statistical Data Management,2,4,2,2,HIGH,Responsible Data Management,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Metadata and Dissemination,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-006,Tara Demo,Junior Statistical Officer: Survey Methods,Senior Statistical Officer: Survey Methods,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-006,Tara Demo,Junior Statistical Officer: Survey Methods,Senior Statistical Officer: Survey Methods,Statistical Computing,,3,,,INSUFFICIENT_EVIDENCE,ASSESSMENT_REQUIRED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-006,Tara Demo,Junior Statistical Officer: Survey Methods,Senior Statistical Officer: Survey Methods,Sampling Methodology,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,INSUFFICIENT_EVIDENCE,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Digital Tools,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Survey Data Collection,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Communication,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Sampling Frames and UFS,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Geospatial Tools,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Data Privacy and Disclosure Control,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Strategic Thinking,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Sampling Methodology,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Critical Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Communication,4,3,-1,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Computing,4,3,-1,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Data Management,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Data Privacy and Disclosure Control,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Metadata and Dissemination,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Leadership,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Strategic Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Digital Tools,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Survey Data Collection,4,3,-1,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Communication,4,4,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Frames and UFS,,3,,,INSUFFICIENT_EVIDENCE,ASSESSMENT_REQUIRED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Geospatial Tools,,3,,,INSUFFICIENT_EVIDENCE,ASSESSMENT_REQUIRED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Leadership,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Collaboration,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Methodology,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,INSUFFICIENT_EVIDENCE,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Critical Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Communication,4,3,-1,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Computing,4,3,-1,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Data Management,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Data Privacy and Disclosure Control,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Metadata and Dissemination,5,4,-1,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Leadership,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Collaboration,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Strategic Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED

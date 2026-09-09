@@ -1,0 +1,22 @@
+[
+  {
+    "course_id": "CRS-101",
+    "resource_id": "RES-DEMO-001",
+    "relationship": "PROJECT_AUTHORED_PRACTICE_NOT_OFFICIAL_COURSE_MATERIAL",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "course_id": "CRS-117",
+    "resource_id": "RES-DEMO-002",
+    "relationship": "PROJECT_AUTHORED_PRACTICE_NOT_OFFICIAL_COURSE_MATERIAL",
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  }
+]

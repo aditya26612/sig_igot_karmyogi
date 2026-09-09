@@ -1,0 +1,203 @@
+user_id,name,current_position,target_position,competency,current_level,required_level,signed_gap,unmet_gap,gap_status,recommendation,readiness,provenance
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Digital Tools,2,3,1,1,MEDIUM,Microsoft Excel Advanced,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Survey Data Collection,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Communication,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Frames and UFS,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Geospatial Tools,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Leadership,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Collaboration,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-001,Aarav Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Methodology,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-002,Isha Demo,Junior Statistical Officer: Enterprise Data,Senior Statistical Officer: Enterprise Quality,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-002,Isha Demo,Junior Statistical Officer: Enterprise Data,Senior Statistical Officer: Enterprise Quality,Industrial Statistics,3,3,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-002,Isha Demo,Junior Statistical Officer: Enterprise Data,Senior Statistical Officer: Enterprise Quality,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,NEAR_READY,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Statistical Analysis,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Price Statistics,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-003,Kabir Demo,Junior Statistical Officer: Price Data,Senior Statistical Officer: Price Indices,Statistical Computing,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,National Accounts,4,4,0,0,NO_GAP,NOT_NEEDED,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-004,Meera Demo,Senior Statistical Officer: National Accounts,Assistant Director: National Accounts,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Critical Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Statistical Computing,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Statistical Data Management,2,4,2,2,HIGH,Responsible Data Management,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Metadata and Dissemination,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-005,Dev Demo,Senior Statistical Officer: Data Stewardship,Assistant Director: Data Governance,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-006,Tara Demo,Junior Statistical Officer: Survey Methods,Senior Statistical Officer: Survey Methods,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-006,Tara Demo,Junior Statistical Officer: Survey Methods,Senior Statistical Officer: Survey Methods,Statistical Computing,,3,,,INSUFFICIENT_EVIDENCE,ASSESSMENT_REQUIRED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-006,Tara Demo,Junior Statistical Officer: Survey Methods,Senior Statistical Officer: Survey Methods,Sampling Methodology,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,INSUFFICIENT_EVIDENCE,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Digital Tools,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Survey Data Collection,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Communication,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Sampling Frames and UFS,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Geospatial Tools,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Data Privacy and Disclosure Control,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Strategic Thinking,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-007,Nikhil Demo,Senior Statistical Officer: Field Supervision,Assistant Director: Survey Operations,Sampling Methodology,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Critical Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Communication,4,3,-1,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Computing,4,3,-1,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Data Management,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Data Privacy and Disclosure Control,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Metadata and Dissemination,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Leadership,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,NEAR_READY,DERIVED
+USR-008,Sana Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Strategic Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,NEAR_READY,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Digital Tools,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Critical Thinking,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Survey Data Collection,4,3,-1,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Communication,4,4,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Frames and UFS,,3,,,INSUFFICIENT_EVIDENCE,ASSESSMENT_REQUIRED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Geospatial Tools,,3,,,INSUFFICIENT_EVIDENCE,ASSESSMENT_REQUIRED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Leadership,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Collaboration,3,3,0,0,NO_GAP,NOT_NEEDED,INSUFFICIENT_EVIDENCE,DERIVED
+USR-009,Vivaan Demo,Junior Statistical Officer: Field Surveys,Senior Statistical Officer: Field Supervision,Sampling Methodology,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,INSUFFICIENT_EVIDENCE,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Critical Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Communication,4,3,-1,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Analysis,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Computing,4,3,-1,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Statistical Data Management,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Data Privacy and Disclosure Control,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Metadata and Dissemination,5,4,-1,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Leadership,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Collaboration,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-010,Anaya Demo,Assistant Director: Data Governance,Deputy Director: Statistical Capability,Strategic Thinking,4,4,0,0,NO_GAP,NOT_NEEDED,READY,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Labour Statistics,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Data Quality Frameworks,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Survey Design,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-011,Rohan Demo,Statistical Officer: Labour Statistics Analysis,Statistical Capability Lead: Labour Statistics Analysis,Metadata Standards,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Survey Data Collection,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Agricultural Statistics,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Data Quality Frameworks,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Survey Design,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Data Visualization,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-012,Kavya Demo,Statistical Officer: Agricultural Statistics Analysis,Statistical Capability Lead: Agricultural Statistics Analysis,Sampling Methodology,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Statistical Data Management,2,3,1,1,MEDIUM,Responsible Data Management,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Metadata and Dissemination,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,SDG Indicators,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Data Quality Frameworks,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Metadata Standards,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-013,Arjun Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Data Visualization,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Statistical Data Management,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Metadata and Dissemination,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,SDG Indicators,4,4,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Data Quality Frameworks,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Metadata Standards,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-014,Diya Demo,Statistical Officer: SDG and Statistical Quality Assurance,Statistical Capability Lead: SDG and Statistical Quality Assurance,Data Visualization,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Statistical Computing,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Python,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,R,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,SQL,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Data Visualization,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-015,Reyansh Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,AI/ML,1,3,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Statistical Computing,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Python,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,R,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,SQL,4,4,0,0,NO_GAP,NOT_NEEDED,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Data Visualization,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-016,Aditi Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,AI/ML,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,DEVELOPMENT_REQUIRED,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Statistical Computing,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Python,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,R,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,SQL,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,Data Visualization,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-017,Ishaan Demo,Statistical Officer: Reproducible Statistical Programming,Statistical Capability Lead: Reproducible Statistical Programming,AI/ML,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Survey Data Collection,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Sampling Frames and UFS,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Statistical Computing,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Metadata and Dissemination,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Data Quality Frameworks,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Survey Design,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Metadata Standards,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-018,Navya Demo,Statistical Officer: Survey Design and Metadata Standards,Statistical Capability Lead: Survey Design and Metadata Standards,Sampling Methodology,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Statistical Data Management,2,3,1,1,MEDIUM,Responsible Data Management,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Metadata Standards,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Python,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,SQL,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Cloud Computing,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,APIs,2,4,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-019,Atharv Demo,Statistical Officer: Cloud Statistical Data Platforms,Statistical Capability Lead: Cloud Statistical Data Platforms,Cybersecurity,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Critical Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Communication,3,3,0,0,NO_GAP,NOT_NEEDED,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Statistical Analysis,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Statistical Data Management,2,3,1,1,MEDIUM,Responsible Data Management,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Data Privacy and Disclosure Control,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Leadership,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Collaboration,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Strategic Thinking,3,4,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Cloud Computing,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,APIs,2,3,1,1,MEDIUM,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED
+USR-020,Anika Demo,Statistical Officer: Cybersecurity for Statistical Services,Statistical Capability Lead: Cybersecurity for Statistical Services,Cybersecurity,1,3,2,2,HIGH,NO_VERIFIED_COURSE,CRITICAL_GAPS,DERIVED

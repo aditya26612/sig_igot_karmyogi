@@ -1,0 +1,13 @@
+{
+  "provenance": "DERIVED",
+  "rule": "Synthetic training blueprints retained only for competencies with at least one known positive current/target user gap. No ID renumbering.",
+  "unused_blueprints_removed": [
+    "CRS-103",
+    "CRS-105",
+    "CRS-106",
+    "CRS-107",
+    "CRS-110",
+    "CRS-111"
+  ],
+  "remaining_synthetic_blueprints": 10
+}

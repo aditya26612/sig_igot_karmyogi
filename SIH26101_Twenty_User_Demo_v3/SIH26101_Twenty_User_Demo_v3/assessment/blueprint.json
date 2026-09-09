@@ -1,0 +1,45 @@
+{
+  "assessment_id": "ASS-DEMO-PRACTICE-001",
+  "provenance": "DERIVED",
+  "question_count": 5,
+  "difficulty_distribution": {
+    "MEDIUM": 5
+  },
+  "competency_ids": [
+    "COMP-SAMPLING"
+  ],
+  "source_document_id": "DOC-DEMO-SAMPLING-001",
+  "topics": [
+    {
+      "topic": "Stratified sampling",
+      "chunk_id": "CHK-DEMO-001",
+      "question_count": 1,
+      "provenance": "DERIVED"
+    },
+    {
+      "topic": "Stratified sampling",
+      "chunk_id": "CHK-DEMO-002",
+      "question_count": 1,
+      "provenance": "DERIVED"
+    },
+    {
+      "topic": "Sampling weights",
+      "chunk_id": "CHK-DEMO-003",
+      "question_count": 1,
+      "provenance": "DERIVED"
+    },
+    {
+      "topic": "Frames and coverage",
+      "chunk_id": "CHK-DEMO-004",
+      "question_count": 1,
+      "provenance": "DERIVED"
+    },
+    {
+      "topic": "Strata and clusters",
+      "chunk_id": "CHK-DEMO-005",
+      "question_count": 1,
+      "provenance": "DERIVED"
+    }
+  ],
+  "notice": "Short practice, not enough to certify L3 or assess full sampling competence."
+}

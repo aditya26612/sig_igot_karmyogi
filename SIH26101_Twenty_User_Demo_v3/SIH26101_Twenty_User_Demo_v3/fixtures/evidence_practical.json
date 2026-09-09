@@ -1,0 +1,20 @@
+{
+  "userId": "USR-001",
+  "assessmentId": "ASS-DEMO-PRACTICAL-001",
+  "assessmentType": "PRACTICAL",
+  "overallScore": 86,
+  "assessedAt": "2026-09-06T15:00:00Z",
+  "rubricVersion": "sampling-practical-demo-v1",
+  "reviewed": true,
+  "sourceType": "MOCK_BEHAVIOUR",
+  "competencies": [
+    {
+      "competencyId": "COMP-SAMPLING",
+      "score": 86,
+      "estimatedLevel": 3,
+      "confidence": 0.87,
+      "coverage": 0.9,
+      "itemCount": 5
+    }
+  ]
+}

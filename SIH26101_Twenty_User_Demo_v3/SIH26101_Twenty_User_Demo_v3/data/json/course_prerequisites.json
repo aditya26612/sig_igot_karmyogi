@@ -1,0 +1,13 @@
+[
+  {
+    "course_id": "CRS-005",
+    "prerequisite_course_id": "CRS-004",
+    "is_mandatory": 0,
+    "note": "Project-suggested order only, not a verified provider prerequisite; both mappings remain pending.",
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  }
+]

@@ -1,0 +1,412 @@
+[
+  {
+    "position_id": "POS-001",
+    "role_id": "ROLE-001",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-002",
+    "role_id": "ROLE-007",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-002",
+    "role_id": "ROLE-001",
+    "is_primary": 0,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-003",
+    "role_id": "ROLE-002",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-004",
+    "role_id": "ROLE-002",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-005",
+    "role_id": "ROLE-003",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-006",
+    "role_id": "ROLE-003",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-007",
+    "role_id": "ROLE-004",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-008",
+    "role_id": "ROLE-004",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-008",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-009",
+    "role_id": "ROLE-005",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-010",
+    "role_id": "ROLE-005",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-011",
+    "role_id": "ROLE-006",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-012",
+    "role_id": "ROLE-006",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-012",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-013",
+    "role_id": "ROLE-007",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-013",
+    "role_id": "ROLE-001",
+    "is_primary": 0,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-013",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-014",
+    "role_id": "ROLE-008",
+    "is_primary": 1,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-014",
+    "role_id": "ROLE-006",
+    "is_primary": 0,
+    "source_id": "SRC-PROJECT",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-06T14:52:00Z",
+    "updated_at": "2026-09-06T14:52:00Z"
+  },
+  {
+    "position_id": "POS-015",
+    "role_id": "ROLE-009",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-016",
+    "role_id": "ROLE-009",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-016",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-017",
+    "role_id": "ROLE-010",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-018",
+    "role_id": "ROLE-010",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-018",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-019",
+    "role_id": "ROLE-011",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-020",
+    "role_id": "ROLE-011",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-020",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-021",
+    "role_id": "ROLE-012",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-022",
+    "role_id": "ROLE-012",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-022",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-023",
+    "role_id": "ROLE-013",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-024",
+    "role_id": "ROLE-013",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-024",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-025",
+    "role_id": "ROLE-014",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-026",
+    "role_id": "ROLE-014",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-026",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-027",
+    "role_id": "ROLE-015",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-028",
+    "role_id": "ROLE-015",
+    "is_primary": 1,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  },
+  {
+    "position_id": "POS-028",
+    "role_id": "ROLE-008",
+    "is_primary": 0,
+    "source_id": "SRC-EXPANSION",
+    "provenance": "DERIVED",
+    "source_type": "DERIVED",
+    "created_at": "2026-09-07T06:15:00Z",
+    "updated_at": "2026-09-07T06:15:00Z"
+  }
+]

@@ -1,0 +1,35 @@
+activity_id,role_id,name,description,is_extension,source_id,provenance,source_type,created_at,updated_at
+ACT-001,ROLE-001,Listing and selecting sampling units,Normalized project work activity; linked requirements are project-defined.,0,SRC-002,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-002,ROLE-001,Household/enterprise survey collection,Normalized project work activity; linked requirements are project-defined.,0,SRC-002,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-003,ROLE-001,Updating/verifying UFS blocks,Normalized project work activity; linked requirements are project-defined.,0,SRC-003,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-004,ROLE-002,Validating enterprise survey data,Normalized project work activity; linked requirements are project-defined.,0,SRC-001,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-005,ROLE-003,Collecting/auditing price quotations,Normalized project work activity; linked requirements are project-defined.,0,SRC-001,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-006,ROLE-003,Compiling/validating price index data,Normalized project work activity; linked requirements are project-defined.,0,SRC-001,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-007,ROLE-004,Compiling National Accounts/GVA data,Normalized project work activity; linked requirements are project-defined.,0,SRC-009,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-008,ROLE-005,Designing samples/calculating weights,Normalized project work activity; linked requirements are project-defined.,0,SRC-001,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-009,ROLE-006,Cleaning/anonymizing microdata,Normalized project work activity; linked requirements are project-defined.,0,SRC-008,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-010,ROLE-006,Publishing datasets and metadata,Normalized project work activity; linked requirements are project-defined.,0,SRC-001,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-011,ROLE-007,Supervising field sample implementation and coaching staff,Normalized project work activity; linked requirements are project-defined.,1,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-012,ROLE-008,Planning statistical capability and cross-team delivery,Normalized project work activity; linked requirements are project-defined.,1,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-013,ROLE-008,Reviewing statistical quality and disclosure governance,Normalized project work activity; linked requirements are project-defined.,1,SRC-PROJECT,DERIVED,DERIVED,2026-09-06T14:52:00Z,2026-09-06T14:52:00Z
+ACT-014,ROLE-009,Classify labour-force status,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-015,ROLE-009,Compile labour-market indicators,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-016,ROLE-009,Publish comparable labour tables,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-017,ROLE-010,Reconcile crop area and yield,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-018,ROLE-010,Review agricultural survey designs,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-019,ROLE-010,Prepare seasonal crop summaries,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-020,ROLE-011,Compile disaggregated SDG indicators,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-021,ROLE-011,Audit statistical quality dimensions,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-022,ROLE-011,Validate indicator metadata,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-023,ROLE-012,Build tested statistical transformations,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-024,ROLE-012,Evaluate predictive analysis without leakage,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-025,ROLE-012,Communicate reproducible analytical results,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-026,ROLE-013,Design and pilot questionnaires,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-027,ROLE-013,Review coverage and frame maintenance,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-028,ROLE-013,Validate metadata exchange packages,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-029,ROLE-014,Design controlled cloud workloads,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-030,ROLE-014,Implement versioned statistical API contracts,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-031,ROLE-014,Review platform reproducibility and recovery,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-032,ROLE-015,Review identity and access controls,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-033,ROLE-015,Exercise incident response and secure exchange,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z
+ACT-034,ROLE-015,Audit cloud service security,Connected extension activity; levels are project requirements.,1,SRC-EXPANSION,DERIVED,DERIVED,2026-09-07T06:15:00Z,2026-09-07T06:15:00Z

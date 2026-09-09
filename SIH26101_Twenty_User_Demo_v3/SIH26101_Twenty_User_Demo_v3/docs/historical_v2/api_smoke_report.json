@@ -1,0 +1,174 @@
+{
+  "provenance": "MOCK_BEHAVIOUR",
+  "scope": "Local HTTP smoke test; no external network, iGOT API, or LLM requests. DB reset to seed afterward.",
+  "tests_run": 33,
+  "passed": 33,
+  "failed": 0,
+  "results": [
+    {
+      "test": "GET /health",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/users",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/users/USR-001",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/users/USR-001/position",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/users/USR-001/competencies",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/users/USR-001/training-history",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/users/USR-001/learning-context",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/positions",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/positions/POS-002",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/positions/POS-002/roles",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/positions/POS-002/competencies",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/roles",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/roles/ROLE-001",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/roles/ROLE-001/activities",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/roles/ROLE-001/competencies",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/competencies",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/competencies/COMP-SAMPLING",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/courses",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/courses/CRS-001",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/mock/igot/courses/CRS-001/competencies",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/users/USR-001/competency-gaps",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/users/USR-001/competency-gaps?scope=target",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/users/USR-001/recommendations?scope=target",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/users/USR-001/learning-path",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET /api/v1/users/USR-001/journey",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "camelCase shared profile IDs",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Trace arrays deserialize at API boundary",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "POST needs service token",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Practical evidence POST applies one-level promotion",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "POST retry is idempotent",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "GET sees recalculated gap after POST",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Conflicting repeated assessment rejected",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    },
+    {
+      "test": "Unknown route returns 404",
+      "status": "PASS",
+      "provenance": "MOCK_BEHAVIOUR"
+    }
+  ]
+}
