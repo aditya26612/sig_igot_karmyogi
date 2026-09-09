@@ -3,7 +3,7 @@ import logging
 from typing import List, Dict, Any, Optional
 from app.config import settings
 from app.database import get_db_connection
-from app.services.transcript_service import search_transcripts
+from app.services.transcript_service import search_transcripts_keywords
 
 logger = logging.getLogger(__name__)
 
@@ -28,11 +28,12 @@ class GroqService:
         self,
         question: str,
         lesson_id: Optional[str] = None,
-        competency_id: Optional[str] = None
+        competency_id: Optional[str] = None,
+        lang: str = "en"
     ) -> Dict[str, Any]:
         """
         Answers learner queries grounded in lesson transcripts and official competencies.
-        Cites lesson titles, timestamps, and quotes.
+        Cites lesson titles, timestamps, and quotes. Responds in EN or HI when requested.
         """
         con = get_db_connection()
         relevant_chunks = []
@@ -58,8 +59,8 @@ class GroqService:
                 """, (competency_id,))
                 relevant_chunks = [dict(r) for r in cur.fetchall()]
             else:
-                # Fallback search by query keywords
-                relevant_chunks = search_transcripts(con, question[:30])
+                # Honest fallback: keyword search over all transcripts (tokenized, OR-matched)
+                relevant_chunks = search_transcripts_keywords(con, question)
         finally:
             con.close()
             
@@ -87,8 +88,13 @@ CRITICAL RULES:
 5. NEVER reveal quiz answer keys before submission.
 6. NEVER promise or alter competency levels.
 """
+                if lang == "hi":
+                    system_prompt += """
+7. Respond entirely in Hindi (Devanagari script), using standard Indian government statistical terminology.
+   Keep technical identifiers, competency codes, and timestamps in their original form.
+"""
                 user_content = f"Context from approved curriculum:\n{context_text}\n\nLearner Question: {question}"
-                
+
                 completion = client.chat.completions.create(
                     model=settings.GROQ_PRIMARY_MODEL,
                     messages=[
@@ -99,49 +105,82 @@ CRITICAL RULES:
                     max_tokens=600
                 )
                 answer_text = completion.choices[0].message.content.strip()
-                
-                return {
-                    "answer": answer_text,
-                    "source_lesson_id": best_chunk.get("lesson_id") if best_chunk else None,
-                    "source_lesson_title": best_chunk.get("lesson_title") if best_chunk else "Curated Statistical Training",
-                    "timestamp_label": best_chunk.get("timestamp_label") if best_chunk else "02:15",
-                    "chunk_id": best_chunk.get("chunk_id") if best_chunk else None,
-                    "citation_snippet": best_chunk.get("text_content")[:120] + "..." if best_chunk else None,
-                    "suggested_actions": [
+
+                if best_chunk:
+                    suggested = [
                         "Explain this with a village survey example",
                         "How do I calculate sampling weights?",
                         "Take practice quiz on this topic",
                         "What should I learn next?"
+                    ] if lang != "hi" else [
+                        "इसे ग्रामीण सर्वेक्षण उदाहरण से समझाइए",
+                        "प्रतिदर्श भार की गणना कैसे करें?",
+                        "इस विषय पर अभ्यास क्विज़ दें",
+                        "मुझे आगे क्या सीखना चाहिए?"
                     ]
+                    return {
+                        "answer": answer_text,
+                        "source_lesson_id": best_chunk.get("lesson_id"),
+                        "source_lesson_title": best_chunk.get("lesson_title"),
+                        "timestamp_label": best_chunk.get("timestamp_label"),
+                        "chunk_id": best_chunk.get("chunk_id"),
+                        "citation_snippet": best_chunk.get("text_content", "")[:120] + "...",
+                        "suggested_actions": suggested
+                    }
+                # No grounding chunk found: do NOT fabricate a citation
+                return {
+                    "answer": answer_text,
+                    "source_lesson_id": None,
+                    "source_lesson_title": None,
+                    "timestamp_label": None,
+                    "chunk_id": None,
+                    "citation_snippet": None,
+                    "suggested_actions": []
                 }
             except Exception as e:
                 logger.warning(f"Groq API call failed: {e}. Falling back to deterministic grounded response.")
-                
+
         # Deterministic Grounded Fallback (Ensures the platform operates with 100% reliability offline)
         if best_chunk:
+            ts = best_chunk.get("timestamp_label")
+            citation = f" at [{ts}]" if ts else ""
             fallback_answer = (
-                f"Based on the approved training material for '{best_chunk.get('lesson_title', 'Curated Module')}' "
-                f"at [{best_chunk.get('timestamp_label', '02:15')}]:\n\n"
+                f"Based on the approved training material for '{best_chunk.get('lesson_title', 'Curated Module')}'"
+                f"{citation}:\n\n"
                 f"{best_chunk.get('text_content', '')}\n\n"
                 f"Key Takeaway: {best_chunk.get('summary', 'Reinforce this concept with the practice quiz.')}"
             )
+            if lang == "hi":
+                fallback_answer = (
+                    f"अनुमोदित प्रशिक्षण सामग्री '{best_chunk.get('lesson_title', 'Curated Module')}'"
+                    f"{citation} के आधार पर:\n\n"
+                    f"{best_chunk.get('text_content', '')}\n\n"
+                    f"मुख्य बात: {best_chunk.get('summary', 'इस अवधारणा को अभ्यास क्विज़ से सुदृढ़ करें।')}"
+                )
             return {
                 "answer": fallback_answer,
                 "source_lesson_id": best_chunk.get("lesson_id"),
-                "source_lesson_title": best_chunk.get("lesson_title", "Curated Lesson"),
-                "timestamp_label": best_chunk.get("timestamp_label", "02:15"),
+                "source_lesson_title": best_chunk.get("lesson_title"),
+                "timestamp_label": ts,
                 "chunk_id": best_chunk.get("chunk_id"),
-                "citation_snippet": best_chunk.get("text_content", "")[:120] + "...",
+                "citation_snippet": best_chunk.get("text_content", "")[:120] + "..." if best_chunk.get("text_content") else None,
                 "suggested_actions": [
                     "Explain this simply",
                     "Show relevant transcript section",
                     "Take practice quiz",
                     "Review next role requirements"
+                ] if lang != "hi" else [
+                    "इसे सरल भाषा में समझाइए",
+                    "संबंधित ट्रांसक्रिप्ट अंश दिखाएँ",
+                    "अभ्यास क्विज़ दें",
+                    "अगली भूमिका आवश्यकताएँ देखें"
                 ]
             }
         else:
+            no_match_en = "I could not find this in the approved learning material for this module. Please consult the curated playlist lessons or ask your supervisor."
+            no_match_hi = "यह सूचना इस मॉड्यूल की अनुमोदित शिक्षण सामग्री में नहीं मिली। कृपया अनुशंसित पाठ्यक्रम देखें या अपने पर्यवेक्षक से परामर्श करें।"
             return {
-                "answer": "I could not find this in the approved learning material for this module. Please consult the curated playlist lessons or ask your supervisor.",
+                "answer": no_match_hi if lang == "hi" else no_match_en,
                 "source_lesson_id": None,
                 "source_lesson_title": None,
                 "timestamp_label": None,

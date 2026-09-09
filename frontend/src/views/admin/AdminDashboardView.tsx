@@ -1,12 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../../api/client';
 import { AdminDashboardMetrics, LearnerAdminListItem } from '../../types';
+import { useReveal } from '../../hooks/useReveal';
+
+const RefreshIcon: React.FC = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+    <polyline points="21 3 21 9 15 9" />
+  </svg>
+);
+
+const PlusIcon: React.FC = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" aria-hidden="true">
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <line x1="5" y1="12" x2="19" y2="12" />
+  </svg>
+);
+
+const CheckIcon: React.FC = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
 
 export const AdminDashboardView: React.FC = () => {
   const [metrics, setMetrics] = useState<AdminDashboardMetrics | null>(null);
   const [learners, setLearners] = useState<LearnerAdminListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'learners' | 'content' | 'sync'>('learners');
+  const metricsReveal = useReveal<HTMLDivElement>();
 
   // New Learner Form
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -78,16 +100,34 @@ export const AdminDashboardView: React.FC = () => {
     }
   };
 
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '10px',
+    borderRadius: 'var(--radius-sm)',
+    border: '1px solid var(--color-border)',
+    fontSize: '14px',
+    fontFamily: 'var(--font-sans)',
+    background: 'var(--color-bg-surface)'
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontSize: '12px',
+    fontWeight: 700,
+    color: 'var(--color-text-secondary)',
+    display: 'block',
+    marginBottom: '4px'
+  };
+
   return (
     <div className="gov-container" style={{ padding: '36px 0' }}>
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
           <span className="badge badge-navy">System Administration & Oversight</span>
-          <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#1a365d', marginTop: '4px' }}>
+          <h1 className="page-title" style={{ marginTop: '8px' }}>
             MoSPI Cadre Competency Governance
           </h1>
-          <p style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>
+          <p className="meta-line">
             National Statistical System officer profiling, curriculum catalog management, and iGOT integration simulator controls.
           </p>
         </div>
@@ -95,39 +135,40 @@ export const AdminDashboardView: React.FC = () => {
         <button
           className="btn btn-primary"
           onClick={() => setShowRegisterModal(true)}
-          style={{ padding: '10px 20px', fontSize: '14px' }}
         >
-          + Register New Officer
+          <PlusIcon /> Register New Officer
         </button>
       </div>
 
       {/* Metrics Row */}
       {metrics && (
-        <div className="grid-3" style={{ marginBottom: '32px' }}>
-          <div className="gov-card" style={{ borderLeft: '4px solid #1a365d' }}>
-            <div style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>Total Registered Officers</div>
-            <div style={{ fontSize: '28px', fontWeight: 800, color: '#1a365d', marginTop: '4px' }}>{metrics.total_learners}</div>
-            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Full MoSPI cadre registry imported from dataset.</div>
-          </div>
-
-          <div className="gov-card" style={{ borderLeft: '4px solid #d97706' }}>
-            <div style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>Priority Gap Backlog</div>
-            <div style={{ fontSize: '28px', fontWeight: 800, color: '#d97706', marginTop: '4px' }}>{metrics.learners_with_critical_gaps}</div>
-            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Officers currently requiring guided development.</div>
-          </div>
-
-          <div className="gov-card" style={{ borderLeft: '4px solid #166534' }}>
-            <div style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>Curated Playlists & Lessons</div>
-            <div style={{ fontSize: '28px', fontWeight: 800, color: '#166534', marginTop: '4px' }}>
-              {metrics.content_curated_playlists} ({metrics.total_lessons} Lessons)
+        <div ref={metricsReveal} className="reveal">
+          <div className="grid-3" style={{ marginBottom: '32px' }}>
+            <div className="stat-chip">
+              <div className="stat-label">Total Registered Officers</div>
+              <div className="stat-value">{metrics.total_learners}</div>
+              <div className="section-sub" style={{ fontSize: '12px' }}>Full MoSPI cadre registry imported from dataset.</div>
             </div>
-            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Mapped to 32 Official Statistical Competencies.</div>
+
+            <div className="stat-chip">
+              <div className="stat-label" style={{ color: 'var(--orange-700)' }}>Priority Gap Backlog</div>
+              <div className="stat-value" style={{ color: 'var(--orange-700)' }}>{metrics.learners_with_critical_gaps}</div>
+              <div className="section-sub" style={{ fontSize: '12px' }}>Officers currently requiring guided development.</div>
+            </div>
+
+            <div className="stat-chip">
+              <div className="stat-label" style={{ color: '#146B1A' }}>Curated Playlists & Lessons</div>
+              <div className="stat-value" style={{ color: 'var(--color-success)' }}>
+                {metrics.content_curated_playlists} <span style={{ fontSize: '16px' }}>({metrics.total_lessons} Lessons)</span>
+              </div>
+              <div className="section-sub" style={{ fontSize: '12px' }}>Mapped to 32 Official Statistical Competencies.</div>
+            </div>
           </div>
         </div>
       )}
 
       {/* Admin Tabs */}
-      <div style={{ borderBottom: '1px solid #e2e8f0', display: 'flex', gap: '16px', marginBottom: '24px' }}>
+      <div style={{ borderBottom: '1px solid var(--color-border)', display: 'flex', gap: '16px', marginBottom: '24px' }}>
         <button
           className={`nav-tab ${activeTab === 'learners' ? 'active' : ''}`}
           onClick={() => setActiveTab('learners')}
@@ -144,31 +185,31 @@ export const AdminDashboardView: React.FC = () => {
 
       {/* Tab Content: Officer Registry */}
       {activeTab === 'learners' && (
-        <div className="gov-card" style={{ overflowX: 'auto', padding: '0' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', textAlign: 'left' }}>
+        <div className="gov-card static" style={{ overflowX: 'auto', padding: '0' }}>
+          <table className="admin-table">
             <thead>
-              <tr style={{ backgroundColor: '#f8fafc', borderBottom: '2px solid #e2e8f0', color: '#475569' }}>
-                <th style={{ padding: '14px 18px', fontWeight: 700 }}>User ID</th>
-                <th style={{ padding: '14px 18px', fontWeight: 700 }}>Officer Name</th>
-                <th style={{ padding: '14px 18px', fontWeight: 700 }}>Designation</th>
-                <th style={{ padding: '14px 18px', fontWeight: 700 }}>Division</th>
-                <th style={{ padding: '14px 18px', fontWeight: 700 }}>Readiness Status</th>
-                <th style={{ padding: '14px 18px', fontWeight: 700 }}>Target Gaps</th>
+              <tr>
+                <th>User ID</th>
+                <th>Officer Name</th>
+                <th>Designation</th>
+                <th>Division</th>
+                <th>Readiness Status</th>
+                <th>Target Gaps</th>
               </tr>
             </thead>
             <tbody>
-              {learners.map((u, i) => (
-                <tr key={u.user_id} style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: i % 2 === 0 ? '#ffffff' : '#fcfcfd' }}>
-                  <td style={{ padding: '12px 18px', fontFamily: 'monospace', fontWeight: 700, color: '#1a365d' }}>{u.user_id}</td>
-                  <td style={{ padding: '12px 18px', fontWeight: 700, color: '#0f172a' }}>{u.name}</td>
-                  <td style={{ padding: '12px 18px', color: '#475569' }}>{u.designation}</td>
-                  <td style={{ padding: '12px 18px', color: '#475569' }}>{u.division_name}</td>
-                  <td style={{ padding: '12px 18px' }}>
+              {learners.map(u => (
+                <tr key={u.user_id}>
+                  <td style={{ fontFamily: 'monospace', fontWeight: 700, color: 'var(--blue-600)' }}>{u.user_id}</td>
+                  <td style={{ fontWeight: 700, color: 'var(--color-text-strong)' }}>{u.name}</td>
+                  <td>{u.designation}</td>
+                  <td>{u.division_name}</td>
+                  <td>
                     <span className={`badge ${u.readiness_status === 'READY' ? 'badge-green' : u.readiness_status === 'NEAR_READY' ? 'badge-navy' : 'badge-saffron'}`} style={{ fontSize: '10px' }}>
                       {u.readiness_status}
                     </span>
                   </td>
-                  <td style={{ padding: '12px 18px', fontWeight: 700, color: u.priority_gaps_count > 0 ? '#dc2626' : '#166534' }}>
+                  <td style={{ fontWeight: 700, color: u.priority_gaps_count > 0 ? 'var(--color-danger)' : 'var(--color-success)' }}>
                     {u.target_gaps_count} Gaps ({u.priority_gaps_count} High)
                   </td>
                 </tr>
@@ -180,35 +221,35 @@ export const AdminDashboardView: React.FC = () => {
 
       {/* Tab Content: iGOT Integration Simulator */}
       {activeTab === 'sync' && (
-        <div className="gov-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div className="gov-card static">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
             <div>
               <span className="badge badge-saffron">Provider Abstraction Control</span>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#1a365d', marginTop: '4px' }}>
+              <h3 style={{ fontSize: '18px', marginTop: '4px' }}>
                 iGOT Karmayogi Course & Training Record Synchronization
               </h3>
-              <p style={{ fontSize: '13px', color: '#64748b', marginTop: '2px' }}>
+              <p className="section-sub">
                 Simulates bidirectional catalog synchronization with the national civil service LMS.
               </p>
             </div>
 
             <button
-              className="btn btn-primary"
+              className="btn btn-navy"
               disabled={syncing}
               onClick={handleTriggerSync}
-              style={{ backgroundColor: '#1a365d' }}
             >
-              {syncing ? 'Synchronizing...' : '↻ Trigger Simulated Catalog Sync'}
+              <RefreshIcon /> {syncing ? 'Synchronizing...' : 'Trigger Simulated Catalog Sync'}
             </button>
           </div>
 
           {syncMsg && (
-            <div style={{ padding: '14px', backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '8px', color: '#166534', fontSize: '13px', marginBottom: '20px' }}>
-              ✓ {syncMsg}
+            <div className="promotion-banner" style={{ marginBottom: '20px' }}>
+              <span className="promotion-banner-icon"><CheckIcon /></span>
+              <span className="promotion-title">{syncMsg}</span>
             </div>
           )}
 
-          <div style={{ padding: '18px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px', color: '#334155', lineHeight: 1.6 }}>
+          <div style={{ padding: '18px', backgroundColor: 'var(--wash-ivory)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', fontSize: '13px', color: 'var(--color-text-primary)', lineHeight: 1.6 }}>
             <strong>Architecture Integrity Statement:</strong>
             <p style={{ marginTop: '6px' }}>
               Public iGOT API documentation and live production credentials are currently restricted to authorized ministry nodal officers.
@@ -223,53 +264,56 @@ export const AdminDashboardView: React.FC = () => {
       {showRegisterModal && (
         <div className="modal-overlay" onClick={() => setShowRegisterModal(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '540px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1a365d', marginBottom: '16px' }}>
+            <h2 style={{ fontSize: '20px', marginBottom: '16px' }}>
               Register Officer into Cadre System
             </h2>
 
             {regMsg && (
-              <div style={{ padding: '12px', backgroundColor: '#f0fdf4', color: '#166534', borderRadius: '6px', marginBottom: '16px', fontSize: '13px' }}>
+              <div style={{ padding: '12px', backgroundColor: 'var(--color-success-subtle)', color: '#146B1A', borderRadius: 'var(--radius-sm)', marginBottom: '16px', fontSize: '13px' }}>
                 {regMsg}
               </div>
             )}
 
             <form onSubmit={handleRegister}>
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                <label style={labelStyle} htmlFor="reg-name">
                   Officer Full Name:
                 </label>
                 <input
+                  id="reg-name"
                   type="text"
                   required
                   value={regName}
                   onChange={e => setRegName(e.target.value)}
                   placeholder="e.g. Smt. Vandana Sharma"
-                  style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '14px' }}
+                  style={inputStyle}
                 />
               </div>
 
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                <label style={labelStyle} htmlFor="reg-email">
                   Government Email:
                 </label>
                 <input
+                  id="reg-email"
                   type="email"
                   required
                   value={regEmail}
                   onChange={e => setRegEmail(e.target.value)}
                   placeholder="e.g. vandana.sharma@mospi.gov.in"
-                  style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '14px' }}
+                  style={inputStyle}
                 />
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                <label style={labelStyle} htmlFor="reg-designation">
                   Designation:
                 </label>
                 <select
+                  id="reg-designation"
                   value={regDesignation}
                   onChange={e => setRegDesignation(e.target.value)}
-                  style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '14px' }}
+                  style={inputStyle}
                 >
                   <option value="Junior Statistical Officer">Junior Statistical Officer</option>
                   <option value="Statistical Assistant">Statistical Assistant</option>

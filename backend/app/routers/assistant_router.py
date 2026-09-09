@@ -13,6 +13,7 @@ class AssistantAskRequest(BaseModel):
     context_type: str = "LESSON" # 'LESSON', 'GAP', 'GENERAL'
     lesson_id: Optional[str] = None
     competency_id: Optional[str] = None
+    lang: str = "en"  # 'en' | 'hi' — response language for the copilot
 
 class AssistantAskResponse(BaseModel):
     answer: str
@@ -69,11 +70,15 @@ def ask_assistant(
     Grounded in curriculum transcripts with mandatory timestamp citations.
     A short presentation delay keeps the response feeling like live synthesis.
     """
+    t0 = time.perf_counter()
     result = groq_service.ask_grounded_assistant(
         question=request.question,
         lesson_id=request.lesson_id,
-        competency_id=request.competency_id
+        competency_id=request.competency_id,
+        lang=getattr(request, "lang", "en")
     )
-    # Ensure at least the configured minimum response time so users perceive real AI generation
-    time.sleep(settings.AI_PRESENTATION_DELAY_SECONDS)
+    # Guarantee a MINIMUM total response time (not additive): sleep only the remainder
+    remaining = settings.AI_PRESENTATION_DELAY_SECONDS - (time.perf_counter() - t0)
+    if remaining > 0:
+        time.sleep(remaining)
     return AssistantAskResponse(**result)

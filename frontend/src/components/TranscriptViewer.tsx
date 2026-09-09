@@ -6,47 +6,48 @@ interface TranscriptViewerProps {
   chunks: TranscriptChunkDTO[];
 }
 
+const SparkIcon: React.FC = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2l2.1 6.9L21 11l-6.9 2.1L12 20l-2.1-6.9L3 11l6.9-2.1L12 2z" />
+  </svg>
+);
+
 export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) => {
   const [filterQuery, setFilterQuery] = useState('');
   const { setIsAssistantOpen } = useAuth();
 
-  const filteredChunks = chunks.filter(c => 
+  const filteredChunks = chunks.filter(c =>
     c.text_content.toLowerCase().includes(filterQuery.toLowerCase()) ||
     c.topic.toLowerCase().includes(filterQuery.toLowerCase())
   );
 
   return (
-    <div style={{ backgroundColor: '#ffffff', borderRadius: 'var(--radius-lg)', border: '1px solid #e2e8f0', padding: '24px', boxShadow: 'var(--shadow-sm)' }}>
+    <div className="transcript-panel">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a365d' }}>
+          <h3 style={{ fontSize: '18px' }}>
             Interactive Transcript & Topic Markers
           </h3>
-          <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>
+          <p className="section-sub">
             Grounding material for practice quizzes and the AI Copilot. Click any timestamp to reference.
           </p>
         </div>
 
-        <div style={{ width: '280px' }}>
+        <div style={{ width: '280px', maxWidth: '100%' }}>
           <input
             type="text"
+            className="transcript-search"
             placeholder="Search transcript text..."
             value={filterQuery}
             onChange={e => setFilterQuery(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '8px 12px',
-              borderRadius: '6px',
-              border: '1px solid #cbd5e1',
-              fontSize: '13px'
-            }}
+            aria-label="Search transcript"
           />
         </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '420px', overflowY: 'auto', paddingRight: '6px' }}>
         {filteredChunks.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '32px', color: '#94a3b8', fontSize: '14px' }}>
+          <div style={{ textAlign: 'center', padding: '32px', color: 'var(--color-text-muted)', fontSize: '14px' }}>
             No transcript segments match "{filterQuery}".
           </div>
         ) : (
@@ -55,26 +56,26 @@ export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) =>
               key={chunk.chunk_id}
               style={{
                 padding: '14px 16px',
-                borderRadius: '8px',
-                backgroundColor: '#f8fafc',
-                border: '1px solid #e2e8f0',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--wash-ivory)',
+                border: '1px solid var(--color-border)',
                 transition: 'border-color 0.15s, background-color 0.15s'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                   <span style={{
-                    backgroundColor: '#1a365d',
-                    color: '#ffffff',
+                    backgroundColor: 'var(--blue-500)',
+                    color: 'var(--color-on-blue)',
                     padding: '2px 8px',
-                    borderRadius: '4px',
+                    borderRadius: 'var(--radius-sm)',
                     fontSize: '11px',
                     fontWeight: 700,
                     fontFamily: 'monospace'
                   }}>
                     {chunk.timestamp_label}
                   </span>
-                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#d97706' }}>
+                  <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--orange-700)' }}>
                     {chunk.topic}
                   </span>
                 </div>
@@ -84,22 +85,26 @@ export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) =>
                   style={{
                     background: 'none',
                     border: 'none',
-                    color: '#2563eb',
+                    color: 'var(--blue-500)',
                     fontSize: '12px',
-                    fontWeight: 600,
-                    cursor: 'pointer'
+                    fontWeight: 700,
+                    fontFamily: 'var(--font-sans)',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px'
                   }}
                 >
-                  ✨ Ask Copilot
+                  <SparkIcon /> Ask Copilot
                 </button>
               </div>
 
-              <p style={{ fontSize: '14px', color: '#334155', lineHeight: 1.6, margin: 0 }}>
+              <p style={{ fontSize: '14px', color: 'var(--color-text-primary)', lineHeight: 1.6, margin: 0 }}>
                 {chunk.text_content}
               </p>
 
               {chunk.summary && (
-                <div style={{ marginTop: '8px', fontSize: '12px', color: '#64748b', fontStyle: 'italic' }}>
+                <div style={{ marginTop: '8px', fontSize: '12px', color: 'var(--color-text-muted)', fontStyle: 'italic' }}>
                   Summary: {chunk.summary}
                 </div>
               )}

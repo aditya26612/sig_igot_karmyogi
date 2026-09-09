@@ -4,6 +4,7 @@ import { api } from '../../api/client';
 import { LearnerDashboardResponse } from '../../types';
 import { OneNextActionCard } from '../../components/OneNextActionCard';
 import { SkillGapCard } from '../../components/SkillGapCard';
+import { useReveal } from '../../hooks/useReveal';
 
 interface ProfileCompetency {
   competency_id: string;
@@ -25,11 +26,22 @@ interface LearnerProfile {
   recent_promotions: ProfileCompetency[];
 }
 
+const AwardIcon: React.FC = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="9" r="6" />
+    <path d="M8.5 14L7 22l5-3 5 3-1.5-8" />
+  </svg>
+);
+
 export const LearnerHomeView: React.FC = () => {
   const { currentUser, setActiveView } = useAuth();
   const [dashboard, setDashboard] = useState<LearnerDashboardResponse | null>(null);
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const profileReveal = useReveal<HTMLDivElement>();
+  const gapsReveal = useReveal<HTMLDivElement>();
+  const journeyReveal = useReveal<HTMLDivElement>();
 
   useEffect(() => {
     async function loadDashboard() {
@@ -53,7 +65,7 @@ export const LearnerHomeView: React.FC = () => {
   if (loading) {
     return (
       <div className="gov-container" style={{ padding: '60px 0', textAlign: 'center' }}>
-        <div style={{ fontSize: '18px', fontWeight: 600, color: '#1a365d' }}>Loading your personalized learning plan...</div>
+        <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--color-text-strong)' }}>Loading your personalized learning plan...</div>
       </div>
     );
   }
@@ -67,38 +79,23 @@ export const LearnerHomeView: React.FC = () => {
   }
 
   return (
-    <div className="gov-container" style={{ padding: '36px 0' }}>
+    <div id="dashboard-top" className="gov-container" style={{ padding: '36px 0' }}>
       {/* Officer Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '28px' }}>
         <div>
-          <span style={{ fontSize: '12px', fontWeight: 700, color: '#d97706', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Officer Competency Journey
-          </span>
-          <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#1a365d', marginTop: '4px' }}>
-            {dashboard.greeting}
-          </h1>
-          <div style={{ fontSize: '14px', color: '#475569', marginTop: '4px' }}>
-            Current Role: <strong style={{ color: '#0f172a' }}>{dashboard.current_role}</strong>
-            <span style={{ margin: '0 8px', color: '#cbd5e1' }}>•</span>
-            Target Role: <strong style={{ color: '#d97706' }}>{dashboard.target_role}</strong>
+          <span className="eyebrow-meta">Officer Competency Journey</span>
+          <h1 className="page-title">{dashboard.greeting}</h1>
+          <div className="meta-line">
+            Current Role: <strong className="strong-ink">{dashboard.current_role}</strong>
+            <span style={{ margin: '0 8px', color: 'var(--color-border-strong)' }}>•</span>
+            Target Role: <strong className="strong-orange">{dashboard.target_role}</strong>
           </div>
         </div>
 
         {/* Readiness Badge */}
-        <div style={{
-          padding: '12px 18px',
-          backgroundColor: '#ffffff',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid #e2e8f0',
-          boxShadow: 'var(--shadow-sm)',
-          textAlign: 'right'
-        }}>
-          <div style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>
-            Learning Readiness Status
-          </div>
-          <div style={{ fontSize: '16px', fontWeight: 800, color: '#1a365d', marginTop: '2px' }}>
-            {dashboard.readiness_status.replace(/_/g, ' ')}
-          </div>
+        <div className="readiness-chip">
+          <div className="readiness-label">Learning Readiness Status</div>
+          <div className="readiness-value">{dashboard.readiness_status.replace(/_/g, ' ')}</div>
         </div>
       </div>
 
@@ -106,74 +103,55 @@ export const LearnerHomeView: React.FC = () => {
       {profile && profile.official_competencies && profile.official_competencies.length > 0 && (
         <div style={{ marginBottom: '36px' }}>
           {profile.recent_promotions && profile.recent_promotions.length > 0 && (
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '12px',
-              padding: '14px 18px', marginBottom: '16px',
-              backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0',
-              borderRadius: 'var(--radius-md)'
-            }}>
-              <span style={{ fontSize: '24px' }}>🏅</span>
+            <div className="promotion-banner">
+              <span className="promotion-banner-icon"><AwardIcon /></span>
               <div>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: '#166534' }}>
+                <div className="promotion-title">
                   Official Competency Upgraded: {profile.recent_promotions[0].label}
                 </div>
-                <div style={{ fontSize: '12px', color: '#15803d' }}>
+                <div className="promotion-sub">
                   Supervisor-verified promotion to <strong>{profile.recent_promotions[0].level_label}</strong> — your official MoSPI registry record has been updated.
                 </div>
               </div>
             </div>
           )}
 
-          <div className="gov-card" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-              <div>
-                <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#1a365d', margin: 0 }}>
-                  Official Competency Levels
-                </h2>
-                <p style={{ fontSize: '12px', color: '#64748b', margin: '2px 0 0' }}>
-                  Verified levels in the MoSPI registry. Levels change only through supervisor-approved assessments.
-                </p>
+          <div ref={profileReveal} className="reveal">
+            <div className="gov-card static" style={{ padding: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+                <div>
+                  <h2 style={{ fontSize: '18px', margin: 0 }}>Official Competency Levels</h2>
+                  <p className="section-sub">
+                    Verified levels in the MoSPI registry. Levels change only through supervisor-approved assessments.
+                  </p>
+                </div>
+                <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
+                  Target: <strong className="strong-orange">{profile.target_position_name}</strong>
+                </span>
               </div>
-              <span style={{ fontSize: '11px', color: '#64748b' }}>
-                Target: <strong style={{ color: '#d97706' }}>{profile.target_position_name}</strong>
-              </span>
-            </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: '10px' }}>
-              {profile.official_competencies.map(c => {
-                const met = c.required_level !== null && c.current_level !== null && c.current_level >= c.required_level;
-                const pct = c.required_level ? Math.min(100, Math.round(((c.current_level || 0) / c.required_level) * 100)) : null;
-                return (
-                  <div key={c.competency_id} style={{
-                    padding: '12px', borderRadius: '8px',
-                    backgroundColor: met ? '#f0fdf4' : '#f8fafc',
-                    border: met ? '1px solid #bbf7d0' : '1px solid #e2e8f0'
-                  }}>
-                    <div style={{ fontSize: '12px', fontWeight: 700, color: '#0f172a', marginBottom: '6px', lineHeight: 1.25 }}>
-                      {c.label}
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                      <span style={{ fontSize: '15px', fontWeight: 800, color: met ? '#166534' : '#1a365d' }}>
-                        {c.level_label}
-                      </span>
-                      {c.required_level !== null && (
-                        <span style={{ fontSize: '11px', color: '#64748b' }}>
-                          needs L{c.required_level}
-                        </span>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: '10px' }}>
+                {profile.official_competencies.map(c => {
+                  const met = c.required_level !== null && c.current_level !== null && c.current_level >= c.required_level;
+                  const pct = c.required_level ? Math.min(100, Math.round(((c.current_level || 0) / c.required_level) * 100)) : null;
+                  return (
+                    <div key={c.competency_id} className={`competency-tile ${met ? 'met' : ''}`}>
+                      <div className="competency-tile-label">{c.label}</div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                        <span className="competency-tile-level">{c.level_label}</span>
+                        {c.required_level !== null && (
+                          <span className="competency-tile-need">needs L{c.required_level}</span>
+                        )}
+                      </div>
+                      {pct !== null && (
+                        <div className="mini-track">
+                          <div className={`mini-fill ${met ? 'met' : ''}`} style={{ width: `${pct}%` }} />
+                        </div>
                       )}
                     </div>
-                    {pct !== null && (
-                      <div style={{ height: '4px', backgroundColor: '#e2e8f0', borderRadius: '2px', marginTop: '8px', overflow: 'hidden' }}>
-                        <div style={{
-                          height: '100%', width: `${pct}%`,
-                          backgroundColor: met ? '#16a34a' : '#d97706',
-                          borderRadius: '2px', transition: 'width 0.6s ease'
-                        }} />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -185,21 +163,18 @@ export const LearnerHomeView: React.FC = () => {
       </div>
 
       {/* 2. PRIORITY SKILL GAPS */}
-      <div style={{ marginBottom: '40px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+      <div style={{ marginBottom: '40px' }} ref={gapsReveal} className="reveal">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1a365d' }}>
-              Priority Skills to Strengthen
-            </h2>
-            <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>
+            <h2 className="section-heading">Priority Skills to Strengthen</h2>
+            <p className="section-sub">
               Identified by comparing your current verified evidence against {dashboard.target_role} requirements.
             </p>
           </div>
 
           <button
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-sm"
             onClick={() => setActiveView('gaps')}
-            style={{ fontSize: '13px', minHeight: '36px', padding: '6px 14px' }}
           >
             View All Gaps ({dashboard.total_gaps_count}) →
           </button>
@@ -213,75 +188,45 @@ export const LearnerHomeView: React.FC = () => {
       </div>
 
       {/* 3. LEARNING PATHWAY PROGRESSION */}
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+      <div ref={journeyReveal} className="reveal">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1a365d' }}>
-              Your Structured Learning Journey
-            </h2>
-            <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>
+            <h2 className="section-heading">Your Structured Learning Journey</h2>
+            <p className="section-sub">
               Step-by-step career path progression from foundation concepts to verified practical assessments.
             </p>
           </div>
 
           <button
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-sm"
             onClick={() => setActiveView('career')}
-            style={{ fontSize: '13px', minHeight: '36px', padding: '6px 14px' }}
           >
             View Full Pathway →
           </button>
         </div>
 
-        <div className="gov-card">
+        <div className="gov-card static">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {dashboard.learning_path_preview.map((item, idx) => (
-              <div
-                key={item.path_item_id}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: '12px 16px',
-                  borderRadius: '8px',
-                  backgroundColor: idx === 0 ? '#f0fdf4' : '#f8fafc',
-                  border: idx === 0 ? '1px solid #bbf7d0' : '1px solid #e2e8f0'
-                }}
-              >
-                <div style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: '50%',
-                  backgroundColor: idx === 0 ? '#166534' : '#cbd5e1',
-                  color: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 700,
-                  fontSize: '13px'
-                }}>
-                  {item.sequence_no}
-                </div>
+              <div key={item.path_item_id} className={`journey-item ${idx === 0 ? 'current' : ''}`}>
+                <div className="journey-node">{item.sequence_no}</div>
 
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                     <span className={`badge ${idx === 0 ? 'badge-green' : 'badge-gray'}`} style={{ fontSize: '10px' }}>
                       {item.stage}
                     </span>
-                    <span style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>
-                      {item.action_label}
-                    </span>
+                    <span className="journey-label">{item.action_label}</span>
                   </div>
-                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>
+                  <div className="journey-meta">
                     Competency: {item.competency_label} {item.course_title ? `• Course: ${item.course_title}` : ''}
                   </div>
                 </div>
 
                 <div>
                   <button
-                    className={`btn ${idx === 0 ? 'btn-primary' : 'btn-secondary'}`}
+                    className={`btn btn-sm ${idx === 0 ? 'btn-primary' : 'btn-secondary'}`}
                     onClick={() => setActiveView('learning')}
-                    style={{ fontSize: '12px', minHeight: '32px', padding: '6px 14px' }}
                   >
                     {idx === 0 ? 'Start Now →' : 'View Module'}
                   </button>

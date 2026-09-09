@@ -6,6 +6,7 @@ from typing import List, Optional, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException
 from app.database import get_db_connection, load_db
 from app.auth import get_current_user
+from app.services.i18n_service import normalize_lang, notice
 from app.engine import find
 from app.models.assessment_schemas import (
     AssessmentDetailDTO,
@@ -224,6 +225,7 @@ def get_assessment_detail(assessment_id: str, current_user: Dict[str, Any] = Dep
 def submit_assessment(
     assessment_id: str,
     submission: AssessmentSubmissionRequest,
+    lang: str = "en",
     current_user: Dict[str, Any] = Depends(get_current_user)
 ):
     """
@@ -251,7 +253,7 @@ def submit_assessment(
                 user_id=uid,
                 status="PENDING_REVIEW",
                 submitted_at=datetime.now(timezone.utc).isoformat(),
-                notice="Your previous submission is currently under review by your supervisor."
+                notice=notice("assessment_pending", normalize_lang(lang))
             )
             
         submission_id = f"SUB-{assessment_id}-{uid}-{uuid.uuid4().hex[:6]}"
@@ -300,7 +302,7 @@ def submit_assessment(
             user_id=uid,
             status="PENDING_REVIEW",
             submitted_at=now,
-            notice="Your assessment has been submitted successfully. A supervisor must verify the evidence against the rubric before your proficiency level changes."
+            notice=notice("assessment_submit", normalize_lang(lang))
         )
     finally:
         con.close()

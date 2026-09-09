@@ -35,21 +35,21 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '760px' }}>
         {!decisionResult ? (
           <div>
-            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: '16px', marginBottom: '20px' }}>
+            <div style={{ borderBottom: '2px solid var(--color-border)', paddingBottom: '16px', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span className="badge badge-saffron">Supervisor Evaluation Queue</span>
-                <span style={{ fontSize: '12px', color: '#64748b' }}>Rubric: {item.rubric_version}</span>
+                <span style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>Rubric: {item.rubric_version}</span>
               </div>
-              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1a365d', marginTop: '6px' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--blue-500)', marginTop: '6px' }}>
                 Practical Evidence Review: {item.learner_name}
               </h2>
-              <div style={{ fontSize: '13px', color: '#64748b', marginTop: '4px' }}>
+              <div style={{ fontSize: '13px', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                 Officer ID: <strong>{item.user_id}</strong> | Competency: <strong>{item.competency_label}</strong> ({item.competency_id})
               </div>
             </div>
 
             {error && (
-              <div style={{ padding: '12px', backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: '6px', marginBottom: '16px', fontSize: '13px' }}>
+              <div style={{ padding: '12px', backgroundColor: 'var(--color-danger-subtle)', color: '#A82B1B', borderRadius: '6px', marginBottom: '16px', fontSize: '13px' }}>
                 {error}
               </div>
             )}
@@ -60,32 +60,32 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
               alignItems: 'center',
               justifyContent: 'space-around',
               padding: '16px',
-              backgroundColor: '#f8fafc',
+              backgroundColor: 'var(--wash-ivory)',
               borderRadius: '8px',
-              border: '1px solid #e2e8f0',
+              border: '1px solid var(--color-border)',
               marginBottom: '20px'
             }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase' }}>Current Level</div>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#1a365d' }}>Level {item.current_level}</div>
+                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Current Level</div>
+                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--blue-500)' }}>Level {item.current_level}</div>
               </div>
-              <div style={{ fontSize: '24px', color: '#d97706', fontWeight: 700 }}>→</div>
+              <div style={{ fontSize: '24px', color: 'var(--orange-500)', fontWeight: 700 }}>→</div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase' }}>Evaluated Target</div>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#166534' }}>Level {item.proposed_level}</div>
+                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Evaluated Target</div>
+                <div style={{ fontSize: '20px', fontWeight: 800, color: '#146B1A' }}>Level {item.proposed_level}</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase' }}>Evidence Score</div>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#1e40af' }}>{item.overall_score}%</div>
+                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Evidence Score</div>
+                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--blue-600)' }}>{item.overall_score}%</div>
               </div>
             </div>
 
             {/* Evidence Checklist */}
-            <div style={{ padding: '16px', backgroundColor: '#f0fdf4', borderRadius: '8px', border: '1px solid #bbf7d0', marginBottom: '20px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#166534', marginBottom: '8px' }}>
+            <div style={{ padding: '16px', backgroundColor: 'var(--color-success-subtle)', borderRadius: '8px', border: '1px solid #BEE7C1', marginBottom: '20px' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#146B1A', marginBottom: '8px' }}>
                 Automated Rubric Pre-Check ({item.rubric_version}):
               </div>
-              <div style={{ fontSize: '13px', color: '#15803d', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ fontSize: '13px', color: '#1E7A24', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {item.rubric_version === 'sampling-practical-demo-v1' && (
                   <>
                     <div>✓ Task 1 Allocation: Proportional share matches population ratio (80 & 40 units).</div>
@@ -118,19 +118,19 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
 
             {/* Supervisor Comments */}
             <div style={{ marginBottom: '24px' }}>
-              <label style={{ fontSize: '13px', fontWeight: 700, color: '#334155', display: 'block', marginBottom: '6px' }}>
+              <label style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)', display: 'block', marginBottom: '6px' }}>
                 Official Supervisor / Assessor Feedback:
               </label>
               <textarea
                 rows={3}
                 value={comments}
                 onChange={e => setComments(e.target.value)}
-                style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px', lineHeight: 1.5 }}
+                style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '13px', lineHeight: 1.5 }}
               />
             </div>
 
             {/* Actions */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #e2e8f0', paddingTop: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--color-border)', paddingTop: '20px' }}>
               <button
                 className="btn btn-secondary"
                 disabled={submitting}
@@ -144,7 +144,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
                   className="btn"
                   disabled={submitting}
                   onClick={() => handleDecision(false)}
-                  style={{ backgroundColor: '#dc2626', color: '#ffffff' }}
+                  style={{ backgroundColor: 'var(--color-danger)', color: '#ffffff' }}
                 >
                   Reject / Needs Practice
                 </button>
@@ -166,8 +166,8 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              backgroundColor: decisionResult.status === 'APPROVED' ? '#dcfce7' : '#fee2e2',
-              color: decisionResult.status === 'APPROVED' ? '#166534' : '#991b1b',
+              backgroundColor: decisionResult.status === 'APPROVED' ? 'var(--color-success-subtle)' : 'var(--color-danger-subtle)',
+              color: decisionResult.status === 'APPROVED' ? '#146B1A' : '#A82B1B',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -176,18 +176,18 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
             }}>
               {decisionResult.status === 'APPROVED' ? '✓' : '✗'}
             </div>
-            <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#1a365d', marginBottom: '10px' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: 800, color: 'var(--blue-500)', marginBottom: '10px' }}>
               {decisionResult.status === 'APPROVED' ? 'Competency Level Successfully Promoted' : 'Assessment Marked as Needs Improvement'}
             </h2>
-            <p style={{ fontSize: '14px', color: '#475569', maxWidth: '580px', margin: '0 auto 20px auto', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', maxWidth: '580px', margin: '0 auto 20px auto', lineHeight: 1.6 }}>
               {decisionResult.message}
             </p>
 
             {decisionResult.level_promoted && (
-              <div style={{ padding: '12px 20px', backgroundColor: '#f0fdf4', borderRadius: '8px', border: '1px solid #bbf7d0', display: 'inline-block', marginBottom: '24px', fontSize: '14px', color: '#166534' }}>
+              <div style={{ padding: '12px 20px', backgroundColor: 'var(--color-success-subtle)', borderRadius: '8px', border: '1px solid #BEE7C1', display: 'inline-block', marginBottom: '24px', fontSize: '14px', color: '#146B1A' }}>
                 Official State Update: <strong>Level {decisionResult.before_level} → Level {decisionResult.after_level}</strong>
                 <br />
-                <span style={{ fontSize: '12px', color: '#15803d' }}>Target learning path and priority gaps recalculated automatically in real-time.</span>
+                <span style={{ fontSize: '12px', color: '#1E7A24' }}>Target learning path and priority gaps recalculated automatically in real-time.</span>
               </div>
             )}
 

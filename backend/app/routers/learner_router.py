@@ -4,6 +4,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from app.database import get_db_connection, load_db
 from app.auth import get_current_user
 from app.engine import journey, find, required
+from app.services.i18n_service import (normalize_lang, greeting, notice,
+    readiness_label as i18n_readiness_label, gap_status_label)
 from app.models.learner_schemas import (
     LearnerProfileDetail,
     OfficialCompetencyItem,
@@ -159,6 +161,7 @@ def get_learner_profile(
 @router.get("/dashboard", response_model=LearnerDashboardResponse)
 def get_learner_dashboard(
     user_id: Optional[str] = Query(None, description="Optional user_id for Admin/Reviewer inspection"),
+    lang: str = "en",
     current_user: Dict[str, Any] = Depends(get_current_user)
 ):
     uid = resolve_target_user_id(current_user, user_id)
@@ -235,7 +238,7 @@ def get_learner_dashboard(
         completed_comp = sum(1 for c in j["current_competencies"] if c.get("current_level") and c["current_level"] >= 3)
         
         return LearnerDashboardResponse(
-            greeting=f"Good day, {u['name']}",
+            greeting=greeting(u["name"], lang),
             learner_name=u["name"],
             current_role=j["current_position"]["name"] if j["current_position"] else "Current Role",
             target_role=tar_pos,
@@ -311,6 +314,7 @@ def get_learner_learning_path(
 @router.get("/career-readiness", response_model=CareerReadinessResponse)
 def get_career_readiness(
     user_id: Optional[str] = Query(None, description="Optional user_id for Admin/Reviewer inspection"),
+    lang: str = "en",
     current_user: Dict[str, Any] = Depends(get_current_user)
 ):
     uid = resolve_target_user_id(current_user, user_id)
@@ -321,13 +325,9 @@ def get_career_readiness(
         u = j["user"]
         tar_pos = j["target_position"]["name"] if j["target_position"] else "Target Role"
         
-        readiness_labels = {
-            "READY": "Learning Readiness: Ready for Advanced Practice",
-            "NEAR_READY": "Learning Readiness: Near Ready (Minor Gap Remaining)",
-            "DEVELOPMENT_REQUIRED": "Learning Readiness: Guided Development Required",
-            "CRITICAL_GAPS": "Learning Readiness: Priority Foundational Gaps",
-            "INSUFFICIENT_EVIDENCE": "Learning Readiness: Diagnostic Assessment Required"
-        }
+        lang = normalize_lang(lang)
+        readiness_labels = {k: i18n_readiness_label(k, lang) for k in
+                            ("READY", "NEAR_READY", "DEVELOPMENT_REQUIRED", "CRITICAL_GAPS", "INSUFFICIENT_EVIDENCE")}
         
         target_gaps = [build_gap_item(g, D, tar_pos) for g in j["target_gaps"]]
         met_count = sum(1 for g in target_gaps if g.gap_status == "NO_GAP")
@@ -340,7 +340,7 @@ def get_career_readiness(
             target_position=tar_pos,
             readiness_status=j["readiness_status"],
             plain_readiness_label=readiness_labels.get(j["readiness_status"], "Under Evaluation"),
-            notice="Readiness reflects demonstrated competency evidence in official modules. Administrative promotion eligibility is determined separately under MoSPI Cadre Recruitment Rules.",
+            notice=notice("readiness", lang),
             total_required_competencies=len(target_gaps),
             met_competencies_count=met_count,
             high_priority_gaps_count=high_gaps,

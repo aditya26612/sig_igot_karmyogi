@@ -7,6 +7,42 @@ import { TranscriptViewer } from '../../components/TranscriptViewer';
 import { QuizModal } from '../../components/QuizModal';
 import { AssessmentModal } from '../../components/AssessmentModal';
 
+const TargetIcon: React.FC = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.4" fill="currentColor" />
+  </svg>
+);
+
+const InstitutionIcon: React.FC = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 21h18" /><path d="M5 21V10l7-5 7 5v11" /><path d="M9 21v-5h6v5" /><path d="M10 12h.01M14 12h.01" />
+  </svg>
+);
+
+const CheckSmallIcon: React.FC = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+const ChevronRightIcon: React.FC = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="9 6 15 12 9 18" />
+  </svg>
+);
+
+const PlayCircleIcon: React.FC = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const LightbulbIcon: React.FC = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M9 18h6" /><path d="M10 22h4" /><path d="M12 2a7 7 0 0 0-4 12.7V18h8v-3.3A7 7 0 0 0 12 2z" />
+  </svg>
+);
+
 export const MyLearningView: React.FC = () => {
   const { selectedLessonId, setSelectedLessonId, activeAssessmentId, setActiveAssessmentId } = useAuth();
   const [playlists, setPlaylists] = useState<CuratedPlaylistDTO[]>([]);
@@ -63,66 +99,53 @@ export const MyLearningView: React.FC = () => {
     loadLesson();
   }, [selectedLessonId]);
 
-  const isSamplingPlaylist = 
-    lessonDetail?.playlist.competency_id === 'COMP-SAMPLING' ||
-    activePlaylistId === 'PLShJJCRzJWxhz7SfG4hpaBD5bKOloWx9J';
-
   return (
     <div className="gov-container" style={{ padding: '36px 0' }}>
-      {/* View Header */}
-      <div style={{ marginBottom: '24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <span className="badge badge-saffron">Curated Learning Modules</span>
-          <span style={{ fontSize: '13px', color: '#64748b' }}>External Videos with Local AI Transcripts & Quizzes</span>
-        </div>
-        <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#1a365d' }}>
-          My Learning & Video Curriculum
-        </h1>
+      {/* View Header — plain language, what this page is for */}
+      <div style={{ marginBottom: '20px' }}>
+        <h1 className="page-title">My Learning</h1>
+        <p className="meta-line">
+          Watch your course videos, read along with the transcript, and check your understanding with a practice quiz.
+        </p>
       </div>
 
-      {/* Assessment Mechanisms Differentiation Guide */}
-      <div style={{
+      {/* How it works — 3 simple steps, one row */}
+      <div className="gov-card static" style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '16px',
-        backgroundColor: '#ffffff',
-        borderRadius: '10px',
-        border: '1px solid #e2e8f0',
-        padding: '16px 20px',
-        marginBottom: '24px',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gap: '0',
+        padding: '18px 8px',
+        marginBottom: '28px'
       }}>
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-          <div style={{ fontSize: '24px', lineHeight: 1 }}>🎯</div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <strong style={{ fontSize: '14px', color: '#1a365d' }}>1. Lesson Practice Quiz</strong>
-              <span className="badge badge-saffron" style={{ fontSize: '10px', padding: '1px 6px' }}>Formative</span>
+        {[
+          { icon: <PlayCircleIcon />, step: '1. Watch', text: 'Play the lesson video. Read the transcript below it any time.' },
+          { icon: <TargetIcon />, step: '2. Practice', text: 'Take the practice quiz. It is just for you — it never changes your official level.' },
+          { icon: <InstitutionIcon />, step: '3. Get verified', text: 'When you are confident, submit the practical task. Your supervisor reviews and approves the promotion.' },
+        ].map((s, i) => (
+          <div key={s.step} style={{
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'flex-start',
+            padding: '0 16px',
+            borderLeft: i > 0 ? '1px solid var(--color-border)' : 'none'
+          }}>
+            <div style={{ color: 'var(--orange-600)', lineHeight: 1, flex: 'none', marginTop: '2px' }}>{s.icon}</div>
+            <div>
+              <strong style={{ display: 'block', fontSize: '14px', color: 'var(--color-text-strong)', marginBottom: '3px' }}>{s.step}</strong>
+              <span style={{ fontSize: '12.5px', color: 'var(--color-text-secondary)', lineHeight: 1.45 }}>{s.text}</span>
             </div>
-            <p style={{ fontSize: '12px', color: '#475569', margin: '4px 0 0 0', lineHeight: 1.4 }}>
-              Self-paced quiz available for every video. Provides instant feedback and transcript citations. <em>Does not alter your official competency level.</em>
-            </p>
           </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', borderLeft: '1px solid #f1f5f9', paddingLeft: '16px' }}>
-          <div style={{ fontSize: '24px', lineHeight: 1 }}>🏛️</div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <strong style={{ fontSize: '14px', color: '#1a365d' }}>2. Cadre Practical Assessment</strong>
-              <span className="badge badge-navy" style={{ fontSize: '10px', padding: '1px 6px' }}>Summative</span>
-            </div>
-            <p style={{ fontSize: '12px', color: '#475569', margin: '4px 0 0 0', lineHeight: 1.4 }}>
-              Formal module-level examination evaluated by NSSO Supervisor (<strong>Sunita Rao</strong>). <em>Official approval promotes your cadre level (+1 Level).</em>
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Playlist Selector Chips */}
-      <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '16px', marginBottom: '24px' }}>
+      {/* Course selector — tabs with subject names, not codes */}
+      <div style={{ marginBottom: '8px' }}>
+        <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>Choose a course</div>
+      </div>
+      <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '14px', marginBottom: '20px' }}>
         {playlists.map(p => {
           const isActive = p.playlist_id === activePlaylistId;
+          const cleanName = p.title.split('&')[0].trim();
           return (
             <button
               key={p.playlist_id}
@@ -140,43 +163,45 @@ export const MyLearningView: React.FC = () => {
               }}
               style={{
                 padding: '10px 16px',
-                borderRadius: '8px',
-                border: isActive ? '2px solid #1a365d' : '1px solid #cbd5e1',
-                backgroundColor: isActive ? '#1a365d' : '#ffffff',
-                color: isActive ? '#ffffff' : '#334155',
+                borderRadius: 'var(--radius-sm)',
+                border: isActive ? '2px solid var(--blue-500)' : '1px solid var(--color-border)',
+                backgroundColor: isActive ? 'var(--blue-500)' : 'var(--color-bg-surface)',
+                color: isActive ? 'var(--color-on-blue)' : 'var(--color-text-secondary)',
                 fontSize: '13px',
                 fontWeight: 700,
+                fontFamily: 'var(--font-sans)',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
-                boxShadow: isActive ? '0 2px 4px rgba(26,54,93,0.2)' : 'none',
+                boxShadow: isActive ? '0 2px 4px rgba(27,76,161,0.2)' : 'none',
                 transition: 'all 0.15s ease'
               }}
             >
-              {p.title.split('&')[0]} ({p.competency_id})
+              {cleanName}
             </button>
           );
         })}
       </div>
 
-      {/* Main Learning Grid: Video Player + Playlist Sidebar */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '28px', alignItems: 'flex-start' }}>
-        {/* Left Column: Video Player & Transcripts */}
+      {/* Main layout: video + transcript (left), syllabus (right) */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '28px', alignItems: 'flex-start' }}>
+        {/* Left: what you're watching now */}
         <div>
           {loading ? (
-            <div style={{ padding: '80px', textAlign: 'center', backgroundColor: '#ffffff', borderRadius: '12px' }}>
-              <div style={{ fontSize: '18px', fontWeight: 600, color: '#1a365d' }}>Loading Video & Transcript...</div>
+            <div className="gov-card" style={{ padding: '80px', textAlign: 'center' }}>
+              <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--color-text-strong)' }}>Loading your lesson...</div>
             </div>
           ) : lessonDetail ? (
             <div>
-              <div style={{ marginBottom: '28px' }}>
-                <VideoPlayer
-                  lesson={lessonDetail.lesson}
-                  playlist={lessonDetail.playlist}
-                  onLaunchQuiz={() => setShowQuizModal(true)}
-                />
+              <div style={{ marginBottom: '6px' }}>
+                <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>Now playing</div>
               </div>
+              <VideoPlayer
+                lesson={lessonDetail.lesson}
+                playlist={lessonDetail.playlist}
+                onLaunchQuiz={() => setShowQuizModal(true)}
+              />
 
-              {/* Conditional Assessment Callout Banner */}
+              {/* Practical task callout — shown only when this course has one */}
               {(() => {
                 const ASSESSMENT_MAP: Record<string, { id: string; rubric: string; title: string }> = {
                   'COMP-SAMPLING': {
@@ -205,112 +230,41 @@ export const MyLearningView: React.FC = () => {
 
                 if (currentAss) {
                   return (
-                    <div style={{
-                      padding: '20px 24px',
-                      backgroundColor: '#fef3c7',
-                      borderRadius: '10px',
-                      border: '1.5px solid #f59e0b',
+                    <div className="gov-card static" style={{
+                      padding: '18px 22px',
+                      backgroundColor: 'var(--wash-cream)',
+                      border: '1px solid var(--orange-300)',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      marginBottom: '28px',
+                      marginBottom: '24px',
                       flexWrap: 'wrap',
-                      gap: '16px',
-                      boxShadow: '0 2px 6px rgba(245, 158, 11, 0.12)'
+                      gap: '14px'
                     }}>
-                      <div style={{ flex: 1, minWidth: '280px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                          <span className="badge badge-saffron" style={{ fontWeight: 800 }}>
-                            FORMAL CADRE ASSESSMENT
-                          </span>
-                          <span style={{ fontSize: '12px', color: '#78350f', fontWeight: 700 }}>
-                            Rubric: {currentAss.rubric}
-                          </span>
-                        </div>
-                        <div style={{ fontWeight: 800, color: '#92400e', fontSize: '16px' }}>
-                          Ready for Formal Cadre Evaluation? ({currentAss.title})
-                        </div>
-                        <div style={{ fontSize: '13px', color: '#78350f', marginTop: '4px', lineHeight: 1.5 }}>
-                          Unlike formative self-paced practice quizzes, submitting this practical evidence packages your work for NSSO Supervisor evaluation (<strong>Sunita Rao</strong>). Upon approval, your official MoSPI competency level is promoted (Level 2 → Level 3).
-                        </div>
+                      <div style={{ flex: 1, minWidth: '260px' }}>
+                        <strong style={{ display: 'block', fontSize: '15px', color: 'var(--color-text-strong)' }}>
+                          Ready for the official practical task?
+                        </strong>
+                        <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                          Submit your work on <strong>{currentAss.title}</strong>. Your supervisor (Sunita Rao) reviews it — approval raises your official level by one step.
+                        </span>
                       </div>
 
                       <button
-                        className="btn btn-primary"
+                        className="btn btn-primary btn-sm"
                         onClick={() => setActiveAssessmentId(currentAss.id)}
-                        style={{
-                          backgroundColor: '#92400e',
-                          border: '1px solid #78350f',
-                          minHeight: '42px',
-                          fontSize: '13px',
-                          fontWeight: 800,
-                          padding: '10px 20px',
-                          whiteSpace: 'nowrap'
-                        }}
+                        style={{ whiteSpace: 'nowrap' }}
                       >
-                        Start Practical Cadre Assessment →
+                        Start the Practical Task →
                       </button>
                     </div>
                   );
                 }
 
-                return (
-                  <div style={{
-                    padding: '20px 24px',
-                    backgroundColor: '#f0f9ff',
-                    borderRadius: '10px',
-                    border: '1.5px solid #93c5fd',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '28px',
-                    flexWrap: 'wrap',
-                    gap: '16px',
-                    boxShadow: '0 2px 6px rgba(147, 197, 253, 0.15)'
-                  }}>
-                    <div style={{ flex: 1, minWidth: '280px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                        <span className="badge badge-navy" style={{ fontWeight: 800 }}>
-                          CADRE ASSESSMENT NOTICE
-                        </span>
-                        <span style={{ fontSize: '12px', color: '#1e40af', fontWeight: 700 }}>
-                          Competency: {lessonDetail.playlist.competency_id}
-                        </span>
-                      </div>
-                      <div style={{ fontWeight: 800, color: '#1e3a8a', fontSize: '16px' }}>
-                        Course Examination Notice • {lessonDetail.playlist.title}
-                      </div>
-                      <div style={{ fontSize: '13px', color: '#334155', marginTop: '4px', lineHeight: 1.5 }}>
-                        Formal cadre examinations for this competency are scheduled through the MoSPI Departmental Review Board. In this sandbox, active supervisor review queues are available for <strong>Sampling</strong>, <strong>SQL</strong>, <strong>Data Quality</strong>, and <strong>Python</strong>.
-                        Use the <strong>🎯 Lesson Practice Quiz</strong> button above to test your understanding of each lecture!
-                      </div>
-                    </div>
-
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => {
-                        setActivePlaylistId('PLShJJCRzJWxhz7SfG4hpaBD5bKOloWx9J');
-                        setSelectedLessonId('sampling-lesson-3');
-                        setActiveAssessmentId('ASS-DEMO-PRACTICAL-001');
-                      }}
-                      style={{
-                        backgroundColor: '#ffffff',
-                        border: '1px solid #1a365d',
-                        color: '#1a365d',
-                        minHeight: '42px',
-                        fontSize: '13px',
-                        fontWeight: 700,
-                        padding: '10px 18px',
-                        whiteSpace: 'nowrap'
-                      }}
-                    >
-                      Go to Active Practical Exams →
-                    </button>
-                  </div>
-                );
+                return null;
               })()}
 
-              {/* Interactive Transcript */}
+              {/* Transcript */}
               <TranscriptViewer chunks={lessonDetail.transcript_chunks} />
             </div>
           ) : (
@@ -318,14 +272,12 @@ export const MyLearningView: React.FC = () => {
           )}
         </div>
 
-        {/* Right Column: Playlist Lesson List */}
-        <div className="gov-card" style={{ padding: '20px' }}>
-          <div style={{ borderBottom: '1px solid #e2e8f0', paddingBottom: '12px', marginBottom: '14px' }}>
-            <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 700, textTransform: 'uppercase' }}>
-              Module Syllabus
-            </span>
-            <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#1a365d', marginTop: '2px' }}>
-              {lessonDetail?.playlist.title || 'Course Lessons'}
+        {/* Right: course lessons list */}
+        <div className="gov-card static" style={{ padding: '20px' }}>
+          <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '12px', marginBottom: '14px' }}>
+            <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>Course syllabus</div>
+            <h3 style={{ fontSize: '15px', marginTop: '4px' }}>
+              {lessonDetail?.playlist.title.split('&')[0] || 'Course Lessons'}
             </h3>
           </div>
 
@@ -333,36 +285,32 @@ export const MyLearningView: React.FC = () => {
             {(currentPlaylistLessons.length > 0 ? currentPlaylistLessons : (lessonDetail?.playlist?.lessons || [])).map(item => {
               const isSelected = item.lesson_id === selectedLessonId;
               return (
-                <div
+                <button
                   key={item.lesson_id}
+                  className={`lesson-row ${isSelected ? 'active' : ''}`}
                   onClick={() => setSelectedLessonId(item.lesson_id)}
-                  style={{
-                    padding: '12px 14px',
-                    borderRadius: '8px',
-                    backgroundColor: isSelected ? '#ebf8ff' : '#f8fafc',
-                    borderLeft: item.is_completed ? '4px solid #2e7d32' : isSelected ? '4px solid #1a365d' : '4px solid transparent',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s'
-                  }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: isSelected ? '#1e40af' : '#64748b' }}>
-                      Lesson #{item.sequence_no}
+                  <span className="lesson-chevron">
+                    {item.is_completed
+                      ? <span style={{ color: 'var(--color-success)', display: 'inline-flex' }}><CheckSmallIcon /></span>
+                      : <ChevronRightIcon />}
+                  </span>
+                  <span style={{ flex: 1, minWidth: 0 }}>
+                    <span className="lesson-row-title" style={{ display: 'block' }}>
+                      {item.title}
                     </span>
-                    <span style={{ fontSize: '11px', color: item.is_completed ? '#2e7d32' : '#94a3b8', fontWeight: item.is_completed ? 700 : 400 }}>
-                      {item.is_completed ? '✓ Watched' : `${item.duration_minutes} min`}
+                    <span className="lesson-row-meta">
+                      Lesson {item.sequence_no} {item.is_completed ? '• Watched' : `• ${item.duration_minutes} min`}
                     </span>
-                  </div>
-                  <div style={{ fontSize: '13px', fontWeight: isSelected ? 700 : 500, color: isSelected ? '#1a365d' : '#334155', lineHeight: 1.3 }}>
-                    {item.title}
-                  </div>
-                </div>
+                  </span>
+                </button>
               );
             })}
           </div>
 
-          <div style={{ marginTop: '20px', padding: '12px', backgroundColor: '#f1f5f9', borderRadius: '6px', fontSize: '11px', color: '#64748b', lineHeight: 1.5 }}>
-            💡 <strong>Notice:</strong> Video playback is sourced directly from verified open educational playlists. Questions and transcripts are processed locally.
+          <div style={{ marginTop: '18px', padding: '12px', backgroundColor: 'var(--wash-ivory)', borderRadius: 'var(--radius-sm)', fontSize: '11.5px', color: 'var(--color-text-muted)', lineHeight: 1.5, display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+            <span style={{ color: 'var(--orange-600)', flex: 'none', marginTop: '1px' }}><LightbulbIcon /></span>
+            <span>Videos come from verified open educational sources. Transcripts and practice questions are processed locally on the platform.</span>
           </div>
         </div>
       </div>

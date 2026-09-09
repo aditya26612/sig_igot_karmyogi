@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import { api } from '../../api/client';
 import { CompetencyGapItem } from '../../types';
 import { SkillGapCard } from '../../components/SkillGapCard';
+import { useReveal } from '../../hooks/useReveal';
 
 export const SkillGapsView: React.FC = () => {
   const { currentUser } = useAuth();
@@ -10,6 +11,8 @@ export const SkillGapsView: React.FC = () => {
   const [scope, setScope] = useState<'TARGET' | 'CURRENT'>('TARGET');
   const [filterStatus, setFilterStatus] = useState<string>('ALL');
   const [loading, setLoading] = useState(true);
+  const summaryReveal = useReveal<HTMLDivElement>();
+  const gridReveal = useReveal<HTMLDivElement>();
 
   useEffect(() => {
     async function loadGaps() {
@@ -42,35 +45,33 @@ export const SkillGapsView: React.FC = () => {
     <div className="gov-container" style={{ padding: '36px 0' }}>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
-        <span style={{ fontSize: '12px', fontWeight: 700, color: '#d97706', textTransform: 'uppercase' }}>
-          Diagnostic & Cadre Evaluation
-        </span>
-        <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#1a365d', marginTop: '4px' }}>
-          Official Competency Gap Analysis
-        </h1>
-        <p style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>
+        <span className="eyebrow-meta">Diagnostic & Cadre Evaluation</span>
+        <h1 className="page-title">Official Competency Gap Analysis</h1>
+        <p className="meta-line">
           Gaps are derived deterministically by calculating unmet proficiency levels: <code>max(required_level - supported_level, 0)</code>.
         </p>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid-3" style={{ marginBottom: '32px' }}>
-        <div className="gov-card" style={{ borderLeft: '4px solid #dc2626' }}>
-          <div style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>Priority Gaps (High)</div>
-          <div style={{ fontSize: '28px', fontWeight: 800, color: '#dc2626', marginTop: '6px' }}>{highCount}</div>
-          <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Unmet gap ≥ 2 levels. Structured training required.</div>
-        </div>
+      <div ref={summaryReveal} className="reveal">
+        <div className="grid-3" style={{ marginBottom: '32px' }}>
+          <div className="stat-chip" style={{ borderTop: 'none' }}>
+            <div className="stat-label" style={{ color: 'var(--color-danger)' }}>Priority Gaps (High)</div>
+            <div className="stat-value" style={{ color: 'var(--color-danger)' }}>{highCount}</div>
+            <div className="section-sub" style={{ fontSize: '12px' }}>Unmet gap ≥ 2 levels. Structured training required.</div>
+          </div>
 
-        <div className="gov-card" style={{ borderLeft: '4px solid #d97706' }}>
-          <div style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>Moderate Gaps (Medium)</div>
-          <div style={{ fontSize: '28px', fontWeight: 800, color: '#d97706', marginTop: '6px' }}>{mediumCount}</div>
-          <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Unmet gap = 1 level. Practice and assessment recommended.</div>
-        </div>
+          <div className="stat-chip">
+            <div className="stat-label" style={{ color: 'var(--orange-700)' }}>Moderate Gaps (Medium)</div>
+            <div className="stat-value" style={{ color: 'var(--orange-700)' }}>{mediumCount}</div>
+            <div className="section-sub" style={{ fontSize: '12px' }}>Unmet gap = 1 level. Practice and assessment recommended.</div>
+          </div>
 
-        <div className="gov-card" style={{ borderLeft: '4px solid #166534' }}>
-          <div style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>Requirements Satisfied</div>
-          <div style={{ fontSize: '28px', fontWeight: 800, color: '#166534', marginTop: '6px' }}>{metCount}</div>
-          <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Demonstrated evidence meets or exceeds target level.</div>
+          <div className="stat-chip">
+            <div className="stat-label" style={{ color: '#146B1A' }}>Requirements Satisfied</div>
+            <div className="stat-value" style={{ color: 'var(--color-success)' }}>{metCount}</div>
+            <div className="section-sub" style={{ fontSize: '12px' }}>Demonstrated evidence meets or exceeds target level.</div>
+          </div>
         </div>
       </div>
 
@@ -80,45 +81,44 @@ export const SkillGapsView: React.FC = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '16px 20px',
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--color-bg-surface)',
         borderRadius: 'var(--radius-md)',
-        border: '1px solid #e2e8f0',
+        border: '1px solid var(--color-border)',
         marginBottom: '28px',
         flexWrap: 'wrap',
         gap: '16px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '13px', fontWeight: 700, color: '#475569' }}>Evaluation Scope:</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Evaluation Scope:</span>
           <button
-            className={`btn ${scope === 'TARGET' ? 'btn-navy' : 'btn-secondary'}`}
+            className={`btn btn-sm ${scope === 'TARGET' ? 'btn-navy' : 'btn-secondary'}`}
             onClick={() => setScope('TARGET')}
-            style={{ fontSize: '12px', minHeight: '34px', padding: '6px 14px' }}
           >
             Target Role Requirements (Supervisory)
           </button>
           <button
-            className={`btn ${scope === 'CURRENT' ? 'btn-navy' : 'btn-secondary'}`}
+            className={`btn btn-sm ${scope === 'CURRENT' ? 'btn-navy' : 'btn-secondary'}`}
             onClick={() => setScope('CURRENT')}
-            style={{ fontSize: '12px', minHeight: '34px', padding: '6px 14px' }}
           >
             Current Role Requirements
           </button>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '13px', fontWeight: 700, color: '#475569' }}>Filter:</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Filter:</span>
           {['ALL', 'HIGH', 'MEDIUM', 'NO_GAP'].map(status => (
             <button
               key={status}
               onClick={() => setFilterStatus(status)}
               style={{
                 padding: '6px 12px',
-                borderRadius: '6px',
-                border: filterStatus === status ? '1px solid #1a365d' : '1px solid #cbd5e1',
-                backgroundColor: filterStatus === status ? '#ebf8ff' : '#ffffff',
-                color: filterStatus === status ? '#1a365d' : '#475569',
+                borderRadius: 'var(--radius-sm)',
+                border: filterStatus === status ? '1px solid var(--blue-500)' : '1px solid var(--color-border)',
+                backgroundColor: filterStatus === status ? 'var(--blue-50)' : 'var(--color-bg-surface)',
+                color: filterStatus === status ? 'var(--blue-600)' : 'var(--color-text-secondary)',
                 fontSize: '12px',
                 fontWeight: filterStatus === status ? 700 : 500,
+                fontFamily: 'var(--font-sans)',
                 cursor: 'pointer'
               }}
             >
@@ -131,14 +131,14 @@ export const SkillGapsView: React.FC = () => {
       {/* Gaps Grid */}
       {loading ? (
         <div style={{ padding: '60px', textAlign: 'center' }}>
-          <div style={{ fontSize: '16px', color: '#1a365d' }}>Loading competency gap matrix...</div>
+          <div style={{ fontSize: '16px', color: 'var(--color-text-strong)' }}>Loading competency gap matrix...</div>
         </div>
       ) : filteredGaps.length === 0 ? (
-        <div style={{ padding: '60px', textAlign: 'center', backgroundColor: '#ffffff', borderRadius: '12px' }}>
-          <p style={{ color: '#64748b' }}>No competency gaps match the selected filter.</p>
+        <div className="gov-card" style={{ padding: '60px', textAlign: 'center' }}>
+          <p className="section-sub">No competency gaps match the selected filter.</p>
         </div>
       ) : (
-        <div className="grid-3">
+        <div ref={gridReveal} className="reveal grid-3">
           {filteredGaps.map(g => (
             <SkillGapCard key={g.gap_id} gap={g} />
           ))}

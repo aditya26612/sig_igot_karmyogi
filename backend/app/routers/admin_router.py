@@ -236,6 +236,23 @@ def upload_transcript(
     """Uploads and indexes an administrative transcript chunk for a lesson."""
     con = get_db_connection()
     try:
+        # Derive course/competency from the lesson itself (previously hardcoded CRS-101/COMP-SAMPLING)
+        l_cur = con.execute(
+            "SELECT course_id, competency_id FROM transcript_chunks WHERE lesson_id = ? LIMIT 1",
+            (req.lesson_id,)
+        )
+        existing = l_cur.fetchone()
+        if existing:
+            course_id, competency_id = existing["course_id"], existing["competency_id"]
+        else:
+            les_cur = con.execute(
+                "SELECT competency_id FROM curated_lessons WHERE lesson_id = ?", (req.lesson_id,)
+            )
+            lesson = les_cur.fetchone()
+            if not lesson:
+                raise HTTPException(status_code=404, detail=f"Lesson '{req.lesson_id}' not found in curriculum catalogue.")
+            course_id, competency_id = "CRS-ADM", lesson["competency_id"]
+
         chunk_id = f"CHK-ADM-{uuid.uuid4().hex[:8]}"
         with con:
             con.execute("""
@@ -243,18 +260,45 @@ def upload_transcript(
                 chunk_id, lesson_id, course_id, competency_id, topic,
                 start_seconds, end_seconds, timestamp_label, text_content, summary, provenance
             )
-            VALUES (?, ?, 'CRS-101', 'COMP-SAMPLING', ?, ?, ?, ?, ?, ?, 'ADMIN_UPLOAD')
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'ADMIN_UPLOAD')
             """, (
-                chunk_id, req.lesson_id, req.topic, req.start_seconds,
+                chunk_id, req.lesson_id, course_id, competency_id, req.topic, req.start_seconds,
                 req.end_seconds, req.timestamp_label, req.text_content,
                 req.text_content[:80] + "..."
+            ))
+            con.execute("""
+            INSERT INTO audit_logs (log_id, actor_id, action, entity_type, entity_id, details, timestamp)
+            VALUES (?, ?, 'TRANSCRIPT_INDEXED', 'TRANSCRIPT_CHUNK', ?, ?, ?)
+            """, (
+                f"LOG-{uuid.uuid4().hex[:12]}", current_user["user_id"], chunk_id,
+                f"Admin indexed transcript chunk for lesson {req.lesson_id} (topic: {req.topic}).",
+                datetime.now(timezone.utc).isoformat()
             ))
         return {
             "status": "INDEXED",
             "chunk_id": chunk_id,
             "lesson_id": req.lesson_id,
+            "competency_id": competency_id,
             "topic": req.topic
         }
+    finally:
+        con.close()
+
+@router.get("/audit-logs")
+def list_audit_logs(
+    limit: int = 50,
+    current_user: Dict[str, Any] = Depends(require_role(["ADMIN"]))
+):
+    """Returns the most recent governance audit events (approvals, syncs, uploads)."""
+    con = get_db_connection()
+    try:
+        limit = max(1, min(limit, 200))
+        cur = con.execute(
+            "SELECT log_id, actor_id, action, entity_type, entity_id, details, timestamp "
+            "FROM audit_logs ORDER BY timestamp DESC LIMIT ?",
+            (limit,)
+        )
+        return [dict(r) for r in cur.fetchall()]
     finally:
         con.close()
 

@@ -38,3 +38,6 @@ backend/tests/groq_latency_report.json
 # ===== IDE =====
 .vscode/
 .idea/
+
+# ===== Local QA/verification artifacts =====
+.verify/

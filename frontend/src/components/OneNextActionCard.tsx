@@ -21,54 +21,39 @@ export const OneNextActionCard: React.FC<OneNextActionCardProps> = ({ nextAction
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #1a365d 0%, #0f294a 100%)',
-      color: '#ffffff',
+      background: 'linear-gradient(135deg, var(--ink-500) 0%, var(--blue-900) 100%)',
+      color: '#FFFFFF',
       borderRadius: 'var(--radius-lg)',
       padding: '32px',
-      boxShadow: 'var(--shadow-lg)',
+      boxShadow: 'var(--shadow-elevated)',
       position: 'relative',
-      overflow: 'hidden',
-      borderLeft: '6px solid #d97706'
+      overflow: 'hidden'
     }}>
-      {/* Subtle decorative watermark */}
-      <div style={{
-        position: 'absolute',
-        right: '-20px',
-        bottom: '-20px',
-        fontSize: '120px',
-        fontWeight: 900,
-        opacity: 0.04,
-        userSelect: 'none',
-        pointerEvents: 'none',
-        fontFamily: 'var(--font-heading)'
-      }}>
-        ACTION
-      </div>
-
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
         <div style={{ maxWidth: '680px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
             <span style={{
-              backgroundColor: '#d97706',
-              color: '#ffffff',
+              backgroundColor: 'var(--orange-500)',
+              color: 'var(--color-on-orange)',
               padding: '3px 10px',
-              borderRadius: '999px',
+              borderRadius: 'var(--radius-full)',
               fontSize: '11px',
               fontWeight: 800,
               letterSpacing: '0.04em',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              fontFamily: 'var(--font-sans)'
             }}>
               {nextAction.badge_label || 'RECOMMENDED NEXT STEP'}
             </span>
-            <span style={{ color: '#93c5fd', fontSize: '13px', fontWeight: 600 }}>
+            <span style={{ color: 'var(--blue-100)', fontSize: '13px', fontWeight: 700 }}>
               Competency: {nextAction.competency_label}
             </span>
           </div>
 
-          <h2 style={{ color: '#ffffff', fontSize: '24px', fontWeight: 800, marginBottom: '8px' }}>
+          <h2 style={{ color: '#FFFFFF', fontSize: '24px', marginBottom: '8px' }}>
             {nextAction.title}
           </h2>
-          <p style={{ color: '#cbd5e1', fontSize: '15px', lineHeight: 1.5, margin: 0 }}>
+          <p style={{ color: 'var(--ink-100)', fontSize: '15px', lineHeight: 1.5, margin: 0 }}>
             {nextAction.subtitle}
           </p>
         </div>
@@ -79,9 +64,7 @@ export const OneNextActionCard: React.FC<OneNextActionCardProps> = ({ nextAction
             onClick={handleActionClick}
             style={{
               padding: '14px 28px',
-              fontSize: '16px',
-              fontWeight: 700,
-              boxShadow: '0 4px 14px rgba(217, 119, 6, 0.4)'
+              fontSize: '16px'
             }}
           >
             {nextAction.button_label} →

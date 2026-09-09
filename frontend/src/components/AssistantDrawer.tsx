@@ -29,7 +29,7 @@ const renderRichText = (text: string): React.ReactNode => {
       if (inCode) {
         elements.push(
           <pre key={`c-${i}`} style={{
-            backgroundColor: '#0f172a', color: '#e2e8f0', borderRadius: '8px',
+            backgroundColor: 'var(--ink-500)', color: 'var(--ink-100)', borderRadius: '8px',
             padding: '10px 12px', fontSize: '11px', fontFamily: 'monospace',
             overflowX: 'auto', margin: '6px 0'
           }}>{codeBuffer.join('\n')}</pre>
@@ -44,14 +44,14 @@ const renderRichText = (text: string): React.ReactNode => {
 
     const headingMatch = line.match(/^(#{1,4})\s+(.*)/);
     if (headingMatch) {
-      elements.push(<div key={`h-${i}`} style={{ fontWeight: 800, fontSize: '13px', color: '#1a365d', margin: '8px 0 4px' }}>{renderInline(headingMatch[2])}</div>);
+      elements.push(<div key={`h-${i}`} style={{ fontWeight: 800, fontSize: '13px', color: 'var(--blue-600)', margin: '8px 0 4px' }}>{renderInline(headingMatch[2])}</div>);
       return;
     }
     const bulletMatch = line.match(/^\s*[-*]\s+(.*)/);
     if (bulletMatch) {
       elements.push(
         <div key={`b-${i}`} style={{ display: 'flex', gap: '8px', margin: '3px 0' }}>
-          <span style={{ color: '#d97706', fontWeight: 800 }}>•</span>
+          <span style={{ color: 'var(--orange-700)', fontWeight: 800 }}>•</span>
           <span>{renderInline(bulletMatch[1])}</span>
         </div>
       );
@@ -61,7 +61,7 @@ const renderRichText = (text: string): React.ReactNode => {
     if (numMatch) {
       elements.push(
         <div key={`n-${i}`} style={{ display: 'flex', gap: '8px', margin: '3px 0' }}>
-          <span style={{ color: '#d97706', fontWeight: 800, minWidth: '16px' }}>{numMatch[1]}.</span>
+          <span style={{ color: 'var(--orange-700)', fontWeight: 800, minWidth: '16px' }}>{numMatch[1]}.</span>
           <span>{renderInline(numMatch[2])}</span>
         </div>
       );
@@ -74,7 +74,7 @@ const renderRichText = (text: string): React.ReactNode => {
     elements.push(<div key={`t-${i}`}>{renderInline(line)}</div>);
   });
   if (inCode && codeBuffer.length) {
-    elements.push(<pre key="c-last" style={{ backgroundColor: '#0f172a', color: '#e2e8f0', borderRadius: '8px', padding: '10px', fontSize: '11px', fontFamily: 'monospace', overflowX: 'auto' }}>{codeBuffer.join('\n')}</pre>);
+    elements.push(<pre key="c-last" style={{ backgroundColor: 'var(--ink-500)', color: 'var(--ink-100)', borderRadius: '8px', padding: '10px', fontSize: '11px', fontFamily: 'monospace', overflowX: 'auto' }}>{codeBuffer.join('\n')}</pre>);
   }
   return <>{elements}</>;
 };
@@ -84,10 +84,10 @@ const renderInline = (text: string): React.ReactNode => {
   return (
     <>
       {parts.map((p, i) => {
-        if (p.startsWith('**') && p.endsWith('**')) return <strong key={i} style={{ color: '#0f172a' }}>{p.slice(2, -2)}</strong>;
-        if (p.startsWith('`') && p.endsWith('`')) return <code key={i} style={{ backgroundColor: '#f1f5f9', padding: '1px 5px', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px' }}>{p.slice(1, -1)}</code>;
+        if (p.startsWith('**') && p.endsWith('**')) return <strong key={i} style={{ color: 'var(--color-text-strong)' }}>{p.slice(2, -2)}</strong>;
+        if (p.startsWith('`') && p.endsWith('`')) return <code key={i} style={{ backgroundColor: 'var(--wash-ivory)', padding: '1px 5px', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px' }}>{p.slice(1, -1)}</code>;
         if (p.match(/^\[[0-9]{1,2}:[0-9]{2}\]$/)) return (
-          <span key={i} style={{ backgroundColor: '#fef3c7', color: '#92400e', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', fontFamily: 'monospace', fontSize: '11px' }}>{p}</span>
+          <span key={i} style={{ backgroundColor: 'var(--orange-50)', color: 'var(--orange-700)', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', fontFamily: 'monospace', fontSize: '11px' }}>{p}</span>
         );
         if (p.startsWith('*') && p.endsWith('*') && p.length > 2) return <em key={i}>{p.slice(1, -1)}</em>;
         return <span key={i}>{p}</span>;
@@ -225,7 +225,7 @@ export const AssistantDrawer: React.FC = () => {
           onClick={() => { setIsAssistantOpen(true); setTimeout(() => inputRef.current?.focus(), 300); }}
           title="Open AI Learning Copilot"
         >
-          <span style={{ fontSize: '24px' }}>✨</span>
+          <span style={{ fontSize: '24px', color: 'var(--orange-bright)', display: 'inline-flex' }}><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.1 6.9L21 11l-6.9 2.1L12 20l-2.1-6.9L3 11l6.9-2.1L12 2z" /></svg></span>
         </button>
         <div className="assistant-trigger-label" onClick={() => { setIsAssistantOpen(true); }}>
           Ask Karmayogi Copilot
@@ -241,12 +241,12 @@ export const AssistantDrawer: React.FC = () => {
       {/* Header */}
       <div className="copilot-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div className="copilot-avatar">✨</div>
+          <div className="copilot-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.1 6.9L21 11l-6.9 2.1L12 20l-2.1-6.9L3 11l6.9-2.1L12 2z" /></svg></div>
           <div>
             <div style={{ fontSize: '14px', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>
               AI Learning Copilot
             </div>
-            <div style={{ fontSize: '10px', color: '#93c5fd', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ fontSize: '10px', color: 'var(--blue-100)', display: 'flex', alignItems: 'center', gap: '5px' }}>
               <span className="online-dot" /> Online • Grounded in MoSPI curriculum
             </div>
           </div>
@@ -265,7 +265,7 @@ export const AssistantDrawer: React.FC = () => {
       <div className="copilot-messages">
         {messages.map(m => (
           <div key={m.id} className={m.sender === 'user' ? 'copilot-row-user' : 'copilot-row-bot'}>
-            {m.sender === 'assistant' && <div className="copilot-avatar copilot-avatar-sm">✨</div>}
+            {m.sender === 'assistant' && <div className="copilot-avatar copilot-avatar-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.1 6.9L21 11l-6.9 2.1L12 20l-2.1-6.9L3 11l6.9-2.1L12 2z" /></svg></div>}
             <div
               className={m.sender === 'user' ? 'copilot-bubble-user' : 'copilot-bubble-bot'}
               style={m.justAnswered ? { animation: 'copilotFadeIn 0.4s ease' } : undefined}
@@ -274,10 +274,10 @@ export const AssistantDrawer: React.FC = () => {
 
               {m.citation && (
                 <div className="copilot-citation-card">
-                  <div style={{ fontWeight: 700, fontSize: '10px', color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                  <div style={{ fontWeight: 700, fontSize: '10px', color: 'var(--orange-700)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                     📎 Grounded Citation
                   </div>
-                  <div style={{ fontSize: '11px', color: '#64748b', marginTop: '3px', lineHeight: 1.45, fontStyle: 'italic' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginTop: '3px', lineHeight: 1.45, fontStyle: 'italic' }}>
                     "{m.citation}"
                   </div>
                 </div>
@@ -285,7 +285,7 @@ export const AssistantDrawer: React.FC = () => {
 
               {m.source && (
                 <div className="copilot-source-row">
-                  <span style={{ color: '#d97706', fontWeight: 700 }}>Source:</span> {m.source}
+                  <span style={{ color: 'var(--orange-700)', fontWeight: 700 }}>Source:</span> {m.source}
                   {m.timestamp && <span className="copilot-timestamp-chip">▶ {m.timestamp}</span>}
                 </div>
               )}
@@ -313,11 +313,11 @@ export const AssistantDrawer: React.FC = () => {
 
         {loading && (
           <div className="copilot-row-bot">
-            <div className="copilot-avatar copilot-avatar-sm">✨</div>
+            <div className="copilot-avatar copilot-avatar-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.1 6.9L21 11l-6.9 2.1L12 20l-2.1-6.9L3 11l6.9-2.1L12 2z" /></svg></div>
             <div className="copilot-bubble-bot copilot-thinking">
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div className="typing-dots"><span /><span /><span /></div>
-                <span style={{ fontSize: '11.5px', color: '#64748b', fontWeight: 600 }}>
+                <span style={{ fontSize: '11.5px', color: 'var(--color-text-muted)', fontWeight: 600 }}>
                   {STAGES[Math.min(thinkingStage, STAGES.length - 1)]}
                 </span>
               </div>

@@ -9,6 +9,7 @@ import { SkillGapsView } from './views/learner/SkillGapsView';
 import { CareerPathView } from './views/learner/CareerPathView';
 import { ReviewerDashboardView } from './views/reviewer/ReviewerDashboardView';
 import { AdminDashboardView } from './views/admin/AdminDashboardView';
+import { LandingView } from './views/LandingView';
 
 const MainLayout: React.FC = () => {
   const { activeView } = useAuth();
@@ -18,6 +19,7 @@ const MainLayout: React.FC = () => {
       <Navbar />
 
       <main style={{ flex: 1 }}>
+        {activeView === 'landing' && <LandingView />}
         {activeView === 'home' && <LearnerHomeView />}
         {activeView === 'learning' && <MyLearningView />}
         {activeView === 'gaps' && <SkillGapsView />}

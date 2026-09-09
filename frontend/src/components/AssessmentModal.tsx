@@ -87,14 +87,14 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '820px' }}>
         {loading && (
           <div style={{ textAlign: 'center', padding: '48px' }}>
-            <div style={{ fontSize: '18px', fontWeight: 600, color: '#1a365d' }}>Loading Official Assessment...</div>
+            <div style={{ fontSize: '18px', fontWeight: 600, color: 'var(--color-text-strong)' }}>Loading Official Assessment...</div>
           </div>
         )}
 
         {error && (
           <div style={{ textAlign: 'center', padding: '32px' }}>
-            <h3 style={{ color: '#dc2626' }}>Assessment Error</h3>
-            <p style={{ color: '#64748b', margin: '12px 0 20px 0' }}>{error}</p>
+            <h3 style={{ color: 'var(--color-danger)' }}>Assessment Error</h3>
+            <p style={{ color: 'var(--color-text-muted)', margin: '12px 0 20px 0' }}>{error}</p>
             <button className="btn btn-secondary" onClick={onClose}>Close</button>
           </div>
         )}
@@ -102,15 +102,15 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
         {detail && !submitted && (
           <div>
             {/* Header */}
-            <div style={{ borderBottom: '2px solid #e2e8f0', paddingBottom: '16px', marginBottom: '20px' }}>
+            <div style={{ borderBottom: '2px solid var(--color-border)', paddingBottom: '16px', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                 <span className="badge badge-navy">Formal Cadre Assessment</span>
                 <span className="badge badge-saffron">Rubric: {detail.rubric_version}</span>
               </div>
-              <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#1a365d' }}>
+              <h2 style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-text-strong)' }}>
                 {detail.title}
               </h2>
-              <div style={{ display: 'flex', gap: '16px', fontSize: '12px', color: '#64748b', marginTop: '6px' }}>
+              <div style={{ display: 'flex', gap: '16px', fontSize: '12px', color: 'var(--color-text-muted)', marginTop: '6px' }}>
                 <span>Target: <strong>Level {detail.target_level} Proficiency</strong></span>
                 <span>Current: <strong>Level {detail.current_level}</strong></span>
                 <span>Time: <strong>{detail.estimated_time_minutes} mins</strong></span>
@@ -119,16 +119,16 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
               <div style={{
                 marginTop: '10px',
                 padding: '8px 12px',
-                backgroundColor: '#eff6ff',
+                backgroundColor: 'var(--blue-50)',
                 borderRadius: '6px',
-                border: '1px solid #bfdbfe',
+                border: '1px solid var(--blue-100)',
                 fontSize: '12px',
-                color: '#1e40af',
+                color: 'var(--blue-600)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                <span>🏛️</span>
+                <span style={{ color: 'var(--blue-500)', display: 'inline-flex' }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-5h6v5"/></svg></span>
                 <span>
                   <strong>Supervisor Evaluation Invariant:</strong> Unlike formative lesson practice quizzes, practical evidence submitted here is audited against rubric <code>{detail.rubric_version}</code>. Official approval promotes your competency level by +1.
                 </span>
@@ -136,11 +136,11 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
             </div>
 
             {/* Assessment Rules */}
-            <div style={{ padding: '14px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', marginBottom: '24px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a365d', marginBottom: '6px' }}>
+            <div style={{ padding: '14px', backgroundColor: 'var(--wash-ivory)', borderRadius: '8px', border: '1px solid var(--color-border)', marginBottom: '24px' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-strong)', marginBottom: '6px' }}>
                 Official Assessment Protocols:
               </div>
-              <ul style={{ paddingLeft: '20px', fontSize: '12px', color: '#475569', lineHeight: 1.6 }}>
+              <ul style={{ paddingLeft: '20px', fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
                 {detail.rules.map((rule, idx) => (
                   <li key={idx}>{rule}</li>
                 ))}
@@ -148,48 +148,48 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
             </div>
 
             {/* Practical Task 1 */}
-            <div style={{ marginBottom: '24px', padding: '18px', borderRadius: '8px', border: '1px solid #cbd5e1' }}>
+            <div style={{ marginBottom: '24px', padding: '18px', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <h4 style={{ color: '#1a365d', fontSize: '16px' }}>
+                <h4 style={{ color: 'var(--color-text-strong)', fontSize: '16px' }}>
                   {detail.tasks[0]?.title || 'Task 1: Practical Allocation'}
                 </h4>
                 <span className="badge badge-gray">{detail.tasks[0]?.expected_output_type || 'NUMERICAL'}</span>
               </div>
-              <p style={{ fontSize: '13px', color: '#334155', lineHeight: 1.5, marginBottom: '6px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--color-text-primary)', lineHeight: 1.5, marginBottom: '6px' }}>
                 <strong>Scenario:</strong> {detail.tasks[0]?.scenario}
               </p>
-              <p style={{ fontSize: '12px', color: '#64748b', lineHeight: 1.4, marginBottom: '12px' }}>
+              <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', lineHeight: 1.4, marginBottom: '12px' }}>
                 <strong>Instructions:</strong> {detail.tasks[0]?.instructions}
               </p>
 
               {isSampling ? (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                   <div>
-                    <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-secondary)', display: 'block', marginBottom: '4px' }}>
                       Stratum A Allocation (n_A):
                     </label>
                     <input
                       type="number"
                       value={stratumA}
                       onChange={e => setStratumA(e.target.value)}
-                      style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '14px', fontWeight: 700 }}
+                      style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '14px', fontWeight: 700 }}
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-secondary)', display: 'block', marginBottom: '4px' }}>
                       Stratum B Allocation (n_B):
                     </label>
                     <input
                       type="number"
                       value={stratumB}
                       onChange={e => setStratumB(e.target.value)}
-                      style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '14px', fontWeight: 700 }}
+                      style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '14px', fontWeight: 700 }}
                     />
                   </div>
                 </div>
               ) : (
                 <div>
-                  <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-secondary)', display: 'block', marginBottom: '4px' }}>
                     Task 1 Technical Work / Query / Calculation:
                   </label>
                   <textarea
@@ -200,7 +200,7 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
                       width: '100%',
                       padding: '10px',
                       borderRadius: '6px',
-                      border: '1px solid #cbd5e1',
+                      border: '1px solid var(--color-border)',
                       fontSize: '13px',
                       lineHeight: 1.4,
                       fontFamily: 'monospace'
@@ -211,48 +211,48 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
             </div>
 
             {/* Practical Task 2 */}
-            <div style={{ marginBottom: '28px', padding: '18px', borderRadius: '8px', border: '1px solid #cbd5e1' }}>
+            <div style={{ marginBottom: '28px', padding: '18px', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <h4 style={{ color: '#1a365d', fontSize: '16px' }}>
+                <h4 style={{ color: 'var(--color-text-strong)', fontSize: '16px' }}>
                   {detail.tasks[1]?.title || 'Task 2: Technical Justification & Defense'}
                 </h4>
                 <span className="badge badge-gray">{detail.tasks[1]?.expected_output_type || 'JUSTIFICATION'}</span>
               </div>
-              <p style={{ fontSize: '13px', color: '#334155', lineHeight: 1.5, marginBottom: '6px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--color-text-primary)', lineHeight: 1.5, marginBottom: '6px' }}>
                 <strong>Scenario:</strong> {detail.tasks[1]?.scenario}
               </p>
-              <p style={{ fontSize: '12px', color: '#64748b', lineHeight: 1.4, marginBottom: '12px' }}>
+              <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', lineHeight: 1.4, marginBottom: '12px' }}>
                 <strong>Instructions:</strong> {detail.tasks[1]?.instructions}
               </p>
 
               {isSampling ? (
                 <>
                   <div style={{ marginBottom: '12px' }}>
-                    <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-secondary)', display: 'block', marginBottom: '4px' }}>
                       Derived Design Weight:
                     </label>
                     <input
                       type="number"
                       value={designWeight}
                       onChange={e => setDesignWeight(e.target.value)}
-                      style={{ width: '140px', padding: '8px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '14px', fontWeight: 700 }}
+                      style={{ width: '140px', padding: '8px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '14px', fontWeight: 700 }}
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-secondary)', display: 'block', marginBottom: '4px' }}>
                       Technical Justification:
                     </label>
                     <textarea
                       rows={3}
                       value={justification}
                       onChange={e => setJustification(e.target.value)}
-                      style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px', lineHeight: 1.4 }}
+                      style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '13px', lineHeight: 1.4 }}
                     />
                   </div>
                 </>
               ) : (
                 <div>
-                  <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-text-secondary)', display: 'block', marginBottom: '4px' }}>
                     Task 2 Technical Formulation & Governance Defense:
                   </label>
                   <textarea
@@ -263,7 +263,7 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
                       width: '100%',
                       padding: '10px',
                       borderRadius: '6px',
-                      border: '1px solid #cbd5e1',
+                      border: '1px solid var(--color-border)',
                       fontSize: '13px',
                       lineHeight: 1.4
                     }}
@@ -273,7 +273,7 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
             </div>
 
             {/* Submission Actions */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #e2e8f0', paddingTop: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--color-border)', paddingTop: '20px' }}>
               <button className="btn btn-secondary" onClick={onClose}>
                 Cancel
               </button>
@@ -281,7 +281,7 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
                 className="btn btn-primary"
                 disabled={submitting}
                 onClick={handleSubmit}
-                style={{ backgroundColor: '#1a365d', padding: '12px 28px' }}
+                style={{ backgroundColor: 'var(--blue-500)', padding: '12px 28px' }}
               >
                 {submitting ? 'Packaging Evidence...' : 'Submit Practical Assessment for Review →'}
               </button>
@@ -296,8 +296,8 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              backgroundColor: '#fef3c7',
-              color: '#d97706',
+              backgroundColor: 'var(--orange-50)',
+              color: 'var(--orange-700)',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -306,19 +306,19 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ assessmentId, 
             }}>
               ⏳
             </div>
-            <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#1a365d', marginBottom: '10px' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-text-strong)', marginBottom: '10px' }}>
               Assessment Evidence Submitted for Supervisor Evaluation
             </h2>
-            <p style={{ fontSize: '14px', color: '#475569', maxWidth: '580px', margin: '0 auto 24px auto', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', maxWidth: '580px', margin: '0 auto 24px auto', lineHeight: 1.6 }}>
               Your practical task calculations have been securely hashed and routed to <strong>Sunita Rao (Superintending Officer & Assessor)</strong>.
               In accordance with MoSPI cadre governance rules, your demonstrated competency level will update only upon official verification.
             </p>
 
-            <div style={{ padding: '14px 20px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'inline-block', textAlign: 'left', marginBottom: '24px', fontSize: '13px' }}>
-              <div>📋 <strong>Status:</strong> <span className="badge badge-saffron" style={{ marginLeft: '6px' }}>PENDING SUPERVISOR REVIEW</span></div>
-              <div style={{ marginTop: '6px' }}>🎯 <strong>Competency:</strong> {detail.competency_id} ({detail.competency_label})</div>
-              <div style={{ marginTop: '6px' }}>📈 <strong>Proposed Update:</strong> Level {detail.current_level} → Level {detail.target_level}</div>
-              <div style={{ marginTop: '6px' }}>📜 <strong>Rubric:</strong> {detail.rubric_version}</div>
+            <div style={{ padding: '14px 20px', backgroundColor: 'var(--wash-ivory)', borderRadius: '8px', border: '1px solid var(--color-border)', display: 'inline-block', textAlign: 'left', marginBottom: '24px', fontSize: '13px' }}>
+              <div><span style={{ color: 'var(--color-text-secondary)', display: 'inline-flex', verticalAlign: '-2px' }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg></span> <strong>Status:</strong> <span className="badge badge-saffron" style={{ marginLeft: '6px' }}>PENDING SUPERVISOR REVIEW</span></div>
+              <div style={{ marginTop: '6px' }}><span style={{ color: 'var(--orange-700)', display: 'inline-flex', verticalAlign: '-2px', marginRight: '4px' }}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></span><strong>Competency:</strong> {detail.competency_id} ({detail.competency_label})</div>
+              <div style={{ marginTop: '6px' }}><span style={{ color: 'var(--color-success)', display: 'inline-flex', verticalAlign: '-2px' }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></span> <strong>Proposed Update:</strong> Level {detail.current_level} → Level {detail.target_level}</div>
+              <div style={{ marginTop: '6px' }}><span style={{ color: 'var(--blue-500)', display: 'inline-flex', verticalAlign: '-2px' }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/></svg></span> <strong>Rubric:</strong> {detail.rubric_version}</div>
             </div>
 
             <div>

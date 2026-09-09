@@ -1,207 +1,247 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
+/* ---- Inline SVG icon set (Material-Symbols-like, single stroke weight) ---- */
+
+const FlagIcon: React.FC = () => (
+  <svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true">
+    <rect width="18" height="12" rx="1.5" fill="#FFFFFF" stroke="#CBD2DC" strokeWidth="0.5" />
+    <rect x="0.75" y="0.75" width="16.5" height="3.5" rx="1" fill="#FF9933" />
+    <rect x="0.75" y="7.75" width="16.5" height="3.5" rx="1" fill="#138808" />
+    <circle cx="9" cy="6" r="1.1" fill="none" stroke="#000080" strokeWidth="0.5" />
+    <circle cx="9" cy="6" r="0.3" fill="#000080" />
+  </svg>
+);
+
+const BrandSunIcon: React.FC = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+    <defs>
+      <radialGradient id="sunGrad" cx="50%" cy="55%" r="60%">
+        <stop offset="0%" stopColor="#FCBF06" />
+        <stop offset="45%" stopColor="#F4970E" />
+        <stop offset="100%" stopColor="#E94E12" />
+      </radialGradient>
+    </defs>
+    <circle cx="22" cy="22" r="13" fill="url(#sunGrad)" />
+    <circle cx="22" cy="22" r="5.5" fill="#FFF7E0" />
+    {Array.from({ length: 12 }).map((_, i) => {
+      const angle = (i * Math.PI) / 6;
+      const x1 = 22 + Math.cos(angle) * 15;
+      const y1 = 22 + Math.sin(angle) * 15;
+      const x2 = 22 + Math.cos(angle) * 19.5;
+      const y2 = 22 + Math.sin(angle) * 19.5;
+      return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#F0951E" strokeWidth="2" strokeLinecap="round" />;
+    })}
+  </svg>
+);
+
+const SparkIcon: React.FC = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2l2.1 6.9L21 11l-6.9 2.1L12 20l-2.1-6.9L3 11l6.9-2.1L12 2z" />
+  </svg>
+);
+
+const SearchIcon: React.FC = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+    <circle cx="10.5" cy="10.5" r="6.5" />
+    <line x1="15.5" y1="15.5" x2="21" y2="21" />
+  </svg>
+);
+
+const AdminIcon: React.FC = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 21h18" />
+    <path d="M5 21V7l7-4 7 4v14" />
+    <path d="M9 21v-4h6v4" />
+    <path d="M9 11h.01M15 11h.01" />
+  </svg>
+);
+
+const MenuIcon: React.FC = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+    <line x1="4" y1="7" x2="20" y2="7" />
+    <line x1="4" y1="12" x2="20" y2="12" />
+    <line x1="4" y1="17" x2="20" y2="17" />
+  </svg>
+);
+
+const ChevronDownIcon: React.FC = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+);
+
 export const Navbar: React.FC = () => {
   const { currentUser, demoAccounts, switchDemoUser, activeView, setActiveView, setIsAssistantOpen } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const role = currentUser?.role || 'LEARNER';
+
+  const learnerTabs = [
+    { view: 'home', label: 'Home' },
+    { view: 'learning', label: 'My Learning' },
+    { view: 'gaps', label: 'Skill Gaps' },
+    { view: 'career', label: 'Career Path' },
+  ];
 
   return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: '#ffffff', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-      {/* Top Official Gov Header */}
-      <div style={{ backgroundColor: '#0f294a', color: '#ffffff', padding: '6px 0', fontSize: '12px' }}>
-        <div className="gov-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ fontWeight: 600, letterSpacing: '0.04em' }}>GOVERNMENT OF INDIA</span>
-            <span style={{ opacity: 0.4 }}>|</span>
-            <span>Ministry of Statistics and Programme Implementation (MoSPI)</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <span>National Statistical System Cadre Training</span>
-            <span style={{ opacity: 0.4 }}>|</span>
-            <span style={{ color: '#fde68a', fontWeight: 600 }}>iGOT Karmayogi Architecture</span>
-          </div>
-        </div>
-      </div>
+    <header className="site-header">
+      {/* Floating glass pill navbar (signature component) */}
+      <div className="gov-container">
+        <nav className="glass-navbar" aria-label="Primary">
+          {/* Brand lockup */}
+          <button className="brand-lockup" onClick={() => setActiveView('landing')} aria-label="iGOT Karmayogi SkillBridge home">
+            <BrandSunIcon />
+            <span className="brand-word">
+              iGOT Karmayogi <em className="brand-suffix">SkillBridge</em>
+              <span className="brand-tagline">
+                {role === 'REVIEWER' ? 'NSSO Supervisory Evaluation Workspace'
+                  : role === 'ADMIN' ? 'Cadre Governance & Platform Administration'
+                  : 'Official Statistical System Competency Platform'}
+              </span>
+            </span>
+          </button>
 
-      {/* Tricolor Accent */}
-      <div className="tricolor-strip" />
-
-      {/* Main Navbar */}
-      <div style={{ borderBottom: '1px solid #e2e8f0', backgroundColor: '#ffffff' }}>
-        <div className="gov-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '70px' }}>
-          {/* Brand */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={() => setActiveView('home')}>
-            <div style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '8px',
-              background: 'linear-gradient(135deg, #1a365d 0%, #d97706 100%)',
-              color: '#ffffff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 800,
-              fontSize: '18px',
-              letterSpacing: '-0.02em',
-              boxShadow: '0 2px 5px rgba(0,0,0,0.15)'
-            }}>
-              iGOT
-            </div>
-            <div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#1a365d', fontFamily: 'var(--font-heading)', lineHeight: 1.1 }}>
-                iGOT Karmayogi <span style={{ color: '#d97706', fontSize: '14px', fontWeight: 600 }}>MoSPI</span>
-              </div>
-              <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 500 }}>
-                Official Statistical System Competency Platform
-              </div>
-            </div>
-          </div>
-
-          {/* 5 Core Learner Navigation Tabs */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <button
-              className={`nav-tab ${activeView === 'home' ? 'active' : ''}`}
-              onClick={() => setActiveView('home')}
-            >
-              Home
-            </button>
-            <button
-              className={`nav-tab ${activeView === 'learning' ? 'active' : ''}`}
-              onClick={() => setActiveView('learning')}
-            >
-              My Learning
-            </button>
-            <button
-              className={`nav-tab ${activeView === 'gaps' ? 'active' : ''}`}
-              onClick={() => setActiveView('gaps')}
-            >
-              Skill Gaps
-            </button>
-            <button
-              className={`nav-tab ${activeView === 'career' ? 'active' : ''}`}
-              onClick={() => setActiveView('career')}
-            >
-              Career Path
-            </button>
-            <button
-              className="nav-tab"
-              onClick={() => setIsAssistantOpen(true)}
-              style={{ color: '#d97706', fontWeight: 700 }}
-            >
-              ✨ AI Copilot
-            </button>
-
-            {/* Role-Specific Portal Links */}
-            {currentUser?.role === 'REVIEWER' && (
+          {/* Center nav links — scoped to the active role */}
+          <div className="nav-links">
+            {role === 'REVIEWER' ? (
               <button
                 className={`nav-tab ${activeView === 'reviewer' ? 'active' : ''}`}
-                onClick={() => setActiveView('reviewer')}
-                style={{ backgroundColor: '#fef3c7', borderRadius: '6px', color: '#92400e', fontWeight: 700, marginLeft: '8px' }}
+                onClick={() => { setActiveView('reviewer'); setMenuOpen(false); }}
               >
-                🔍 Supervisor Queue
+                <SearchIcon />
+                Evidence Queue
               </button>
-            )}
-
-            {currentUser?.role === 'ADMIN' && (
+            ) : role === 'ADMIN' ? (
               <button
                 className={`nav-tab ${activeView === 'admin' ? 'active' : ''}`}
-                onClick={() => setActiveView('admin')}
-                style={{ backgroundColor: '#ebf8ff', borderRadius: '6px', color: '#1e40af', fontWeight: 700, marginLeft: '8px' }}
+                onClick={() => { setActiveView('admin'); setMenuOpen(false); }}
               >
-                👑 Admin Console
+                <AdminIcon />
+                Governance Console
               </button>
+            ) : (
+              learnerTabs.map(tab => (
+                <button
+                  key={tab.view}
+                  className={`nav-tab ${activeView === tab.view ? 'active' : ''}`}
+                  onClick={() => { setActiveView(tab.view); setMenuOpen(false); }}
+                >
+                  {tab.label}
+                </button>
+              ))
             )}
-          </nav>
 
-          {/* Demo Persona Switcher */}
-          <div style={{ position: 'relative' }}>
+            <button className="nav-tab" onClick={() => setIsAssistantOpen(true)}>
+              <SparkIcon />
+              AI Copilot
+            </button>
+          </div>
+
+          {/* Flag + language toggle (iGOT identity elements, compact) */}
+          <div className="nav-identity">
+            <FlagIcon />
+            <button className="lang-toggle" type="button" aria-label="Language toggle (demo placeholder)">
+              EN | हिंदी
+            </button>
+          </div>
+
+          {/* Demo persona switcher */}
+          <div style={{ position: 'relative', flex: 'none' }}>
             <button
+              className="persona-chip"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '8px 14px',
-                borderRadius: '8px',
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f8fafc',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
+              aria-expanded={dropdownOpen}
+              aria-haspopup="menu"
             >
-              <div style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                backgroundColor: currentUser?.role === 'ADMIN' ? '#1e40af' : currentUser?.role === 'REVIEWER' ? '#92400e' : '#166534',
-                color: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '13px',
-                fontWeight: 700
-              }}>
+              <div className={`persona-avatar role-${currentUser?.role || 'LEARNER'}`}>
                 {currentUser?.full_name?.charAt(0) || 'U'}
               </div>
-              <div style={{ textAlign: 'left' }}>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>
-                  {currentUser?.full_name || 'Switch Demo Persona'}
-                </div>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>
-                  Role: <strong style={{ color: '#d97706' }}>{currentUser?.role}</strong> (Demo Mode)
-                </div>
-              </div>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>▼</span>
+              <span>
+                <span className="persona-chip-name">{currentUser?.full_name || 'Switch Demo Persona'}</span>
+                <br />
+                <span className="persona-chip-meta">
+                  Role: <strong>{currentUser?.role}</strong> (Demo)
+                </span>
+              </span>
+              <ChevronDownIcon />
             </button>
 
             {dropdownOpen && (
-              <div style={{
-                position: 'absolute',
-                top: '110%',
-                right: 0,
-                width: '340px',
-                backgroundColor: '#ffffff',
-                borderRadius: '10px',
-                boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
-                border: '1px solid #e2e8f0',
-                padding: '10px',
-                zIndex: 200
-              }}>
-                <div style={{ padding: '8px 10px', fontSize: '12px', fontWeight: 700, color: '#64748b', borderBottom: '1px solid #f1f5f9', textTransform: 'uppercase' }}>
-                  Quick-Switch Demo Persona
-                </div>
+              <div className="persona-dropdown" role="menu" aria-label="Quick-switch demo persona">
+                <div className="persona-dropdown-title">Quick-Switch Demo Persona</div>
                 {demoAccounts.map(acc => (
-                  <div
+                  <button
                     key={acc.user_id}
+                    className={`persona-option ${currentUser?.user_id === acc.user_id ? 'selected' : ''}`}
                     onClick={() => {
                       switchDemoUser(acc.user_id);
                       setDropdownOpen(false);
                     }}
-                    style={{
-                      padding: '10px',
-                      borderRadius: '6px',
-                      cursor: 'pointer',
-                      backgroundColor: currentUser?.user_id === acc.user_id ? '#ebf8ff' : 'transparent',
-                      borderLeft: currentUser?.user_id === acc.user_id ? '3px solid #1a365d' : '3px solid transparent',
-                      marginTop: '4px',
-                      transition: 'background-color 0.15s'
-                    }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>{acc.full_name}</span>
+                    <span className="persona-option-name-row">
+                      <span>{acc.full_name}</span>
                       <span className={`badge ${acc.role === 'ADMIN' ? 'badge-navy' : acc.role === 'REVIEWER' ? 'badge-saffron' : 'badge-green'}`} style={{ fontSize: '10px' }}>
                         {acc.role}
                       </span>
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#64748b', marginTop: '3px' }}>
-                      {acc.description}
-                    </div>
-                  </div>
+                    </span>
+                    <span className="persona-option-desc">{acc.description}</span>
+                  </button>
                 ))}
               </div>
             )}
           </div>
-        </div>
+
+          {/* Hamburger (mobile) */}
+          <button
+            className="hamburger"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label="Menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <MenuIcon />
+          </button>
+        </nav>
+
+        {menuOpen && (
+          <div className="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu">
+            {role === 'REVIEWER' ? (
+              <button
+                className={`nav-tab ${activeView === 'reviewer' ? 'active' : ''}`}
+                style={{ width: '100%', justifyContent: 'flex-start' }}
+                onClick={() => { setActiveView('reviewer'); setMenuOpen(false); }}
+              >
+                <SearchIcon />
+                Evidence Queue
+              </button>
+            ) : role === 'ADMIN' ? (
+              <button
+                className={`nav-tab ${activeView === 'admin' ? 'active' : ''}`}
+                style={{ width: '100%', justifyContent: 'flex-start' }}
+                onClick={() => { setActiveView('admin'); setMenuOpen(false); }}
+              >
+                <AdminIcon />
+                Governance Console
+              </button>
+            ) : (
+              learnerTabs.map(tab => (
+                <button
+                  key={tab.view}
+                  className={`nav-tab ${activeView === tab.view ? 'active' : ''}`}
+                  style={{ width: '100%', justifyContent: 'flex-start' }}
+                  onClick={() => { setActiveView(tab.view); setMenuOpen(false); }}
+                >
+                  {tab.label}
+                </button>
+              ))
+            )}
+            <button className="nav-tab" style={{ width: '100%', justifyContent: 'flex-start' }} onClick={() => { setIsAssistantOpen(true); setMenuOpen(false); }}>
+              <SparkIcon />
+              AI Copilot
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

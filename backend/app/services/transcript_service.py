@@ -592,3 +592,74 @@ def search_transcripts(con: sqlite3.Connection, query: str) -> List[Dict[str, An
             "matching_snippet": snippet
         })
     return results
+
+
+# Words that carry no meaning for transcript matching in this domain
+_STOPWORDS = {
+    "the", "a", "an", "is", "are", "was", "were", "what", "which", "how", "why",
+    "can", "you", "please", "explain", "tell", "me", "about", "in", "on", "of",
+    "for", "to", "and", "or", "do", "i", "my", "it", "this", "that", "with",
+    "give", "show", "help", "need", "want", "know", "does", "did", "should",
+    "kya", "hai", "ka", "ki", "ke", "kaise", "kyon", "mujhe", "batao", "samjhao"
+}
+
+
+def extract_question_keywords(question: str, max_terms: int = 4) -> List[str]:
+    """Extracts meaningful lowercase keywords from a natural-language question (EN/HI)."""
+    words = [w.strip(".,?!;:'\"()[]").lower() for w in question.split()]
+    keywords = [w for w in words if len(w) > 2 and w not in _STOPWORDS and not w.isdigit()]
+    # Preserve order, dedupe
+    seen = set()
+    ordered = []
+    for w in keywords:
+        if w not in seen:
+            seen.add(w)
+            ordered.append(w)
+    return ordered[:max_terms]
+
+
+def search_transcripts_keywords(con: sqlite3.Connection, question: str, limit: int = 5) -> List[Dict[str, Any]]:
+    """
+    Robust keyword fallback search: tokenizes the question and OR-matches each
+    meaningful keyword against transcript text/topics, ranking by hit count.
+    Replaces the old phrase-LIKE search that almost never matched real questions.
+    """
+    keywords = extract_question_keywords(question)
+    if not keywords:
+        return []
+
+    match_clause = " OR ".join(
+        ["(LOWER(c.text_content) LIKE ? OR LOWER(c.topic) LIKE ?)"] * len(keywords)
+    )
+    params: List[Any] = []
+    for kw in keywords:
+        like = f"%{kw}%"
+        params.extend([like, like])
+
+    # Score = number of keywords present in the chunk (computed in Python for SQLite simplicity)
+    cursor = con.execute(f"""
+    SELECT
+        c.chunk_id, c.lesson_id, c.course_id, c.competency_id, c.topic,
+        c.timestamp_label, c.start_seconds, c.end_seconds, c.text_content, c.summary,
+        l.title as lesson_title, p.title as playlist_title
+    FROM transcript_chunks c
+    LEFT JOIN curated_lessons l ON c.lesson_id = l.lesson_id
+    LEFT JOIN curated_playlists p ON l.playlist_id = p.playlist_id
+    WHERE {match_clause}
+    """, params)
+
+    scored = []
+    for r in cursor.fetchall():
+        row = dict(r)
+        blob = (row.get("text_content") or "").lower() + " " + (row.get("topic") or "").lower()
+        hits = sum(1 for kw in keywords if kw in blob)
+        scored.append((hits, row))
+    scored.sort(key=lambda x: (-x[0], x[1].get("start_seconds") or 0))
+
+    # Return in the same shape the copilot expects (chunk rows joined with lesson/playlist titles)
+    results = []
+    for hits, row in scored[:limit]:
+        row.setdefault("lesson_title", row.get("lesson_title") or "Curated Lesson")
+        row.setdefault("playlist_title", row.get("playlist_title") or "Curated Playlist")
+        results.append(row)
+    return results
