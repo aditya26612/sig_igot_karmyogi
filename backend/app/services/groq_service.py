@@ -230,9 +230,10 @@ class GroqService:
         )
 
         # max_tokens=2400 (not the brief's 1100): with json_mode the provider validates
-        # the streamed JSON; at 1100 the completion is cut before a valid document
-        # closes and Groq rejects with json_validate_failed ~75% of live runs
-        # (empirically probed: 1100 -> 0-2 questions, 2400 -> 5/5 questions).
+        # the streamed JSON; at 1100 the completion is often cut before a valid document
+        # closes and Groq rejects with json_validate_failed (empirical live probe on the
+        # configured model: 1100 tokens -> trials parsed 1, 3, 5, 5 questions; 1600 ->
+        # 2, 4, 4; 2400 -> 5 questions on 5/5 consecutive trials, ~2200-2650 chars JSON).
         raw = _llm_generate(
             "You are an assessment designer for India's Official Statistical System (MoSPI). "
             "You output ONLY valid JSON. Questions must be answerable from the given transcript "
