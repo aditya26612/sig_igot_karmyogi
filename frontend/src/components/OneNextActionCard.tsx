@@ -1,21 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { NextActionItem } from '../types';
-import { useAuth } from '../context/AuthContext';
 
 interface OneNextActionCardProps {
   nextAction: NextActionItem;
 }
 
 export const OneNextActionCard: React.FC<OneNextActionCardProps> = ({ nextAction }) => {
-  const { setActiveView, setSelectedLessonId, setActiveAssessmentId } = useAuth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleActionClick = () => {
     if (nextAction.action_type === 'START_ASSESSMENT') {
-      setActiveAssessmentId('ASS-DEMO-PRACTICAL-001');
-      setActiveView('learning');
+      navigate('/learning?assessment=ASS-DEMO-PRACTICAL-001');
     } else {
-      setSelectedLessonId('sampling-lesson-3');
-      setActiveView('learning');
+      navigate(`/learning?lesson=${encodeURIComponent('sampling-lesson-3')}`);
     }
   };
 
@@ -46,7 +46,7 @@ export const OneNextActionCard: React.FC<OneNextActionCardProps> = ({ nextAction
               {nextAction.badge_label || 'RECOMMENDED NEXT STEP'}
             </span>
             <span style={{ color: 'var(--blue-100)', fontSize: '13px', fontWeight: 700 }}>
-              Competency: {nextAction.competency_label}
+              {t('home.competency')}: {nextAction.competency_label}
             </span>
           </div>
 

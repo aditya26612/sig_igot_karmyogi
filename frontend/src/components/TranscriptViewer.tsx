@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { TranscriptChunkDTO } from '../types';
-import { useAuth } from '../context/AuthContext';
 
 interface TranscriptViewerProps {
   chunks: TranscriptChunkDTO[];
@@ -14,7 +15,8 @@ const SparkIcon: React.FC = () => (
 
 export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) => {
   const [filterQuery, setFilterQuery] = useState('');
-  const { setIsAssistantOpen } = useAuth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const filteredChunks = chunks.filter(c =>
     c.text_content.toLowerCase().includes(filterQuery.toLowerCase()) ||
@@ -26,10 +28,10 @@ export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) =>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
         <div>
           <h3 style={{ fontSize: '18px' }}>
-            Interactive Transcript & Topic Markers
+            {t('learning.interactiveTranscript')}
           </h3>
           <p className="section-sub">
-            Grounding material for practice quizzes and the AI Copilot. Click any timestamp to reference.
+            {t('learning.transcriptHint')}
           </p>
         </div>
 
@@ -37,10 +39,10 @@ export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) =>
           <input
             type="text"
             className="transcript-search"
-            placeholder="Search transcript text..."
+            placeholder={t('learning.searchTranscript')}
             value={filterQuery}
             onChange={e => setFilterQuery(e.target.value)}
-            aria-label="Search transcript"
+            aria-label={t('learning.searchTranscript')}
           />
         </div>
       </div>
@@ -48,7 +50,7 @@ export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) =>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '420px', overflowY: 'auto', paddingRight: '6px' }}>
         {filteredChunks.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '32px', color: 'var(--color-text-muted)', fontSize: '14px' }}>
-            No transcript segments match "{filterQuery}".
+            {t('learning.noTranscriptMatch', { query: filterQuery })}
           </div>
         ) : (
           filteredChunks.map(chunk => (
@@ -81,7 +83,7 @@ export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) =>
                 </div>
 
                 <button
-                  onClick={() => setIsAssistantOpen(true)}
+                  onClick={() => navigate('/copilot')}
                   style={{
                     background: 'none',
                     border: 'none',
@@ -95,7 +97,7 @@ export const TranscriptViewer: React.FC<TranscriptViewerProps> = ({ chunks }) =>
                     gap: '5px'
                   }}
                 >
-                  <SparkIcon /> Ask Copilot
+                  <SparkIcon /> {t('learning.askCopilot')}
                 </button>
               </div>
 

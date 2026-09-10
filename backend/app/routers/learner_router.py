@@ -198,39 +198,40 @@ def get_learner_dashboard(
             
         # Determine ONE CLEAR NEXT ACTION
         # If user has a high-priority gap in COMP-SAMPLING:
+        hi = normalize_lang(lang) == "hi"
         first_item = j["learning_path_items"][0] if j["learning_path_items"] else None
         if first_item and first_item["item_type"] == "IGOT_COURSE":
             next_action = NextActionItem(
                 action_type="CONTINUE_LESSON",
-                title="Continue Survey Sampling Design",
-                subtitle="Lesson 3: Stratified Sampling & Population Weights",
+                title="सर्वेक्षण प्रतिदर्शन अभिकल्पना जारी रखें" if hi else "Continue Survey Sampling Design",
+                subtitle="पाठ 3: स्तरित प्रतिदर्शन एवं जनसंख्या भार" if hi else "Lesson 3: Stratified Sampling & Population Weights",
                 competency_id="COMP-SAMPLING",
-                competency_label="Survey Sampling",
+                competency_label="सर्वेक्षण प्रतिदर्शन" if hi else "Survey Sampling",
                 target_url="/learning/lesson/sampling-lesson-3",
-                button_label="Watch Lesson & Practice",
-                badge_label="Next Step"
+                button_label="पाठ देखें एवं अभ्यास करें" if hi else "Watch Lesson & Practice",
+                badge_label="अगला चरण" if hi else "Next Step"
             )
         elif first_item and first_item["stage"] == "PRACTICAL":
             next_action = NextActionItem(
                 action_type="START_ASSESSMENT",
-                title="Practical Proficiency Assessment",
-                subtitle="Practical Frame Audit & Sample Allocation Task",
+                title="व्यावहारिक दक्षता मूल्यांकन" if hi else "Practical Proficiency Assessment",
+                subtitle="व्यावहारिक फ्रेम अंकेक्षण एवं प्रतिदर्श आवंटन कार्य" if hi else "Practical Frame Audit & Sample Allocation Task",
                 competency_id=first_item["competency_id"],
-                competency_label="Practical Evaluation",
+                competency_label="व्यावहारिक मूल्यांकन" if hi else "Practical Evaluation",
                 target_url="/assessments/ASS-DEMO-PRACTICAL-001",
-                button_label="Begin Practical Task",
-                badge_label="Assessment Required"
+                button_label="व्यावहारिक कार्य प्रारंभ करें" if hi else "Begin Practical Task",
+                badge_label="मूल्यांकन आवश्यक" if hi else "Assessment Required"
             )
         else:
             next_action = NextActionItem(
                 action_type="CONTINUE_LESSON",
-                title="Strengthen Core Competencies",
-                subtitle="Review your recommended learning modules",
+                title="मूल दक्षताएँ सुदृढ़ करें" if hi else "Strengthen Core Competencies",
+                subtitle="अपने अनुशंसित शिक्षण मॉड्यूल देखें" if hi else "Review your recommended learning modules",
                 competency_id="COMP-SAMPLING",
-                competency_label="Survey Methodology",
+                competency_label="सर्वेक्षण पद्धति" if hi else "Survey Methodology",
                 target_url="/learning",
-                button_label="Open Learning Path",
-                badge_label="Recommended"
+                button_label="शिक्षण पथ खोलें" if hi else "Open Learning Path",
+                badge_label="अनुशंसित" if hi else "Recommended"
             )
             
         # Total gaps & completed count

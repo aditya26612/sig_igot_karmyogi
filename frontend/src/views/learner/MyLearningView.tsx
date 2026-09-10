@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { api } from '../../api/client';
 import { CuratedPlaylistDTO, CuratedLessonDTO, LessonDetailResponse } from '../../types';
 import { VideoPlayer } from '../../components/VideoPlayer';
@@ -44,25 +45,55 @@ const LightbulbIcon: React.FC = () => (
 );
 
 export const MyLearningView: React.FC = () => {
-  const { selectedLessonId, setSelectedLessonId, activeAssessmentId, setActiveAssessmentId } = useAuth();
+  const { t } = useTranslation();
+  // Deep-linkable state: /learning?lesson=…&assessment=…
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedLessonId = searchParams.get('lesson');
+  const activeAssessmentId = searchParams.get('assessment');
+
+  const setSelectedLessonId = (id: string | null) => {
+    const next = new URLSearchParams(searchParams);
+    if (id) next.set('lesson', id); else next.delete('lesson');
+    setSearchParams(next, { replace: true });
+  };
+  const setActiveAssessmentId = (id: string | null) => {
+    const next = new URLSearchParams(searchParams);
+    if (id) next.set('assessment', id); else next.delete('assessment');
+    setSearchParams(next, { replace: true });
+  };
+
   const [playlists, setPlaylists] = useState<CuratedPlaylistDTO[]>([]);
-  const [activePlaylistId, setActivePlaylistId] = useState<string>('PLShJJCRzJWxhz7SfG4hpaBD5bKOloWx9J');
+  const [activePlaylistId, setActivePlaylistId] = useState<string>('');
   const [lessonDetail, setLessonDetail] = useState<LessonDetailResponse | null>(null);
   const [currentPlaylistLessons, setCurrentPlaylistLessons] = useState<CuratedLessonDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const [showQuizModal, setShowQuizModal] = useState(false);
 
-  // Load playlists
+  // Load playlists once, then default to the first lesson
   useEffect(() => {
     async function loadPlaylists() {
       try {
         const data = await api.getPlaylists();
         setPlaylists(data);
+        if (!searchParams.get('lesson') && data.length > 0) {
+          const detail = await api.getPlaylistDetail(data[0].playlist_id);
+          if (detail?.lessons?.length > 0) {
+            setSelectedLessonIdInit(detail.lessons[0].lesson_id);
+            setActivePlaylistIdState(data[0].playlist_id);
+          }
+        }
       } catch (err) {
         console.error('Failed to load playlists:', err);
       }
     }
+    const setSelectedLessonIdInit = (id: string) => {
+      const next = new URLSearchParams(window.location.search);
+      next.set('lesson', id);
+      setSearchParams(next, { replace: true });
+    };
+    const setActivePlaylistIdState = (id: string) => setActivePlaylistId(id);
     loadPlaylists();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load playlist lessons dynamically when active playlist changes
@@ -81,7 +112,7 @@ export const MyLearningView: React.FC = () => {
     loadPlaylistLessons();
   }, [activePlaylistId]);
 
-  // Load lesson detail
+  // Load lesson detail when the ?lesson= param changes
   useEffect(() => {
     async function loadLesson() {
       if (!selectedLessonId) return;
@@ -103,9 +134,9 @@ export const MyLearningView: React.FC = () => {
     <div className="gov-container" style={{ padding: '36px 0' }}>
       {/* View Header — plain language, what this page is for */}
       <div style={{ marginBottom: '20px' }}>
-        <h1 className="page-title">My Learning</h1>
+        <h1 className="page-title">{t('learning.myLearning')}</h1>
         <p className="meta-line">
-          Watch your course videos, read along with the transcript, and check your understanding with a practice quiz.
+          {t('learning.pageIntro')}
         </p>
       </div>
 
@@ -118,9 +149,9 @@ export const MyLearningView: React.FC = () => {
         marginBottom: '28px'
       }}>
         {[
-          { icon: <PlayCircleIcon />, step: '1. Watch', text: 'Play the lesson video. Read the transcript below it any time.' },
-          { icon: <TargetIcon />, step: '2. Practice', text: 'Take the practice quiz. It is just for you — it never changes your official level.' },
-          { icon: <InstitutionIcon />, step: '3. Get verified', text: 'When you are confident, submit the practical task. Your supervisor reviews and approves the promotion.' },
+          { icon: <PlayCircleIcon />, step: t('learning.step1Title'), text: t('learning.step1Text') },
+          { icon: <TargetIcon />, step: t('learning.step2Title'), text: t('learning.step2Text') },
+          { icon: <InstitutionIcon />, step: t('learning.step3Title'), text: t('learning.step3Text') },
         ].map((s, i) => (
           <div key={s.step} style={{
             display: 'flex',
@@ -140,7 +171,7 @@ export const MyLearningView: React.FC = () => {
 
       {/* Course selector — tabs with subject names, not codes */}
       <div style={{ marginBottom: '8px' }}>
-        <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>Choose a course</div>
+        <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>{t('learning.chooseCourse')}</div>
       </div>
       <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '14px', marginBottom: '20px' }}>
         {playlists.map(p => {
@@ -188,12 +219,12 @@ export const MyLearningView: React.FC = () => {
         <div>
           {loading ? (
             <div className="gov-card" style={{ padding: '80px', textAlign: 'center' }}>
-              <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--color-text-strong)' }}>Loading your lesson...</div>
+              <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--color-text-strong)' }}>{t('learning.loadingLesson')}</div>
             </div>
           ) : lessonDetail ? (
             <div>
               <div style={{ marginBottom: '6px' }}>
-                <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>Now playing</div>
+                <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>{t('learning.nowPlaying')}</div>
               </div>
               <VideoPlayer
                 lesson={lessonDetail.lesson}
@@ -243,10 +274,10 @@ export const MyLearningView: React.FC = () => {
                     }}>
                       <div style={{ flex: 1, minWidth: '260px' }}>
                         <strong style={{ display: 'block', fontSize: '15px', color: 'var(--color-text-strong)' }}>
-                          Ready for the official practical task?
+                          {t('learning.readyPracticalTitle')}
                         </strong>
                         <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                          Submit your work on <strong>{currentAss.title}</strong>. Your supervisor (Sunita Rao) reviews it — approval raises your official level by one step.
+                          {t('learning.readyPracticalBody', { title: currentAss.title })}
                         </span>
                       </div>
 
@@ -255,7 +286,7 @@ export const MyLearningView: React.FC = () => {
                         onClick={() => setActiveAssessmentId(currentAss.id)}
                         style={{ whiteSpace: 'nowrap' }}
                       >
-                        Start the Practical Task →
+                        {t('learning.startPractical')}
                       </button>
                     </div>
                   );
@@ -275,9 +306,9 @@ export const MyLearningView: React.FC = () => {
         {/* Right: course lessons list */}
         <div className="gov-card static" style={{ padding: '20px' }}>
           <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '12px', marginBottom: '14px' }}>
-            <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>Course syllabus</div>
+            <div className="eyebrow-meta" style={{ color: 'var(--color-text-muted)' }}>{t('learning.courseLessons')}</div>
             <h3 style={{ fontSize: '15px', marginTop: '4px' }}>
-              {lessonDetail?.playlist.title.split('&')[0] || 'Course Lessons'}
+              {lessonDetail?.playlist.title.split('&')[0] || t('learning.courseLessons')}
             </h3>
           </div>
 
@@ -300,7 +331,7 @@ export const MyLearningView: React.FC = () => {
                       {item.title}
                     </span>
                     <span className="lesson-row-meta">
-                      Lesson {item.sequence_no} {item.is_completed ? '• Watched' : `• ${item.duration_minutes} min`}
+                      {t('learning.lessonLabel', { no: item.sequence_no })} {item.is_completed ? t('learning.lessonWatched') : `• ${item.duration_minutes} ${t('common.minutes')}`}
                     </span>
                   </span>
                 </button>
@@ -310,7 +341,7 @@ export const MyLearningView: React.FC = () => {
 
           <div style={{ marginTop: '18px', padding: '12px', backgroundColor: 'var(--wash-ivory)', borderRadius: 'var(--radius-sm)', fontSize: '11.5px', color: 'var(--color-text-muted)', lineHeight: 1.5, display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
             <span style={{ color: 'var(--orange-600)', flex: 'none', marginTop: '1px' }}><LightbulbIcon /></span>
-            <span>Videos come from verified open educational sources. Transcripts and practice questions are processed locally on the platform.</span>
+            <span>{t('learning.syllabusNote')}</span>
           </div>
         </div>
       </div>

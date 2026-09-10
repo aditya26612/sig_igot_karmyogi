@@ -76,21 +76,31 @@ class GroqService:
         
         if client and context_text:
             try:
-                system_prompt = """
-You are the AI Learning Copilot for India's Official Statistical System (MoSPI) and iGOT Karmayogi.
+                system_prompt = """You are the AI Learning Copilot for India's Official Statistical System (MoSPI) and iGOT Karmayogi.
 Your purpose is to help government statistical officers master survey methodology, data analysis, and official statistics.
 
-CRITICAL RULES:
-1. Ground your answer strictly in the provided transcript context.
-2. Clearly cite the lesson title, timestamp (e.g. [02:15]), and topic in your response.
-3. Keep answers clear, professional, and accessible (plain language first).
-4. If the information is not present in the context, say: "I could not find this in the approved learning material for this module."
-5. NEVER reveal quiz answer keys before submission.
-6. NEVER promise or alter competency levels.
+ANSWER STYLE — you are a friendly senior trainer, not a documentation dump:
+1. Be CONCISE: 120-180 words maximum. Lead with the direct answer in the first sentence; details after.
+2. FORMAT simply: short paragraphs, 3-5 bullet points max, or a 2-4 step numbered list. NO markdown tables.
+   NO horizontal rules, NO title headings, NO emoji. Bold sparingly for one or two key terms only.
+3. PLAIN LANGUAGE first: explain in simple words, then give the technical term. Use one concrete field
+   example (a district survey, a census round) when it clarifies — keep it inside the word budget.
+4. END with a single short follow-up line inviting the learner to go deeper (one sentence, no list).
+
+GROUNDING RULES:
+5. Ground your answer strictly in the provided transcript context.
+6. Cite inline exactly once, in the form [MM:SS] of the lesson, at the sentence it supports. Do not attach
+   a separate citation section or a "Source:" block.
+7. The learner may use broader or narrower terms than the transcript. If the context contains material on
+   the asked topic or a closely related concept, answer from that material and cite it. Only say
+   "I could not find this in the approved learning material for this module." when the context genuinely
+   has nothing related to the question.
+8. NEVER reveal quiz answer keys before submission.
+9. NEVER promise or alter competency levels.
 """
                 if lang == "hi":
                     system_prompt += """
-7. Respond entirely in Hindi (Devanagari script), using standard Indian government statistical terminology.
+10. Respond entirely in Hindi (Devanagari script), using standard Indian government statistical terminology.
    Keep technical identifiers, competency codes, and timestamps in their original form.
 """
                 user_content = f"Context from approved curriculum:\n{context_text}\n\nLearner Question: {question}"
@@ -102,22 +112,11 @@ CRITICAL RULES:
                         {"role": "user", "content": user_content}
                     ],
                     temperature=0.3,
-                    max_tokens=600
+                    max_tokens=450
                 )
                 answer_text = completion.choices[0].message.content.strip()
 
                 if best_chunk:
-                    suggested = [
-                        "Explain this with a village survey example",
-                        "How do I calculate sampling weights?",
-                        "Take practice quiz on this topic",
-                        "What should I learn next?"
-                    ] if lang != "hi" else [
-                        "इसे ग्रामीण सर्वेक्षण उदाहरण से समझाइए",
-                        "प्रतिदर्श भार की गणना कैसे करें?",
-                        "इस विषय पर अभ्यास क्विज़ दें",
-                        "मुझे आगे क्या सीखना चाहिए?"
-                    ]
                     return {
                         "answer": answer_text,
                         "source_lesson_id": best_chunk.get("lesson_id"),
@@ -125,7 +124,7 @@ CRITICAL RULES:
                         "timestamp_label": best_chunk.get("timestamp_label"),
                         "chunk_id": best_chunk.get("chunk_id"),
                         "citation_snippet": best_chunk.get("text_content", "")[:120] + "...",
-                        "suggested_actions": suggested
+                        "suggested_actions": self._contextual_follow_ups(question, relevant_chunks, lang)
                     }
                 # No grounding chunk found: do NOT fabricate a citation
                 return {
@@ -164,17 +163,7 @@ CRITICAL RULES:
                 "timestamp_label": ts,
                 "chunk_id": best_chunk.get("chunk_id"),
                 "citation_snippet": best_chunk.get("text_content", "")[:120] + "..." if best_chunk.get("text_content") else None,
-                "suggested_actions": [
-                    "Explain this simply",
-                    "Show relevant transcript section",
-                    "Take practice quiz",
-                    "Review next role requirements"
-                ] if lang != "hi" else [
-                    "इसे सरल भाषा में समझाइए",
-                    "संबंधित ट्रांसक्रिप्ट अंश दिखाएँ",
-                    "अभ्यास क्विज़ दें",
-                    "अगली भूमिका आवश्यकताएँ देखें"
-                ]
+                "suggested_actions": self._contextual_follow_ups(question, relevant_chunks, lang)
             }
         else:
             no_match_en = "I could not find this in the approved learning material for this module. Please consult the curated playlist lessons or ask your supervisor."
@@ -192,6 +181,52 @@ CRITICAL RULES:
                     "Return to home dashboard"
                 ]
             }
+
+    def _contextual_follow_ups(
+        self,
+        question: str,
+        chunks: List[Dict[str, Any]],
+        lang: str
+    ) -> List[str]:
+        """
+        Builds follow-up suggestions tied to what was actually discussed:
+        - Reference the topic keyword of a *different* chunk in the same lesson.
+        - Offer the quiz on the lesson the answer came from.
+        - Offer a plain-language re-explanation of the current topic.
+        Falls back to generic (but lesson-anchored) prompts when no metadata exists.
+        """
+        hi = lang == "hi"
+        follow_ups: List[str] = []
+        topics = [str(c.get("topic", "")).strip() for c in chunks if c.get("topic")]
+        lesson_title = str(chunks[0].get("lesson_title", "")).strip() if chunks else ""
+        primary_topic = topics[0] if topics else ""
+        other_topics = [t for t in topics[1:] if t and t.lower() != primary_topic.lower()][:1]
+
+        # 1. A concrete next topic from the same lesson the answer came from
+        if other_topics:
+            follow_ups.append(
+                f"अगला: {other_topics[0]} क्या है?" if hi else f"What is {other_topics[0]}?"
+            )
+        elif lesson_title:
+            follow_ups.append(
+                f"'{lesson_title}' का सारांश दें" if hi else f"Summarize '{lesson_title}'"
+            )
+
+        # 2. Deepen the concept that was just answered
+        if primary_topic:
+            follow_ups.append(
+                f"{primary_topic} का एक क्षेत्रीय उदाहरण दें" if hi else f"Give a field example of {primary_topic}"
+            )
+        else:
+            follow_ups.append("Explain this in simpler words" if not hi else "इसे और सरल भाषा में बताएँ")
+
+        # 3. Practice — anchored to the same lesson
+        if lesson_title:
+            follow_ups.append(
+                f"'{lesson_title}' का अभ्यास क्विज़ दें" if hi else f"Quiz me on '{lesson_title}'"
+            )
+
+        return follow_ups[:3]
 
 
 

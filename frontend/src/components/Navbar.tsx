@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import { setLanguage, getCurrentLang, type Lang } from '../i18n';
 
 /* ---- Inline SVG icon set (Material-Symbols-like, single stroke weight) ---- */
 
@@ -71,18 +74,88 @@ const ChevronDownIcon: React.FC = () => (
   </svg>
 );
 
+/* ---- Accessibility controls (persisted font zoom) ---- */
+
+const FONT_ZOOM_KEY = 'igot_font_zoom';
+
+function applyAccessibility() {
+  const zoom = Number(localStorage.getItem(FONT_ZOOM_KEY) || '1');
+  document.documentElement.style.zoom = String(zoom);
+}
+
+const AccessibilityControls: React.FC = () => {
+  const { t } = useTranslation();
+  const [zoom, setZoom] = useState<number>(() => Number(localStorage.getItem(FONT_ZOOM_KEY) || '1'));
+
+  const changeZoom = (z: number) => {
+    setZoom(z);
+    localStorage.setItem(FONT_ZOOM_KEY, String(z));
+    applyAccessibility();
+  };
+
+  return (
+    <div className="a11y-controls" role="group" aria-label={t('accessibility.fontSize')}>
+      <span className="a11y-label" aria-hidden="true">A</span>
+      <div className="a11y-zoom-group">
+        <button
+          className="a11y-zoom-btn"
+          onClick={() => changeZoom(Math.max(0.85, Number((zoom - 0.1).toFixed(2))))}
+          aria-label="Decrease font size"
+          title="A−"
+        >−</button>
+        <span className="a11y-zoom-value" aria-live="polite">{Math.round(zoom * 100)}%</span>
+        <button
+          className="a11y-zoom-btn"
+          onClick={() => changeZoom(Math.min(1.25, Number((zoom + 0.1).toFixed(2))))}
+          aria-label="Increase font size"
+          title="A+"
+        >+</button>
+      </div>
+    </div>
+  );
+};
+
 export const Navbar: React.FC = () => {
-  const { currentUser, demoAccounts, switchDemoUser, activeView, setActiveView, setIsAssistantOpen } = useAuth();
+  const { currentUser, demoAccounts, switchDemoUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lang, setLang] = useState<Lang>(getCurrentLang());
   const role = currentUser?.role || 'LEARNER';
 
-  const learnerTabs = [
-    { view: 'home', label: 'Home' },
-    { view: 'learning', label: 'My Learning' },
-    { view: 'gaps', label: 'Skill Gaps' },
-    { view: 'career', label: 'Career Path' },
-  ];
+  // One map-driven nav: route + label per role — rendered identically on desktop and mobile.
+  const navItems =
+    role === 'REVIEWER'
+      ? [{ path: '/reviewer', label: t('nav.evidenceQueue'), icon: <SearchIcon /> }]
+      : role === 'ADMIN'
+        ? [{ path: '/admin', label: t('nav.governance'), icon: <AdminIcon /> }]
+        : [
+            { path: '/home', label: t('nav.home'), icon: null as React.ReactNode },
+            { path: '/learning', label: t('nav.myLearning'), icon: null as React.ReactNode },
+            { path: '/gaps', label: t('nav.skillGaps'), icon: null as React.ReactNode },
+            { path: '/career', label: t('nav.careerPath'), icon: null as React.ReactNode },
+          ];
+
+  const copilotItem = { path: '/copilot', label: t('nav.aiCopilot'), icon: <SparkIcon /> };
+  const allItems = [...navItems, copilotItem];
+
+  const toggleLanguage = () => {
+    const next: Lang = lang === 'en' ? 'hi' : 'en';
+    setLanguage(next);
+    setLang(next);
+  };
+
+  const go = (path: string) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
+
+  const tagline =
+    role === 'REVIEWER' ? 'NSSO Supervisory Evaluation Workspace'
+    : role === 'ADMIN' ? 'Cadre Governance & Platform Administration'
+    : 'Official Statistical System Competency Platform';
 
   return (
     <header className="site-header">
@@ -90,59 +163,45 @@ export const Navbar: React.FC = () => {
       <div className="gov-container">
         <nav className="glass-navbar" aria-label="Primary">
           {/* Brand lockup */}
-          <button className="brand-lockup" onClick={() => setActiveView('landing')} aria-label="iGOT Karmayogi SkillBridge home">
+          <button className="brand-lockup" onClick={() => go('/')} aria-label="iGOT Karmayogi SkillBridge home">
             <BrandSunIcon />
             <span className="brand-word">
               iGOT Karmayogi <em className="brand-suffix">SkillBridge</em>
-              <span className="brand-tagline">
-                {role === 'REVIEWER' ? 'NSSO Supervisory Evaluation Workspace'
-                  : role === 'ADMIN' ? 'Cadre Governance & Platform Administration'
-                  : 'Official Statistical System Competency Platform'}
-              </span>
+              <span className="brand-tagline">{tagline}</span>
             </span>
           </button>
 
-          {/* Center nav links — scoped to the active role */}
+          {/* Center nav links — map-driven, shared by desktop + mobile */}
           <div className="nav-links">
-            {role === 'REVIEWER' ? (
+            {allItems.map(item => (
               <button
-                className={`nav-tab ${activeView === 'reviewer' ? 'active' : ''}`}
-                onClick={() => { setActiveView('reviewer'); setMenuOpen(false); }}
+                key={item.path}
+                className={`nav-tab ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => go(item.path)}
+                aria-current={location.pathname === item.path ? 'page' : undefined}
               >
-                <SearchIcon />
-                Evidence Queue
+                {item.icon}
+                {item.label}
               </button>
-            ) : role === 'ADMIN' ? (
-              <button
-                className={`nav-tab ${activeView === 'admin' ? 'active' : ''}`}
-                onClick={() => { setActiveView('admin'); setMenuOpen(false); }}
-              >
-                <AdminIcon />
-                Governance Console
-              </button>
-            ) : (
-              learnerTabs.map(tab => (
-                <button
-                  key={tab.view}
-                  className={`nav-tab ${activeView === tab.view ? 'active' : ''}`}
-                  onClick={() => { setActiveView(tab.view); setMenuOpen(false); }}
-                >
-                  {tab.label}
-                </button>
-              ))
-            )}
-
-            <button className="nav-tab" onClick={() => setIsAssistantOpen(true)}>
-              <SparkIcon />
-              AI Copilot
-            </button>
+            ))}
           </div>
 
-          {/* Flag + language toggle (iGOT identity elements, compact) */}
+          {/* Accessibility controls (font size + high contrast) */}
+          <div className="nav-a11y">
+            <AccessibilityControls />
+          </div>
+
+          {/* Flag + language toggle (functional EN/HI switch) */}
           <div className="nav-identity">
             <FlagIcon />
-            <button className="lang-toggle" type="button" aria-label="Language toggle (demo placeholder)">
-              EN | हिंदी
+            <button
+              className="lang-toggle"
+              type="button"
+              onClick={toggleLanguage}
+              aria-label={lang === 'en' ? 'हिंदी में देखें' : 'View in English'}
+              title={lang === 'en' ? 'हिंदी में देखें' : 'View in English'}
+            >
+              {lang === 'en' ? 'EN | हिंदी' : 'हिंदी | EN'}
             </button>
           </div>
 
@@ -197,7 +256,7 @@ export const Navbar: React.FC = () => {
             className="hamburger"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            aria-label="Menu"
+            aria-label={t('nav.menu')}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             <MenuIcon />
@@ -206,40 +265,24 @@ export const Navbar: React.FC = () => {
 
         {menuOpen && (
           <div className="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu">
-            {role === 'REVIEWER' ? (
+            {allItems.map(item => (
               <button
-                className={`nav-tab ${activeView === 'reviewer' ? 'active' : ''}`}
+                key={item.path}
+                className={`nav-tab ${location.pathname === item.path ? 'active' : ''}`}
                 style={{ width: '100%', justifyContent: 'flex-start' }}
-                onClick={() => { setActiveView('reviewer'); setMenuOpen(false); }}
+                onClick={() => go(item.path)}
               >
-                <SearchIcon />
-                Evidence Queue
+                {item.icon}
+                {item.label}
               </button>
-            ) : role === 'ADMIN' ? (
-              <button
-                className={`nav-tab ${activeView === 'admin' ? 'active' : ''}`}
-                style={{ width: '100%', justifyContent: 'flex-start' }}
-                onClick={() => { setActiveView('admin'); setMenuOpen(false); }}
-              >
-                <AdminIcon />
-                Governance Console
+            ))}
+            {/* Language toggle also reachable on mobile */}
+            <div className="mobile-a11y-row">
+              <AccessibilityControls />
+              <button className="lang-toggle" type="button" onClick={toggleLanguage}>
+                {lang === 'en' ? 'EN | हिंदी' : 'हिंदी | EN'}
               </button>
-            ) : (
-              learnerTabs.map(tab => (
-                <button
-                  key={tab.view}
-                  className={`nav-tab ${activeView === tab.view ? 'active' : ''}`}
-                  style={{ width: '100%', justifyContent: 'flex-start' }}
-                  onClick={() => { setActiveView(tab.view); setMenuOpen(false); }}
-                >
-                  {tab.label}
-                </button>
-              ))
-            )}
-            <button className="nav-tab" style={{ width: '100%', justifyContent: 'flex-start' }} onClick={() => { setIsAssistantOpen(true); setMenuOpen(false); }}>
-              <SparkIcon />
-              AI Copilot
-            </button>
+            </div>
           </div>
         )}
       </div>
