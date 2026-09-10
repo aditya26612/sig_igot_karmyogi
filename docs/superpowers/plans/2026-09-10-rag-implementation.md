@@ -17,7 +17,7 @@
 - Learner-facing requests never call YouTube; ingestion is CLI-only, resumable, jittered (3–5s between fetches).
 - Existing hand-seeded `CHK-DEMO-*` chunks are never deleted or re-chunked.
 - Every phase ends with the platform fully working (spec §12 degradation matrix must always hold).
-- Chunk parameters (verbatim from spec): target ~900 chars, overlap ~225 chars (25%), advance ~675 chars; RRF k=60; rerank fused top-20 → top-4; grounding cosine threshold 0.45; quiz max_tokens 1100; assistant timeout 8s; quiz timeout 20s.
+- Chunk parameters (verbatim from spec): target ~900 chars, overlap ~225 chars (25%), advance ~675 chars; RRF k=60; rerank fused top-20 → top-4; grounding cosine threshold 0.45; quiz max_tokens 2400 (AMENDED during Task 10: Groq json_mode server-side validation rejects truncated JSON at the originally-planned 1100 — probes showed 1100→flaky 0-2 valid questions, 2400→5/5 stable; the spec's intent, valid complete JSON batches, is preserved); assistant timeout 8s; quiz timeout 20s.
 - Embedding model: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` (384-dim). Reranker: `BAAI/bge-reranker-v2-m3`.
 - Tests never require the HF model download or network; model-dependent paths are monkeypatched or skipped. Tests requiring the real models are marked `@pytest.mark.slowmodel` and skipped when `embedding_service.is_available()` is False.
 - Python 3.11; pytest; existing suite (`backend/tests/test_module*.py`) must keep passing.
