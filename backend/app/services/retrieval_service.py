@@ -9,6 +9,7 @@ import numpy as np
 
 from app.services import embedding_service
 from app.services.chunking_service import merge_near_duplicate_hits
+from app.services.reranker_service import rerank as _reranker_rank
 from app.services.transcript_service import extract_question_keywords
 
 logger = logging.getLogger(__name__)
@@ -168,8 +169,8 @@ def retrieve(
 
 
 def _rerank(query: str, candidates: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Reranker stage; pass-through stub replaced in Task 8."""
-    return candidates
+    """Optional reranker stage (Task 8); pass-through when unavailable."""
+    return _reranker_rank(query, candidates)
 
 
 def rebuild_fts(con: sqlite3.Connection) -> None:

@@ -1,15 +1,17 @@
 # backend/tests/test_retrieval_service.py
 import sqlite3
 import pytest
-from app.services import embedding_service, retrieval_service
+from app.services import embedding_service, reranker_service, retrieval_service
 from app.services.retrieval_service import rrf_fuse, rebuild_fts, retrieve
 
 
 @pytest.fixture()
 def con(tmp_path, monkeypatch):
-    # Hermeticity: never load/download the real embedding model in tests.
+    # Hermeticity: never load/download the real embedding or reranker models in tests.
     monkeypatch.setattr(embedding_service, "_model", None)
     monkeypatch.setattr(embedding_service, "_load_failed", True)
+    monkeypatch.setattr(reranker_service, "_model", None)
+    monkeypatch.setattr(reranker_service, "_load_failed", True)
     c = sqlite3.connect(tmp_path / "r.sqlite")
     c.row_factory = sqlite3.Row
     c.execute("""CREATE TABLE transcript_chunks (
@@ -77,3 +79,30 @@ def test_retrieve_respects_lesson_scope(con, monkeypatch):
 def test_retrieve_empty_on_no_match(con, monkeypatch):
     monkeypatch.setattr(retrieval_service, "_vector_ids_and_matrix", lambda con: (None, None))
     assert retrieve("quantum thermodynamics of quarks", con=con) == []
+
+
+def test_retrieve_uses_reranker_when_available(con, monkeypatch):
+    from app.services import reranker_service
+
+    class FakeModel:
+        def predict(self, pairs):
+            return [9.0 if "weights" in t else 1.0 for _, t in pairs]
+
+    monkeypatch.setattr(reranker_service, "_model", FakeModel())
+    monkeypatch.setattr(reranker_service, "_load_failed", False)
+    # Force FTS5 leg to return a deterministic order where the weights chunk ranks SECOND
+    scrambled = [
+        {"chunk_id": "CHK-T-001", "text_content": "Stratified sampling divides population.",
+         "lesson_id": "lesson-1", "start_seconds": 0, "end_seconds": 90,
+         "lesson_title": "L", "playlist_title": "P", "timestamp_label": "00:00",
+         "topic": "t", "course_id": "C", "competency_id": "K", "summary": "", "end_offset": 0},
+        {"chunk_id": "CHK-T-002", "text_content": "Sampling weights are inverse selection probability.",
+         "lesson_id": "lesson-2", "start_seconds": 100, "end_seconds": 190,
+         "lesson_title": "L", "playlist_title": "P", "timestamp_label": "00:00",
+         "topic": "t", "course_id": "C", "competency_id": "K", "summary": "", "end_offset": 0},
+    ]
+    monkeypatch.setattr(retrieval_service, "fts5_search",
+                        lambda con, q, *a, **kw: scrambled)
+    monkeypatch.setattr(retrieval_service, "_vector_ids_and_matrix", lambda con: (None, None))
+    hits = retrieve("what are sampling weights", con=con)
+    assert hits[0]["chunk_id"] == "CHK-T-002"
