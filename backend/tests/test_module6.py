@@ -15,8 +15,25 @@ sys.path.insert(0, str(backend_dir))
 
 from fastapi.testclient import TestClient
 from app.main import app
+from app.database import get_db_connection
+from app.services import embedding_service, reranker_service, retrieval_service
 
 def test_learning_assistant():
+    # Hermeticity + retrieval index setup for the RAG-grounded assistant:
+    # 1. Never load/download the real embedding or reranker models in tests
+    #    (retrieval falls back to the FTS5 lexical leg).
+    # 2. demo.sqlite ships with an empty transcript_fts (only scripts/ingest_transcripts.py
+    #    rebuilds it), so rebuild it here from the seeded transcript chunks.
+    embedding_service._model = None
+    embedding_service._load_failed = True
+    reranker_service._model = None
+    reranker_service._load_failed = True
+    con = get_db_connection()
+    try:
+        retrieval_service.rebuild_fts(con)
+    finally:
+        con.close()
+
     print("\n--- Testing Module 6: Learning Assistant (AI Copilot) ---")
     with TestClient(app) as client:
         # Authenticate as USR-001

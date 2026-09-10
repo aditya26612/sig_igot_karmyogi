@@ -1,160 +1,120 @@
+# backend/app/services/groq_service.py
 import json
 import logging
-from typing import List, Dict, Any, Optional
+import sqlite3
+from typing import Any, Dict, List, Optional
+
 from app.config import settings
 from app.database import get_db_connection
-from app.services.transcript_service import search_transcripts_keywords
+from app.services import embedding_service as _embedding_probe
+from app.services import llm_router, retrieval_service
 
 logger = logging.getLogger(__name__)
 
-class GroqService:
-    def __init__(self):
-        self.key_index = 0
-        
-    def _get_next_client(self):
-        keys = settings.groq_keys
-        if not keys:
-            return None, None
-        key = keys[self.key_index % len(keys)]
-        self.key_index += 1
-        try:
-            from groq import Groq
-            return Groq(api_key=key), key
-        except Exception as e:
-            logger.warning(f"Failed to initialize Groq client: {e}")
-            return None, None
+_GROUNDING_COSINE_THRESHOLD = 0.45
 
+
+def _llm_generate(system: str, user: str, max_tokens: int, **kw) -> Optional[str]:
+    return llm_router.generate(system, user, max_tokens, **kw)
+
+
+class GroqService:
+
+    # ---------------- Assistant (copilot) ----------------
     def ask_grounded_assistant(
         self,
         question: str,
         lesson_id: Optional[str] = None,
         competency_id: Optional[str] = None,
-        lang: str = "en"
+        lang: str = "en",
+        con: sqlite3.Connection = None,
     ) -> Dict[str, Any]:
-        """
-        Answers learner queries grounded in lesson transcripts and official competencies.
-        Cites lesson titles, timestamps, and quotes. Responds in EN or HI when requested.
-        """
-        con = get_db_connection()
-        relevant_chunks = []
+        should_close = con is None
+        if should_close:
+            con = get_db_connection()
         try:
-            if lesson_id:
-                cur = con.execute("""
-                SELECT c.*, l.title as lesson_title, p.title as playlist_title
-                FROM transcript_chunks c
-                JOIN curated_lessons l ON c.lesson_id = l.lesson_id
-                JOIN curated_playlists p ON l.playlist_id = p.playlist_id
-                WHERE c.lesson_id = ?
-                ORDER BY c.start_seconds ASC
-                """, (lesson_id,))
-                relevant_chunks = [dict(r) for r in cur.fetchall()]
-            elif competency_id:
-                cur = con.execute("""
-                SELECT c.*, l.title as lesson_title, p.title as playlist_title
-                FROM transcript_chunks c
-                JOIN curated_lessons l ON c.lesson_id = l.lesson_id
-                JOIN curated_playlists p ON l.playlist_id = p.playlist_id
-                WHERE c.competency_id = ?
-                LIMIT 5
-                """, (competency_id,))
-                relevant_chunks = [dict(r) for r in cur.fetchall()]
-            else:
-                # Honest fallback: keyword search over all transcripts (tokenized, OR-matched)
-                relevant_chunks = search_transcripts_keywords(con, question)
+            relevant_chunks = retrieval_service.retrieve(
+                question, lesson_id=lesson_id, competency_id=competency_id,
+                top_k=4, con=con,
+            )
         finally:
-            con.close()
-            
-        # If we have relevant chunks, build context
-        context_text = ""
+            if should_close:
+                con.close()
+
         best_chunk = relevant_chunks[0] if relevant_chunks else None
-        
+        context_text = ""
         for chk in relevant_chunks[:4]:
-            context_text += f"\n[Lesson: {chk.get('lesson_title', 'Lesson')} | Timestamp: {chk.get('timestamp_label', '00:00')} | Topic: {chk.get('topic', '')}]\n{chk.get('text_content', '')}\n"
-            
-        # Check if Groq client can be initialized
-        client, key_used = self._get_next_client()
-        
-        if client and context_text:
-            try:
-                system_prompt = """You are the AI Learning Copilot for India's Official Statistical System (MoSPI) and iGOT Karmayogi.
-Your purpose is to help government statistical officers master survey methodology, data analysis, and official statistics.
+            context_text += (
+                f"\n[CHUNK {chk.get('chunk_id')} | Lesson: {chk.get('lesson_title', 'Lesson')} | "
+                f"Timestamp: {chk.get('timestamp_label', '00:00')} | Topic: {chk.get('topic', '')}]\n"
+                f"{chk.get('text_content', '')}\n"
+            )
 
-ANSWER STYLE — you are a friendly senior trainer, not a documentation dump:
-1. Be CONCISE: 120-180 words maximum. Lead with the direct answer in the first sentence; details after.
-2. FORMAT simply: short paragraphs, 3-5 bullet points max, or a 2-4 step numbered list. NO markdown tables.
-   NO horizontal rules, NO title headings, NO emoji. Bold sparingly for one or two key terms only.
-3. PLAIN LANGUAGE first: explain in simple words, then give the technical term. Use one concrete field
-   example (a district survey, a census round) when it clarifies — keep it inside the word budget.
-4. END with a single short follow-up line inviting the learner to go deeper (one sentence, no list).
+        system_prompt = (
+            "You are the AI Learning Copilot for India's Official Statistical System (MoSPI) "
+            "and iGOT Karmayogi. Your purpose is to help government statistical officers master "
+            "survey methodology, data analysis, and official statistics.\n\n"
+            "ANSWER STYLE: be concise (120-180 words), lead with the direct answer, short "
+            "paragraphs or 3-5 bullets, plain language with one concrete field example.\n"
+            "GROUNDING: answer strictly from the provided transcript context; cite inline "
+            "exactly once as [MM:SS] at the sentence it supports; never reveal quiz answer "
+            "keys; if the context genuinely has nothing related, say you could not find this "
+            "in the approved learning material for this module."
+        )
+        if lang == "hi":
+            system_prompt += (
+                "\nRespond entirely in Hindi (Devanagari script), using standard Indian "
+                "government statistical terminology. Keep timestamps in original form."
+            )
+        user_content = (
+            f"Context from approved curriculum:\n{context_text}\n\nLearner Question: {question}"
+        )
 
-GROUNDING RULES:
-5. Ground your answer strictly in the provided transcript context.
-6. Cite inline exactly once, in the form [MM:SS] of the lesson, at the sentence it supports. Do not attach
-   a separate citation section or a "Source:" block.
-7. The learner may use broader or narrower terms than the transcript. If the context contains material on
-   the asked topic or a closely related concept, answer from that material and cite it. Only say
-   "I could not find this in the approved learning material for this module." when the context genuinely
-   has nothing related to the question.
-8. NEVER reveal quiz answer keys before submission.
-9. NEVER promise or alter competency levels.
-"""
-                if lang == "hi":
-                    system_prompt += """
-10. Respond entirely in Hindi (Devanagari script), using standard Indian government statistical terminology.
-   Keep technical identifiers, competency codes, and timestamps in their original form.
-"""
-                user_content = f"Context from approved curriculum:\n{context_text}\n\nLearner Question: {question}"
+        answer_text = None
+        if context_text.strip():
+            answer_text = _llm_generate(
+                system_prompt, user_content, max_tokens=450, temperature=0.3,
+                timeout=settings.GROQ_ASSISTANT_TIMEOUT_S,
+            )
 
-                completion = client.chat.completions.create(
-                    model=settings.GROQ_PRIMARY_MODEL,
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_content}
-                    ],
-                    temperature=0.3,
-                    max_tokens=450
-                )
-                answer_text = completion.choices[0].message.content.strip()
-
-                if best_chunk:
-                    return {
-                        "answer": answer_text,
-                        "source_lesson_id": best_chunk.get("lesson_id"),
-                        "source_lesson_title": best_chunk.get("lesson_title"),
-                        "timestamp_label": best_chunk.get("timestamp_label"),
-                        "chunk_id": best_chunk.get("chunk_id"),
-                        "citation_snippet": best_chunk.get("text_content", "")[:120] + "...",
-                        "suggested_actions": self._contextual_follow_ups(question, relevant_chunks, lang)
-                    }
-                # No grounding chunk found: do NOT fabricate a citation
+        if answer_text:
+            if best_chunk:
                 return {
                     "answer": answer_text,
-                    "source_lesson_id": None,
-                    "source_lesson_title": None,
-                    "timestamp_label": None,
-                    "chunk_id": None,
-                    "citation_snippet": None,
-                    "suggested_actions": []
+                    "source_lesson_id": best_chunk.get("lesson_id"),
+                    "source_lesson_title": best_chunk.get("lesson_title"),
+                    "timestamp_label": best_chunk.get("timestamp_label"),
+                    "chunk_id": best_chunk.get("chunk_id"),
+                    "citation_snippet": (best_chunk.get("text_content") or "")[:120] + "...",
+                    "suggested_actions": self._contextual_follow_ups(
+                        question, relevant_chunks, lang),
                 }
-            except Exception as e:
-                logger.warning(f"Groq API call failed: {e}. Falling back to deterministic grounded response.")
+            return {
+                "answer": answer_text,
+                "source_lesson_id": None,
+                "source_lesson_title": None,
+                "timestamp_label": None,
+                "chunk_id": None,
+                "citation_snippet": None,
+                "suggested_actions": [],
+            }
 
-        # Deterministic Grounded Fallback (Ensures the platform operates with 100% reliability offline)
+        # Deterministic grounded fallback (100% offline reliability)
         if best_chunk:
             ts = best_chunk.get("timestamp_label")
             citation = f" at [{ts}]" if ts else ""
-            fallback_answer = (
-                f"Based on the approved training material for '{best_chunk.get('lesson_title', 'Curated Module')}'"
-                f"{citation}:\n\n"
-                f"{best_chunk.get('text_content', '')}\n\n"
-                f"Key Takeaway: {best_chunk.get('summary', 'Reinforce this concept with the practice quiz.')}"
-            )
             if lang == "hi":
                 fallback_answer = (
                     f"अनुमोदित प्रशिक्षण सामग्री '{best_chunk.get('lesson_title', 'Curated Module')}'"
-                    f"{citation} के आधार पर:\n\n"
-                    f"{best_chunk.get('text_content', '')}\n\n"
+                    f"{citation} के आधार पर:\n\n{best_chunk.get('text_content', '')}\n\n"
                     f"मुख्य बात: {best_chunk.get('summary', 'इस अवधारणा को अभ्यास क्विज़ से सुदृढ़ करें।')}"
+                )
+            else:
+                fallback_answer = (
+                    f"Based on the approved training material for "
+                    f"'{best_chunk.get('lesson_title', 'Curated Module')}'{citation}:\n\n"
+                    f"{best_chunk.get('text_content', '')}\n\n"
+                    f"Key Takeaway: {best_chunk.get('summary', 'Reinforce this concept with the practice quiz.')}"
                 )
             return {
                 "answer": fallback_answer,
@@ -162,25 +122,30 @@ GROUNDING RULES:
                 "source_lesson_title": best_chunk.get("lesson_title"),
                 "timestamp_label": ts,
                 "chunk_id": best_chunk.get("chunk_id"),
-                "citation_snippet": best_chunk.get("text_content", "")[:120] + "..." if best_chunk.get("text_content") else None,
-                "suggested_actions": self._contextual_follow_ups(question, relevant_chunks, lang)
+                "citation_snippet": (best_chunk.get("text_content") or "")[:120] + "..."
+                if best_chunk.get("text_content") else None,
+                "suggested_actions": self._contextual_follow_ups(
+                    question, relevant_chunks, lang),
             }
-        else:
-            no_match_en = "I could not find this in the approved learning material for this module. Please consult the curated playlist lessons or ask your supervisor."
-            no_match_hi = "यह सूचना इस मॉड्यूल की अनुमोदित शिक्षण सामग्री में नहीं मिली। कृपया अनुशंसित पाठ्यक्रम देखें या अपने पर्यवेक्षक से परामर्श करें।"
-            return {
-                "answer": no_match_hi if lang == "hi" else no_match_en,
-                "source_lesson_id": None,
-                "source_lesson_title": None,
-                "timestamp_label": None,
-                "chunk_id": None,
-                "citation_snippet": None,
-                "suggested_actions": [
-                    "View all available courses",
-                    "Check my skill gaps",
-                    "Return to home dashboard"
-                ]
-            }
+
+        no_match_en = ("I could not find this in the approved learning material for this "
+                       "module. Please consult the curated playlist lessons or ask your "
+                       "supervisor.")
+        no_match_hi = ("यह सूचना इस मॉड्यूल की अनुमोदित शिक्षण सामग्री में नहीं मिली। "
+                       "कृपया अनुशंसित पाठ्यक्रम देखें या अपने पर्यवेक्षक से परामर्श करें।")
+        return {
+            "answer": no_match_hi if lang == "hi" else no_match_en,
+            "source_lesson_id": None,
+            "source_lesson_title": None,
+            "timestamp_label": None,
+            "chunk_id": None,
+            "citation_snippet": None,
+            "suggested_actions": [
+                "View all available courses",
+                "Check my skill gaps",
+                "Return to home dashboard",
+            ],
+        }
 
     def _contextual_follow_ups(
         self,
@@ -240,72 +205,68 @@ GROUNDING RULES:
         transcript_chunks: List[Dict[str, Any]],
         num_questions: int = 5,
     ) -> Optional[List[Dict[str, Any]]]:
-        """
-        Asks Groq to generate formative practice questions grounded in the
-        lesson transcript. Returns a validated list of question dicts, or
-        None if the API fails / output fails validation (caller falls back
-        to the curated question bank).
-        """
-        client, _ = self._get_next_client()
-        if not client:
-            return None
-
         context_text = ""
         for chk in transcript_chunks[:4]:
             context_text += (
-                "\n[" + str(chk.get('topic', 'Topic')) + " | " + str(chk.get('timestamp_label', '00:00')) + "] "
-                + str(chk.get('text_content', '')) + "\n"
+                "\n[CHUNK " + str(chk.get("chunk_id", "CHUNK")) + " | " +
+                str(chk.get("topic", "Topic")) + " | " +
+                str(chk.get("timestamp_label", "00:00")) + "] " +
+                str(chk.get("text_content", "")) + "\n"
             )
         if not context_text.strip():
             return None
 
         prompt = (
             "Create a practice quiz for government statistical officers.\n"
-            "Lesson: " + str(lesson['title']) + "\n"
-            "Competency: " + str(lesson['competency_id']) + "\n"
+            "Lesson: " + str(lesson["title"]) + "\n"
+            "Competency: " + str(lesson["competency_id"]) + "\n"
             "Approved transcript context:\n" + context_text + "\n"
-            "Generate exactly " + str(num_questions) + " multiple-choice questions grounded ONLY in the transcript. "
-            "Return STRICT JSON only (no markdown, no commentary): a JSON array where each item has keys: "
-            '"question_text" (string), "options" (array of exactly 4 objects with keys "text" (string)), '
-            '"correct_index" (integer 0-3 pointing to the correct option), '
-            '"explanation" (string citing why, referencing the transcript), '
-            '"difficulty" (one of EASY/MEDIUM/HARD), '
-            '"timestamp_label" (string MM:SS from the transcript context).'
+            "Generate exactly " + str(num_questions) + " multiple-choice questions grounded "
+            "ONLY in the transcript. Return STRICT JSON only, no markdown: "
+            '{"questions": [{"question_text": str, "options": [exactly 4 objects with key '
+            '"text"], "correct_index": int 0-3, "explanation": str citing the transcript, '
+            '"difficulty": "EASY"|"MEDIUM"|"HARD", "timestamp_label": "MM:SS from context", '
+            '"chunk_id": "the CHUNK id this question is drawn from"}]}'
         )
 
-        try:
-            completion = client.chat.completions.create(
-                model=settings.GROQ_PRIMARY_MODEL,
-                messages=[
-                    {"role": "system", "content": (
-                        "You are an assessment designer for India's Official Statistical System (MoSPI). "
-                        "You output ONLY valid JSON. Questions must be answerable from the given transcript "
-                        "alone, in plain professional language, with one unambiguously correct option."
-                    )},
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.4,
-                max_tokens=1600,
-            )
-            raw = (completion.choices[0].message.content or "").strip()
-            # Strip any accidental markdown fencing
-            if raw.startswith("```"):
-                raw = raw.strip("`")
-                if raw.lower().startswith("json"):
-                    raw = raw[4:]
-            # Extract the JSON array even if the model added stray text
-            start, end = raw.find("["), raw.rfind("]")
-            if start == -1 or end == -1:
-                logger.warning("Groq quiz generation: no JSON array found in response")
-                return None
-            items = json.loads(raw[start:end + 1])
-        except Exception as e:
-            logger.warning(f"Groq quiz generation failed: {e}. Falling back to question bank.")
+        # max_tokens=2400 (not the brief's 1100): with json_mode the provider validates
+        # the streamed JSON; at 1100 the completion is cut before a valid document
+        # closes and Groq rejects with json_validate_failed ~75% of live runs
+        # (empirically probed: 1100 -> 0-2 questions, 2400 -> 5/5 questions).
+        raw = _llm_generate(
+            "You are an assessment designer for India's Official Statistical System (MoSPI). "
+            "You output ONLY valid JSON. Questions must be answerable from the given transcript "
+            "alone, in plain professional language, with one unambiguously correct option.",
+            prompt,
+            max_tokens=2400,
+            temperature=0.4,
+            json_mode=True,
+            timeout=settings.GROQ_QUIZ_TIMEOUT_S,
+        )
+        payload = llm_router.parse_json_payload(raw) if raw else None
+        if not payload or not isinstance(payload.get("questions"), list):
+            logger.warning("Quiz generation: no valid JSON payload")
             return None
+        items = payload["questions"]
 
-        # ---- Validation: never trust LLM output blindly ----
-        validated: List[Dict[str, Any]] = []
         option_ids = ["A", "B", "C", "D"]
+        chunk_texts = {
+            str(c.get("chunk_id")): str(c.get("text_content", ""))
+            for c in transcript_chunks if c.get("chunk_id")
+        }
+        chunk_ids_present = list(chunk_texts.keys())
+        grounding_rejects = 0
+
+        # Pre-embed cited chunk texts once when embeddings are available
+        emb_chunks = None
+        if chunk_ids_present:
+            try:
+                emb_chunks = _embedding_probe.embed_texts(
+                    [chunk_texts[cid] for cid in chunk_ids_present])
+            except Exception:
+                emb_chunks = None
+
+        validated: List[Dict[str, Any]] = []
         for i, item in enumerate(items[:num_questions], 1):
             try:
                 q_text = str(item["question_text"]).strip()
@@ -313,7 +274,8 @@ GROUNDING RULES:
                 correct_idx = int(item["correct_index"])
                 explanation = str(item["explanation"]).strip()
                 difficulty = str(item.get("difficulty", "MEDIUM")).upper()
-                ts_label = str(item.get("timestamp_label", "02:15")).strip() or "02:15"
+                ts_label = str(item.get("timestamp_label", "")).strip() or "02:15"
+                cited_chunk = str(item.get("chunk_id", "")).strip()
 
                 if not q_text or len(q_text) < 15:
                     continue
@@ -329,25 +291,50 @@ GROUNDING RULES:
                 if difficulty not in ("EASY", "MEDIUM", "HARD"):
                     difficulty = "MEDIUM"
 
+                # Semantic grounding (spec section 8): question+explanation must be
+                # cosine >= 0.45 with the cited chunk, when embeddings are available.
+                if emb_chunks is not None:
+                    if cited_chunk not in chunk_texts:
+                        grounding_rejects += 1
+                        continue
+                    idx = chunk_ids_present.index(cited_chunk)
+                    qvec = _embedding_probe.embed_texts([q_text + " " + explanation])
+                    if qvec is not None:
+                        score = float(_embedding_probe.cosine_sim(
+                            emb_chunks[idx:idx + 1], qvec[0])[0])
+                        if score < _GROUNDING_COSINE_THRESHOLD:
+                            grounding_rejects += 1
+                            logger.info(
+                                f"GROUNDING_REJECT q{i} score={score:.3f}")
+                            continue
+
                 validated.append({
                     "question_id": f"Q-{lesson['lesson_id'].upper()}-AI-{i:02d}",
                     "question_text": q_text,
                     "options_json": json.dumps(
-                        [{"option_id": option_ids[j], "text": texts[j]} for j in range(4)]
-                    ),
+                        [{"option_id": option_ids[j], "text": texts[j]}
+                         for j in range(4)]),
                     "correct_option": option_ids[correct_idx],
                     "explanation": explanation,
                     "difficulty": difficulty,
                     "timestamp_label": ts_label,
-                    "chunk_id": transcript_chunks[0]["chunk_id"] if transcript_chunks else None,
+                    "chunk_id": cited_chunk or None,
                 })
             except (KeyError, ValueError, TypeError):
                 continue
 
         if len(validated) < 3:
-            logger.warning(f"Groq quiz generation: only {len(validated)} valid questions, discarding batch.")
+            logger.warning(
+                f"Quiz generation: {len(validated)} valid "
+                f"({grounding_rejects} grounding rejects); discarding batch.")
             return None
         return validated
 
 
 groq_service = GroqService()
+
+# Module-level aliases bound to the singleton: lets tests (and any future
+# callers) invoke the public API directly off the module. The routers keep
+# using the `groq_service` singleton; both forms share one instance.
+ask_grounded_assistant = groq_service.ask_grounded_assistant
+generate_quiz_questions = groq_service.generate_quiz_questions

@@ -17,6 +17,7 @@ sys.path.insert(0, str(backend_dir))
 from fastapi.testclient import TestClient
 from app.main import app
 from app.database import get_db_connection, load_db
+from app.services import embedding_service, reranker_service, retrieval_service
 from reset_demo import reset_database
 
 def test_full_pipeline_journey():
@@ -24,6 +25,19 @@ def test_full_pipeline_journey():
     print("STARTING FULL END-TO-END SIH26101 PIPELINE VERIFICATION")
     print("================================================================================")
     reset_database()
+
+    # Hermeticity: keep the RAG-grounded copilot step offline-hermetic (no embedding /
+    # reranker model loads) and give the freshly reset demo DB a populated FTS5 index
+    # (only scripts/ingest_transcripts.py rebuilds it) so retrieval can ground answers.
+    embedding_service._model = None
+    embedding_service._load_failed = True
+    reranker_service._model = None
+    reranker_service._load_failed = True
+    con = get_db_connection()
+    try:
+        retrieval_service.rebuild_fts(con)
+    finally:
+        con.close()
 
     
     with TestClient(app) as client:
