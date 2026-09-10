@@ -215,4 +215,36 @@ def init_db():
         )
         """)
 
+        # RAG: permanent raw caption cache
+        con.execute("""
+        CREATE TABLE IF NOT EXISTS raw_transcripts (
+            lesson_id TEXT PRIMARY KEY,
+            transcript_text TEXT,
+            language TEXT DEFAULT 'en',
+            source TEXT DEFAULT 'YOUTUBE_AUTO',
+            fetched_at TEXT,
+            status TEXT DEFAULT 'FETCHED'
+        )
+        """)
+
+        # RAG: local embedding vectors (float32 bytes)
+        con.execute("""
+        CREATE TABLE IF NOT EXISTS chunk_embeddings (
+            chunk_id TEXT PRIMARY KEY,
+            embedding BLOB,
+            model_name TEXT,
+            created_at TEXT
+        )
+        """)
+
+        # RAG: FTS5 lexical index over transcript chunks
+        con.execute("""
+        CREATE VIRTUAL TABLE IF NOT EXISTS transcript_fts USING fts5(
+            chunk_id UNINDEXED,
+            text_content,
+            topic,
+            tokenize='unicode61'
+        )
+        """)
+
     con.close()
