@@ -177,6 +177,12 @@ def get_lesson_detail(lesson_id: str, current_user: Dict[str, Any] = Depends(get
             provider_badge="Curated YouTube Resource"
         )
         
+        # Background quiz pre-generation (spec section 9): fire-and-forget so
+        # the learner's Practice click is a cache hit. Local import avoids
+        # import-order issues; practice_router never imports content_router.
+        from app.routers.practice_router import prewarm_quiz_for_lesson
+        prewarm_quiz_for_lesson(lesson_id)
+
         return LessonDetailResponse(
             lesson=lesson_dto,
             playlist=playlist_dto,
