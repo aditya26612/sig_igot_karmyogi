@@ -32,6 +32,8 @@ def prewarm_quiz_for_lesson(lesson_id: str) -> None:
     Called when a learner opens a lesson/video so the Practice click is a
     cache hit. Idempotent and single-flight per lesson.
     """
+    if not settings.PREWARM_ENABLED:
+        return
     with _prewarm_lock:
         if lesson_id in _prewarm_inflight:
             return

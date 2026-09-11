@@ -25,6 +25,9 @@ Hermeticity strategy (documented per the task-11 context):
   endpoint (which now triggers prewarm) and their daemon threads share the
   module-level ``_prewarm_inflight`` set; a unique id eliminates any
   cross-test single-flight collision.
+- ``tests/conftest.py`` disables prewarm suite-wide (settings.PREWARM_ENABLED
+  attribute flip); this test re-enables it at function scope via monkeypatch,
+  which restores the conftest value on exit.
 """
 import sqlite3
 import threading
@@ -122,6 +125,10 @@ def test_prewarm_single_flight_per_lesson(hermetic_prewarm_db, monkeypatch):
         time.sleep(0.3)
         return None
 
+    # tests/conftest.py disables prewarm for the whole suite; this test is the
+    # one place that exercises it, so flip the kill-switch back on (function
+    # scope: monkeypatch restores the conftest value afterwards).
+    monkeypatch.setattr(practice_router.settings, "PREWARM_ENABLED", True)
     monkeypatch.setattr(practice_router.groq_service, "generate_quiz_questions", slow_gen)
     practice_router._prewarm_inflight.clear()
     practice_router.prewarm_quiz_for_lesson(LESSON_ID)
