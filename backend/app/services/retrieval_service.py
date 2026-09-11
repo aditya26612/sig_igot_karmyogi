@@ -44,7 +44,10 @@ def fts5_search(
     limit: int = _LEG_LIMIT,
 ) -> List[Dict[str, Any]]:
     expanded = _expand_query(query)
-    terms = [t for t in expanded.split() if t]
+    # Quote each term: FTS5 reads a bare hyphen inside a MATCH term as the NOT
+    # operator ("hot-deck" -> hot NOT deck -> syntax error, silently []), while a
+    # quoted term is a phrase query whose BM25 matches the bare term.
+    terms = [f'"{t}"' for t in expanded.split() if t]
     if not terms:
         return []
     fts_query = " OR ".join(terms)

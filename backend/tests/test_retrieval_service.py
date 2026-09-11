@@ -106,3 +106,35 @@ def test_retrieve_uses_reranker_when_available(con, monkeypatch):
     monkeypatch.setattr(retrieval_service, "_vector_ids_and_matrix", lambda con: (None, None))
     hits = retrieve("what are sampling weights", con=con)
     assert hits[0]["chunk_id"] == "CHK-T-002"
+
+
+def test_fts5_search_matches_hyphenated_terms():
+    # FTS5 treats a bare hyphen as the NOT operator ("hot-deck" -> "hot NOT deck"),
+    # which raises a syntax error the old code swallowed into [] silently.
+    # Quoting terms makes "hot-deck" a phrase query that matches the chunk text.
+    from app.services.retrieval_service import fts5_search
+
+    con_fixture = sqlite3.connect(":memory:")
+    con_fixture.row_factory = sqlite3.Row
+    con_fixture.execute("""CREATE TABLE transcript_chunks (
+        chunk_id TEXT PRIMARY KEY, lesson_id TEXT, course_id TEXT, competency_id TEXT,
+        topic TEXT, start_seconds INTEGER, end_seconds INTEGER, timestamp_label TEXT,
+        text_content TEXT, summary TEXT, provenance TEXT)""")
+    con_fixture.execute("""CREATE VIRTUAL TABLE transcript_fts USING fts5(
+        chunk_id UNINDEXED, text_content, topic, tokenize='unicode61')""")
+    con_fixture.execute("""CREATE TABLE curated_lessons (
+        lesson_id TEXT PRIMARY KEY, playlist_id TEXT, sequence_no INTEGER, title TEXT,
+        youtube_video_id TEXT, youtube_url TEXT, duration_minutes INTEGER,
+        competency_id TEXT, has_transcript INTEGER)""")
+    con_fixture.execute("""CREATE TABLE curated_playlists (playlist_id TEXT PRIMARY KEY, title TEXT)""")
+    con_fixture.execute("""CREATE TABLE chunk_embeddings (
+        chunk_id TEXT PRIMARY KEY, embedding BLOB, model_name TEXT, created_at TEXT)""")
+    con_fixture.execute(
+        "INSERT INTO transcript_chunks VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        ("CHK-T-005", "lesson-5", "CRS-5", "COMP-5", "topic", 400, 490, "00:00",
+         "Donor hot-deck imputation preserves empirical distributions for item non-response.", "", "AUTO_CHUNK"),
+    )
+    rebuild_fts(con_fixture)
+    hits = fts5_search(con_fixture, "How does donor hot-deck imputation preserve distributions?")
+    assert any(h["chunk_id"] == "CHK-T-005" for h in hits)
+    con_fixture.close()
