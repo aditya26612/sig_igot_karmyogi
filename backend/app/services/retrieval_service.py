@@ -3,6 +3,7 @@
 near-duplicate merge, optional reranker stage."""
 import logging
 import sqlite3
+import threading
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
@@ -73,6 +74,7 @@ def fts5_search(
 
 # ---- vector leg ----
 _matrix_cache: Optional[Dict[str, Any]] = None
+_matrix_lock = threading.Lock()
 
 
 def embeddings_changed() -> None:
@@ -85,14 +87,19 @@ def _vector_ids_and_matrix(con: sqlite3.Connection) -> Tuple[Optional[List[str]]
     global _matrix_cache
     if _matrix_cache is not None:
         return _matrix_cache["ids"], _matrix_cache["matrix"]
-    rows = con.execute("SELECT chunk_id, embedding FROM chunk_embeddings").fetchall()
-    if not rows:
-        _matrix_cache = {"ids": [], "matrix": None}
-        return [], None
-    ids = [r["chunk_id"] for r in rows]
-    matrix = np.vstack([np.frombuffer(r["embedding"], dtype=np.float32) for r in rows])
-    _matrix_cache = {"ids": ids, "matrix": matrix}
-    return ids, matrix
+    # Lock around the miss path: the prewarm daemon and request threads can
+    # both build the matrix concurrently otherwise (duplicate memory spike).
+    with _matrix_lock:
+        if _matrix_cache is not None:
+            return _matrix_cache["ids"], _matrix_cache["matrix"]
+        rows = con.execute("SELECT chunk_id, embedding FROM chunk_embeddings").fetchall()
+        if not rows:
+            _matrix_cache = {"ids": [], "matrix": None}
+            return [], None
+        ids = [r["chunk_id"] for r in rows]
+        matrix = np.vstack([np.frombuffer(r["embedding"], dtype=np.float32) for r in rows])
+        _matrix_cache = {"ids": ids, "matrix": matrix}
+        return ids, matrix
 
 
 def vector_search(
@@ -110,12 +117,26 @@ def vector_search(
     ids, matrix = _vector_ids_and_matrix(con)
     if not ids or matrix is None:
         return []
-    scores = embedding_service.cosine_sim(matrix, qvec)
+    # Apply scope BEFORE ranking: a lesson-pinned query must rank its in-lesson
+    # chunks against each other, not against the whole corpus's top-20 (which
+    # other lessons' better-matching chunks can crowd out entirely).
+    row_by_id = {cid: i for i, cid in enumerate(ids)}
+    scoped_ids: Optional[List[str]] = None
+    if lesson_id or competency_id:
+        clause, params = _scope_clause(lesson_id, competency_id)
+        scoped_rows = con.execute(
+            f"SELECT c.chunk_id FROM transcript_chunks c WHERE 1=1 {clause}", params
+        ).fetchall()
+        scoped_ids = [r["chunk_id"] for r in scoped_rows if r["chunk_id"] in row_by_id]
+        if not scoped_ids:
+            return []
+    candidate_ids = scoped_ids if scoped_ids is not None else ids
+    cand_rows = [row_by_id[cid] for cid in candidate_ids]
+    scores = embedding_service.cosine_sim(matrix[cand_rows], qvec)
     order = np.argsort(-scores)[:leg_limit]
-    top_ids = [ids[i] for i in order]
+    top_ids = [candidate_ids[i] for i in order]
     if not top_ids:
         return []
-    clause, params = _scope_clause(lesson_id, competency_id)
     placeholders = ",".join("?" * len(top_ids))
     sql = f"""
     SELECT c.chunk_id, c.lesson_id, c.course_id, c.competency_id, c.topic,
@@ -124,10 +145,10 @@ def vector_search(
     FROM transcript_chunks c
     LEFT JOIN curated_lessons l ON c.lesson_id = l.lesson_id
     LEFT JOIN curated_playlists p ON l.playlist_id = p.playlist_id
-    WHERE c.chunk_id IN ({placeholders}) {clause}
+    WHERE c.chunk_id IN ({placeholders})
     """
     try:
-        rows = {r["chunk_id"]: dict(r) for r in con.execute(sql, top_ids + params).fetchall()}
+        rows = {r["chunk_id"]: dict(r) for r in con.execute(sql, top_ids).fetchall()}
     except sqlite3.OperationalError:
         return []
     return [rows[cid] for cid in top_ids if cid in rows]

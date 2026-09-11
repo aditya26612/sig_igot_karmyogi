@@ -1,6 +1,7 @@
 # backend/app/services/reranker_service.py
 """Optional cross-encoder reranker (spec section 7). Auto-off when model missing/disabled."""
 import logging
+import threading
 from typing import Dict, Any, List
 
 from app.config import settings
@@ -9,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 _model = None
 _load_failed = False
+_load_lock = threading.Lock()
 
 
 def _ensure_model():
@@ -17,17 +19,25 @@ def _ensure_model():
         return _model
     if _load_failed or not settings.RAG_RERANKER_ENABLED:
         return None
-    try:
-        from sentence_transformers import CrossEncoder
+    # Double-checked lock: the prewarm daemon and request threads can both hit
+    # a cold cache; a concurrent 2.2GB double-load is an OOM risk on the
+    # 4GB-VRAM target hardware.
+    with _load_lock:
+        if _model is not None:
+            return _model
+        if _load_failed or not settings.RAG_RERANKER_ENABLED:
+            return None
         try:
-            _model = CrossEncoder(settings.RAG_RERANKER_MODEL, device="cuda")
-        except Exception:
-            _model = CrossEncoder(settings.RAG_RERANKER_MODEL, device="cpu")
-        return _model
-    except Exception as e:
-        logger.warning(f"[rag] reranker unavailable: {e}. Using RRF order.")
-        _load_failed = True
-        return None
+            from sentence_transformers import CrossEncoder
+            try:
+                _model = CrossEncoder(settings.RAG_RERANKER_MODEL, device="cuda")
+            except Exception:
+                _model = CrossEncoder(settings.RAG_RERANKER_MODEL, device="cpu")
+            return _model
+        except Exception as e:
+            logger.warning(f"[rag] reranker unavailable: {e}. Using RRF order.")
+            _load_failed = True
+            return None
 
 
 def is_available() -> bool:

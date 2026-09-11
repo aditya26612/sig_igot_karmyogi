@@ -5,6 +5,7 @@ Lazy singleton. Every public call returns None (or False) when the model is
 missing so retrieval can degrade to the FTS5 leg without crashing.
 """
 import logging
+import threading
 from typing import List, Optional
 
 import numpy as np
@@ -15,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 _model = None
 _load_failed = False
+_load_lock = threading.Lock()
 
 
 def _ensure_model():
@@ -23,14 +25,21 @@ def _ensure_model():
         return _model
     if _load_failed:
         return None
-    try:
-        from sentence_transformers import SentenceTransformer
-        _model = SentenceTransformer(settings.RAG_EMBEDDING_MODEL)
-        return _model
-    except Exception as e:
-        logger.warning(f"[rag] embedding model unavailable: {e}. Semantic leg disabled.")
-        _load_failed = True
-        return None
+    # Double-checked lock: the prewarm daemon and request threads can both hit
+    # a cold cache; only one may pay the model load.
+    with _load_lock:
+        if _model is not None:
+            return _model
+        if _load_failed:
+            return None
+        try:
+            from sentence_transformers import SentenceTransformer
+            _model = SentenceTransformer(settings.RAG_EMBEDDING_MODEL)
+            return _model
+        except Exception as e:
+            logger.warning(f"[rag] embedding model unavailable: {e}. Semantic leg disabled.")
+            _load_failed = True
+            return None
 
 
 def is_available() -> bool:

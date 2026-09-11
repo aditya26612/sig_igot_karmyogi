@@ -275,7 +275,7 @@ class GroqService:
                 correct_idx = int(item["correct_index"])
                 explanation = str(item["explanation"]).strip()
                 difficulty = str(item.get("difficulty", "MEDIUM")).upper()
-                ts_label = str(item.get("timestamp_label", "")).strip() or "02:15"
+                ts_label = str(item.get("timestamp_label", "")).strip()
                 cited_chunk = str(item.get("chunk_id", "")).strip()
 
                 if not q_text or len(q_text) < 15:
@@ -291,6 +291,20 @@ class GroqService:
                     continue
                 if difficulty not in ("EASY", "MEDIUM", "HARD"):
                     difficulty = "MEDIUM"
+
+                # Citation integrity (final review I3): a hallucinated chunk_id
+                # must never be persisted. Fall back to the first context chunk;
+                # the timestamp always inherits the cited chunk's real label so
+                # learners never see a fabricated default.
+                if cited_chunk not in chunk_texts:
+                    if not chunk_ids_present:
+                        continue
+                    cited_chunk = chunk_ids_present[0]
+                if cited_chunk in chunk_texts:
+                    chunk_ts = str(
+                        transcript_chunks[chunk_ids_present.index(cited_chunk)].get(
+                            "timestamp_label", "") or "").strip()
+                    ts_label = chunk_ts or ts_label
 
                 # Semantic grounding (spec section 8): question+explanation must be
                 # cosine >= 0.45 with the cited chunk, when embeddings are available.
@@ -318,7 +332,7 @@ class GroqService:
                     "correct_option": option_ids[correct_idx],
                     "explanation": explanation,
                     "difficulty": difficulty,
-                    "timestamp_label": ts_label,
+                    "timestamp_label": ts_label or None,
                     "chunk_id": cited_chunk or None,
                 })
             except (KeyError, ValueError, TypeError):

@@ -138,3 +138,66 @@ def test_fts5_search_matches_hyphenated_terms():
     hits = fts5_search(con_fixture, "How does donor hot-deck imputation preserve distributions?")
     assert any(h["chunk_id"] == "CHK-T-005" for h in hits)
     con_fixture.close()
+
+
+def test_vector_search_applies_scope_before_ranking(con, monkeypatch):
+    # I1 (final review): the vector leg ranked globally then filtered by scope,
+    # so in-lesson chunks could be crowded out of the top-20 by other lessons.
+    # Here lesson-1's chunk is the ONLY one matching the lesson scope but is
+    # LESS similar than 25 identical decoys from lesson-9 — a global top-20
+    # excludes it entirely; scope must be applied before ranking.
+    import numpy as np
+    from app.services import embedding_service as emb
+    from app.services.retrieval_service import vector_search
+
+    q_vec = np.array([1.0, 0.0, 0.0], dtype=np.float32)
+    near_vec = np.array([0.999, 0.04, 0.0], dtype=np.float32)   # ~0.999 cos with query
+    target_vec = np.array([0.95, 0.31, 0.0], dtype=np.float32)  # ~0.95 cos — lower
+
+    con.execute("DELETE FROM transcript_chunks")
+    con.execute("DELETE FROM chunk_embeddings")
+    # target: the only chunk in lesson-1
+    con.execute(
+        "INSERT INTO transcript_chunks VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        ("CHK-S-001", "lesson-1", "CRS-1", "COMP-1", "weights", 0, 90, "00:00",
+         "Sampling weights content in lesson one.", "", "SEED"),
+    )
+    # 25 near-duplicate decoys in lesson-9 (crowd the global top-20)
+    for i in range(25):
+        con.execute(
+            "INSERT INTO transcript_chunks VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            (f"CHK-S-9{i:02d}", "lesson-9", "CRS-9", "COMP-9", "decoy", 0, 90, "00:00",
+             "Decoy sampling content in lesson nine.", "", "SEED"),
+        )
+    con.execute(
+        "INSERT INTO chunk_embeddings VALUES (?,?,?,?)",
+        ("CHK-S-001", emb.embedding_to_bytes(target_vec), "test", "t"),
+    )
+    for i in range(25):
+        con.execute(
+            "INSERT INTO chunk_embeddings VALUES (?,?,?,?)",
+            (f"CHK-S-9{i:02d}", emb.embedding_to_bytes(near_vec), "test", "t"),
+        )
+    retrieval_service.embeddings_changed()  # fixture preloaded the cache
+
+    class StaticEmb:
+        @staticmethod
+        def is_available():
+            return True
+
+        @staticmethod
+        def embed_query(q):
+            return q_vec
+
+        @staticmethod
+        def cosine_sim(matrix, q):
+            m = matrix / np.linalg.norm(matrix, axis=1, keepdims=True)
+            return m @ (q / np.linalg.norm(q))
+
+    monkeypatch.setattr(retrieval_service, "embedding_service", StaticEmb)
+    hits = vector_search(con, "sampling weights", lesson_id="lesson-1")
+    ids = [h["chunk_id"] for h in hits]
+    assert "CHK-S-001" in ids, (
+        f"scoped vector search must rank the in-lesson chunk even when 25 "
+        f"better-matching chunks exist elsewhere; got {ids}"
+    )

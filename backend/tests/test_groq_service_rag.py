@@ -151,3 +151,49 @@ def test_generate_quiz_questions_grounding_reject(monkeypatch):
     monkeypatch.setattr(gs, "_embedding_probe", OrthogonalEmb)
     out = gs.generate_quiz_questions(lesson, chunks, num_questions=5)
     assert out is None  # every question failed the 0.45 grounding threshold
+
+
+def test_quiz_citation_validated_when_embeddings_offline(monkeypatch):
+    """I3 (final review): with embeddings unavailable, a hallucinated chunk_id
+    must not be persisted; the question must cite a real context chunk, and a
+    missing timestamp must inherit the context chunk's real label (never a
+    fabricated '02:15')."""
+    import json as _json
+    from app.services import groq_service as gs
+
+    chunks = [
+        {"chunk_id": "CHK-REAL-001", "topic": "weights", "timestamp_label": "04:10",
+         "text_content": "Sampling weights equal the inverse of the inclusion probability of each unit."},
+    ]
+    bad_q = {
+        "question_text": "What equals the inverse of the inclusion probability of each unit?",
+        "options": [{"text": "Sampling weights"}, {"text": "Strata"},
+                    {"text": "Clusters"}, {"text": "Frames"}],
+        "correct_index": 0,
+        "explanation": "Sampling weights are the inverse of inclusion probability.",
+        "difficulty": "MEDIUM",
+        "timestamp_label": "07:77",          # implausible label, real-format
+        "chunk_id": "CHK-HALLUCINATED-999",  # NOT in context
+    }
+
+    monkeypatch.setattr(gs, "_llm_generate",
+                        lambda *a, **kw: _json.dumps({"questions": [bad_q] * 3}))
+
+    class OfflineEmb:
+        @staticmethod
+        def embed_texts(texts):
+            return None
+
+    monkeypatch.setattr(gs, "_embedding_probe", OfflineEmb)
+    out = gs.generate_quiz_questions(
+        {"lesson_id": "cit-lesson-1", "title": "Weights", "competency_id": "COMP-1"},
+        chunks, num_questions=5,
+    )
+    assert out and len(out) == 3
+    for q in out:
+        assert q["chunk_id"] in {c["chunk_id"] for c in chunks}, (
+            f"hallucinated chunk_id persisted: {q['chunk_id']}"
+        )
+        assert q["timestamp_label"] == "04:10", (
+            f"timestamp must inherit the cited chunk's real label, got {q['timestamp_label']}"
+        )

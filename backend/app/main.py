@@ -6,6 +6,7 @@ from app.database import init_db, get_db_connection, load_db
 from app.auth import seed_demo_users
 from app.services.transcript_service import seed_content_catalogue
 from app.services.quiz_gen_service import seed_practice_data
+from app.services import retrieval_service
 from app.routers import (
     auth_router,
     learner_router,
@@ -18,15 +19,25 @@ from app.routers import (
     admin_router
 )
 
+
+def seed_and_index(con) -> None:
+    """Seeds demo users, content catalogue, and practice data, then rebuilds the
+    FTS5 index so seeded transcript chunks are retrievable on a fresh database
+    (rebuild_fts is idempotent; it is the only place transcript_fts is populated
+    outside the ingestion CLI)."""
+    seed_demo_users(con)
+    seed_content_catalogue(con)
+    seed_practice_data(con)
+    retrieval_service.rebuild_fts(con)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Initialize extension tables and seed demo accounts, content, & practice quizzes
     init_db()
     con = get_db_connection()
     try:
-        seed_demo_users(con)
-        seed_content_catalogue(con)
-        seed_practice_data(con)
+        seed_and_index(con)
     finally:
         con.close()
     yield
