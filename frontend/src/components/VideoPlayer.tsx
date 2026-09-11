@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { CuratedLessonDTO, CuratedPlaylistDTO } from '../types';
 import { api } from '../api/client';
-import { useAuth } from '../context/AuthContext';
 
 interface VideoPlayerProps {
   lesson: CuratedLessonDTO;
@@ -60,7 +61,8 @@ const DocIcon: React.FC = () => (
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ lesson, playlist, onLaunchQuiz }) => {
   const [completed, setCompleted] = useState<boolean>(lesson.is_completed || false);
-  const { setIsAssistantOpen } = useAuth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Keep the button in sync when switching between lessons (e.g. next/prev navigation)
   React.useEffect(() => {
@@ -116,21 +118,21 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ lesson, playlist, onLa
               style={{ textDecoration: 'none' }}
               title="Open video on YouTube"
             >
-              <PlayIcon /> Watch on YouTube ↗
+              <PlayIcon /> {t('learning.watchOnYoutube')}
             </a>
             <button
               className={`btn btn-sm ${completed ? 'btn-success' : 'btn-secondary'}`}
               onClick={handleMarkProgress}
             >
-              {completed ? <><CheckIcon /> Watched</> : 'Mark as Watched'}
+              {completed ? <><CheckIcon /> {t('learning.watched')}</> : t('learning.markWatched')}
             </button>
             <button
               className="btn btn-primary btn-sm"
               onClick={onLaunchQuiz}
-              title="Formative Lesson Practice Quiz • Instant Feedback • Does not alter official competency level"
+              title={t('learning.quizTitle')}
             >
               <TargetIcon />
-              Lesson Practice Quiz
+              {t('learning.practiceQuiz')}
               <span style={{
                 fontSize: '10px',
                 padding: '2px 6px',
@@ -139,22 +141,22 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ lesson, playlist, onLa
                 textTransform: 'uppercase',
                 fontWeight: 800
               }}>
-                Formative
+                {t('learning.formative')}
               </span>
             </button>
             <button
               className="btn btn-navy btn-sm"
-              onClick={() => setIsAssistantOpen(true)}
+              onClick={() => navigate(`/copilot?lesson=${encodeURIComponent(lesson.lesson_id)}`)}
             >
-              <SparkIcon /> Ask Copilot
+              <SparkIcon /> {t('learning.askCopilot')}
             </button>
           </div>
         </div>
 
         <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: 'var(--color-text-muted)', borderTop: '1px solid var(--color-border)', paddingTop: '12px', flexWrap: 'wrap' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><ClockIcon /> Duration: <strong>{lesson.duration_minutes} mins</strong></span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><TagIcon /> Competency: <strong>{lesson.competency_id}</strong></span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><DocIcon /> Interactive Transcript: <strong>Available Below</strong></span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><ClockIcon /> {t('learning.duration')} <strong>{lesson.duration_minutes} {t('learning.minutes')}</strong></span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><TagIcon /> {t('learning.competencyLabel')} <strong>{lesson.competency_id}</strong></span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><DocIcon /> {t('learning.transcriptAvailable')}</span>
         </div>
       </div>
     </div>

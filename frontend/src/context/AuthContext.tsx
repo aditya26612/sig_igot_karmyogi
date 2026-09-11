@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserProfile, DemoAccountInfo } from '../types';
 import { api, setAuthToken, clearAuthToken } from '../api/client';
 
@@ -8,14 +9,6 @@ interface AuthContextType {
   isLoading: boolean;
   switchDemoUser: (userId: string) => Promise<void>;
   logout: () => void;
-  activeView: string;
-  setActiveView: (view: string) => void;
-  selectedLessonId: string | null;
-  setSelectedLessonId: (id: string | null) => void;
-  activeAssessmentId: string | null;
-  setActiveAssessmentId: (id: string | null) => void;
-  isAssistantOpen: boolean;
-  setIsAssistantOpen: (open: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,10 +17,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
   const [demoAccounts, setDemoAccounts] = useState<DemoAccountInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [activeView, setActiveView] = useState<string>('landing');
-  const [selectedLessonId, setSelectedLessonId] = useState<string | null>('sampling-lesson-3');
-  const [activeAssessmentId, setActiveAssessmentId] = useState<string | null>(null);
-  const [isAssistantOpen, setIsAssistantOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function initAuth() {
@@ -48,32 +38,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     initAuth();
   }, []);
 
-  const switchDemoUser = async (userId: string) => {
+  const switchDemoUser = useCallback(async (userId: string) => {
     setIsLoading(true);
     try {
       const res = await api.demoSwitch(userId);
       setAuthToken(res.access_token);
       setCurrentUser(res.user);
-      
-      // Route appropriately for persona
-      if (res.user.role === 'ADMIN') {
-        setActiveView('admin');
-      } else if (res.user.role === 'REVIEWER') {
-        setActiveView('reviewer');
-      } else {
-        setActiveView('home');
-      }
+
+      // Route to the persona's default route; browser URL stays truthful for role switching
+      const role = res.user.role;
+      navigate(role === 'ADMIN' ? '/admin' : role === 'REVIEWER' ? '/reviewer' : '/home', { replace: true });
     } catch (err) {
       console.error('Failed to switch user:', err);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [navigate]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     clearAuthToken();
     setCurrentUser(null);
-  };
+  }, []);
 
   return (
     <AuthContext.Provider value={{
@@ -82,14 +67,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isLoading,
       switchDemoUser,
       logout,
-      activeView,
-      setActiveView,
-      selectedLessonId,
-      setSelectedLessonId,
-      activeAssessmentId,
-      setActiveAssessmentId,
-      isAssistantOpen,
-      setIsAssistantOpen
     }}>
       {children}
     </AuthContext.Provider>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { CompetencyGapItem } from '../types';
-import { useAuth } from '../context/AuthContext';
 
 interface SkillGapCardProps {
   gap: CompetencyGapItem;
@@ -8,18 +9,19 @@ interface SkillGapCardProps {
 
 export const SkillGapCard: React.FC<SkillGapCardProps> = ({ gap }) => {
   const [expanded, setExpanded] = useState(false);
-  const { setActiveView, setSelectedLessonId, setActiveAssessmentId } = useAuth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'HIGH':
-        return <span className="badge badge-danger">Priority Skill to Improve</span>;
+        return <span className="badge badge-danger">{t('gaps.badgeHigh')}</span>;
       case 'MEDIUM':
-        return <span className="badge badge-saffron">Moderate Gap</span>;
+        return <span className="badge badge-saffron">{t('gaps.badgeMedium')}</span>;
       case 'NO_GAP':
-        return <span className="badge badge-green">Requirements Met</span>;
+        return <span className="badge badge-green">{t('gaps.badgeMet')}</span>;
       case 'INSUFFICIENT_EVIDENCE':
-        return <span className="badge badge-gray">Diagnostic Required</span>;
+        return <span className="badge badge-gray">{t('gaps.badgeDiagnostic')}</span>;
       default:
         return <span className="badge badge-navy">{status}</span>;
     }
@@ -27,14 +29,14 @@ export const SkillGapCard: React.FC<SkillGapCardProps> = ({ gap }) => {
 
   const handleLearnClick = () => {
     if (gap.competency_id === 'COMP-SAMPLING') {
-      setSelectedLessonId('sampling-lesson-3');
+      navigate(`/learning?lesson=${encodeURIComponent('sampling-lesson-3')}`);
+    } else {
+      navigate('/learning');
     }
-    setActiveView('learning');
   };
 
   const handleAssessClick = () => {
-    setActiveAssessmentId('ASS-DEMO-PRACTICAL-001');
-    setActiveView('learning');
+    navigate('/learning?assessment=ASS-DEMO-PRACTICAL-001');
   };
 
   return (
@@ -59,27 +61,27 @@ export const SkillGapCard: React.FC<SkillGapCardProps> = ({ gap }) => {
         {/* Level metrics */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 14px', backgroundColor: 'var(--wash-ivory)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', marginBottom: '16px' }}>
           <div style={{ flex: 1, textAlign: 'center' }}>
-            <div className="gap-level-label">Current Level</div>
+            <div className="gap-level-label">{t('gaps.currentLevel')}</div>
             <div style={{ fontSize: '16px', fontWeight: 700, color: gap.current_level ? 'var(--blue-500)' : 'var(--color-text-muted)' }}>
-              {gap.current_level ? `Level ${gap.current_level}` : 'Unknown'}
+              {gap.current_level ? `${t('common.level')} ${gap.current_level}` : t('gaps.unknown')}
             </div>
           </div>
 
           <div style={{ color: 'var(--color-border-strong)', fontWeight: 700 }}>→</div>
 
           <div style={{ flex: 1, textAlign: 'center' }}>
-            <div className="gap-level-label">Target Role Need</div>
+            <div className="gap-level-label">{t('gaps.targetNeed')}</div>
             <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--orange-700)' }}>
-              Level {gap.required_level}
+              {t('common.level')} {gap.required_level}
             </div>
           </div>
 
           <div style={{ width: '1px', height: '24px', backgroundColor: 'var(--color-border-strong)' }} />
 
           <div style={{ flex: 1, textAlign: 'center' }}>
-            <div className="gap-level-label">Unmet Gap</div>
+            <div className="gap-level-label">{t('gaps.unmetGap')}</div>
             <div style={{ fontSize: '16px', fontWeight: 700, color: (gap.unmet_gap || 0) > 0 ? 'var(--color-danger)' : 'var(--color-success)' }}>
-              {(gap.unmet_gap || 0) > 0 ? `${gap.unmet_gap} Level${gap.unmet_gap! > 1 ? 's' : ''}` : 'None'}
+              {(gap.unmet_gap || 0) > 0 ? `${gap.unmet_gap} ${t('common.level')}${gap.unmet_gap! > 1 ? 's' : ''}` : t('gaps.none')}
             </div>
           </div>
         </div>
@@ -88,14 +90,14 @@ export const SkillGapCard: React.FC<SkillGapCardProps> = ({ gap }) => {
         {expanded && (
           <div style={{ padding: '14px', backgroundColor: 'var(--blue-50)', borderRadius: 'var(--radius-md)', border: '1px solid var(--blue-100)', marginBottom: '16px', fontSize: '13px' }}>
             <div style={{ fontWeight: 700, color: 'var(--blue-600)', marginBottom: '6px' }}>
-              Why this competency matters for {gap.target_role_name}:
+              {t('gaps.whyMatters', { role: gap.target_role_name })}:
             </div>
             <p style={{ color: 'var(--color-text-primary)', lineHeight: 1.5, margin: 0 }}>
-              Your target role requires independent verification and execution. In NSSO field operations, officers must audit sampling frames and calculate strata weights.
+              {t('gaps.whyMattersBody')}
             </p>
             {gap.contributing_activities.length > 0 && (
               <div style={{ marginTop: '10px' }}>
-                <strong style={{ color: 'var(--blue-600)', fontSize: '11px', textTransform: 'uppercase' }}>Contributing Official Activities:</strong>
+                <strong style={{ color: 'var(--blue-600)', fontSize: '11px', textTransform: 'uppercase' }}>{t('gaps.contributingActivities')}:</strong>
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '4px' }}>
                   {gap.contributing_activities.map((act, i) => (
                     <span key={i} style={{ backgroundColor: 'var(--blue-50)', color: 'var(--blue-600)', padding: '2px 8px', borderRadius: 'var(--radius-sm)', fontSize: '11px', border: '1px solid var(--blue-100)' }}>
@@ -114,15 +116,15 @@ export const SkillGapCard: React.FC<SkillGapCardProps> = ({ gap }) => {
           onClick={() => setExpanded(!expanded)}
           style={{ background: 'none', border: 'none', color: 'var(--blue-500)', fontSize: '12px', fontWeight: 700, cursor: 'pointer', padding: 0 }}
         >
-          {expanded ? '▲ Hide context' : '▼ Why this skill?'}
+          {expanded ? `▲ ${t('gaps.hideContext')}` : `▼ ${t('gaps.whyThisSkill')}`}
         </button>
 
         <div style={{ display: 'flex', gap: '8px' }}>
           <button className="btn btn-secondary btn-sm" onClick={handleLearnClick}>
-            Watch Lessons
+            {t('gaps.watchLessons')}
           </button>
           <button className="btn btn-primary btn-sm" onClick={handleAssessClick}>
-            Assessment
+            {t('gaps.assessment')}
           </button>
         </div>
       </div>

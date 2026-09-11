@@ -21,6 +21,7 @@ from app.database import init_db, get_db_connection
 from app.auth import seed_demo_users
 from app.services.transcript_service import seed_content_catalogue
 from app.services.quiz_gen_service import seed_practice_data
+from app.services import retrieval_service
 
 def reset_database():
     root = backend_dir
@@ -58,6 +59,9 @@ def reset_database():
         seed_demo_users(c)
         seed_content_catalogue(c)
         seed_practice_data(c)
+        # Fresh DB from schema.sql has an empty FTS index; seeded chunks must be
+        # retrievable (rebuild_fts is idempotent).
+        retrieval_service.rebuild_fts(c)
     finally:
         c.close()
         

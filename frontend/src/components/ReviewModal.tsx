@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ReviewQueueItemDTO, ReviewDecisionResponse } from '../types';
 import { api } from '../api/client';
 
@@ -9,9 +10,8 @@ interface ReviewModalProps {
 }
 
 export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecisionComplete }) => {
-  const [comments, setComments] = useState(
-    "Verified practical sampling calculations against standard NSSO rubric. Frame allocation and design weights are completely accurate."
-  );
+  const { t } = useTranslation();
+  const [comments, setComments] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [decisionResult, setDecisionResult] = useState<ReviewDecisionResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -37,14 +37,14 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
           <div>
             <div style={{ borderBottom: '2px solid var(--color-border)', paddingBottom: '16px', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="badge badge-saffron">Supervisor Evaluation Queue</span>
-                <span style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>Rubric: {item.rubric_version}</span>
+                <span className="badge badge-saffron">{t('review.queue')}</span>
+                <span style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{t('assessment.rubricLabel', { rubric: item.rubric_version })}</span>
               </div>
               <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--blue-500)', marginTop: '6px' }}>
-                Practical Evidence Review: {item.learner_name}
+                {t('review.reviewTitle', { name: item.learner_name })}
               </h2>
               <div style={{ fontSize: '13px', color: 'var(--color-text-muted)', marginTop: '4px' }}>
-                Officer ID: <strong>{item.user_id}</strong> | Competency: <strong>{item.competency_label}</strong> ({item.competency_id})
+                {t('review.officerId')} <strong>{item.user_id}</strong> | {t('review.competency')} <strong>{item.competency_label}</strong> ({item.competency_id})
               </div>
             </div>
 
@@ -66,16 +66,16 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
               marginBottom: '20px'
             }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Current Level</div>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--blue-500)' }}>Level {item.current_level}</div>
+                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>{t('review.levelCurrentLabel')}</div>
+                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--blue-500)' }}>{t('common.level')} {item.current_level}</div>
               </div>
               <div style={{ fontSize: '24px', color: 'var(--orange-500)', fontWeight: 700 }}>→</div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Evaluated Target</div>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#146B1A' }}>Level {item.proposed_level}</div>
+                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>{t('review.levelTargetLabel')}</div>
+                <div style={{ fontSize: '20px', fontWeight: 800, color: '#146B1A' }}>{t('common.level')} {item.proposed_level}</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Evidence Score</div>
+                <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>{t('review.evidenceScore')}</div>
                 <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--blue-600)' }}>{item.overall_score}%</div>
               </div>
             </div>
@@ -83,7 +83,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
             {/* Evidence Checklist */}
             <div style={{ padding: '16px', backgroundColor: 'var(--color-success-subtle)', borderRadius: '8px', border: '1px solid #BEE7C1', marginBottom: '20px' }}>
               <div style={{ fontSize: '13px', fontWeight: 700, color: '#146B1A', marginBottom: '8px' }}>
-                Automated Rubric Pre-Check ({item.rubric_version}):
+                {t('review.preCheck', { rubric: item.rubric_version })}
               </div>
               <div style={{ fontSize: '13px', color: '#1E7A24', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {item.rubric_version === 'sampling-practical-demo-v1' && (
@@ -110,21 +110,22 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
                     <div>✓ Task 2 Pipeline Auditing: Multi-stage assertion gates and Benford's first-digit validation rules formulated.</div>
                   </>
                 )}
-                <div>✓ Item Coverage: {Math.round(item.coverage * 100)}% | Confidence: {Math.round(item.confidence * 100)}%</div>
-                <div>✓ Freshness Rule: Newer than previous evidence records.</div>
-                <div>✓ Invariant: Maximum 1 level promotion upon approval (Level {item.current_level} → Level {item.proposed_level}).</div>
+                <div>{t('review.coverage', { pct: Math.round(item.coverage * 100), pct2: Math.round(item.confidence * 100) })}</div>
+                <div>{t('review.freshness')}</div>
+                <div>{t('review.invariantMax', { from: item.current_level, to: item.proposed_level })}</div>
               </div>
             </div>
 
             {/* Supervisor Comments */}
             <div style={{ marginBottom: '24px' }}>
               <label style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)', display: 'block', marginBottom: '6px' }}>
-                Official Supervisor / Assessor Feedback:
+                {t('review.feedbackLabel')}
               </label>
               <textarea
                 rows={3}
                 value={comments}
                 onChange={e => setComments(e.target.value)}
+                placeholder={t('review.commentsPlaceholder')}
                 style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '13px', lineHeight: 1.5 }}
               />
             </div>
@@ -136,7 +137,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
                 disabled={submitting}
                 onClick={onClose}
               >
-                Cancel
+                {t('common.cancel')}
               </button>
 
               <div style={{ display: 'flex', gap: '12px' }}>
@@ -146,7 +147,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
                   onClick={() => handleDecision(false)}
                   style={{ backgroundColor: 'var(--color-danger)', color: '#ffffff' }}
                 >
-                  Reject / Needs Practice
+                  {t('review.rejectBtn')}
                 </button>
                 <button
                   className="btn btn-success"
@@ -154,7 +155,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
                   onClick={() => handleDecision(true)}
                   style={{ padding: '10px 24px' }}
                 >
-                  {submitting ? 'Promoting Level...' : '✓ Approve Level Promotion'}
+                  {submitting ? t('review.promoting') : t('review.approveBtn')}
                 </button>
               </div>
             </div>
@@ -177,7 +178,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
               {decisionResult.status === 'APPROVED' ? '✓' : '✗'}
             </div>
             <h2 style={{ fontSize: '22px', fontWeight: 800, color: 'var(--blue-500)', marginBottom: '10px' }}>
-              {decisionResult.status === 'APPROVED' ? 'Competency Level Successfully Promoted' : 'Assessment Marked as Needs Improvement'}
+              {decisionResult.status === 'APPROVED' ? t('review.promotedTitle') : t('review.rejectedTitle')}
             </h2>
             <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', maxWidth: '580px', margin: '0 auto 20px auto', lineHeight: 1.6 }}>
               {decisionResult.message}
@@ -185,15 +186,15 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({ item, onClose, onDecis
 
             {decisionResult.level_promoted && (
               <div style={{ padding: '12px 20px', backgroundColor: 'var(--color-success-subtle)', borderRadius: '8px', border: '1px solid #BEE7C1', display: 'inline-block', marginBottom: '24px', fontSize: '14px', color: '#146B1A' }}>
-                Official State Update: <strong>Level {decisionResult.before_level} → Level {decisionResult.after_level}</strong>
+                {t('review.stateUpdate', { from: decisionResult.before_level, to: decisionResult.after_level })}
                 <br />
-                <span style={{ fontSize: '12px', color: '#1E7A24' }}>Target learning path and priority gaps recalculated automatically in real-time.</span>
+                <span style={{ fontSize: '12px', color: '#1E7A24' }}>{t('review.recalcNote')}</span>
               </div>
             )}
 
             <div>
               <button className="btn btn-navy" onClick={onClose}>
-                Return to Review Queue
+                {t('review.returnToQueue')}
               </button>
             </div>
           </div>

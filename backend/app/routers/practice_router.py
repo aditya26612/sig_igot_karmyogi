@@ -1,4 +1,5 @@
 import json
+import threading
 import time
 import uuid
 from datetime import datetime, timezone
@@ -20,6 +21,60 @@ from app.models.practice_schemas import (
 )
 
 router = APIRouter(prefix="/api/practice", tags=["Practice Quizzes"])
+
+_prewarm_inflight: set = set()
+_prewarm_lock = threading.Lock()
+
+
+def prewarm_quiz_for_lesson(lesson_id: str) -> None:
+    """Fire-and-forget background quiz generation (spec section 9).
+
+    Called when a learner opens a lesson/video so the Practice click is a
+    cache hit. Idempotent and single-flight per lesson.
+    """
+    if not settings.PREWARM_ENABLED:
+        return
+    with _prewarm_lock:
+        if lesson_id in _prewarm_inflight:
+            return
+        _prewarm_inflight.add(lesson_id)
+
+    def _job():
+        con = None
+        try:
+            con = get_db_connection()
+            existing = con.execute(
+                "SELECT 1 FROM practice_quizzes WHERE lesson_id = ? AND quiz_id LIKE 'QUIZ-AI-%'",
+                (lesson_id,),
+            ).fetchone()
+            if existing:
+                return
+            lesson_row = con.execute(
+                "SELECT * FROM curated_lessons WHERE lesson_id = ?", (lesson_id,)
+            ).fetchone()
+            if not lesson_row:
+                return
+            lesson = dict(lesson_row)
+            chunks = [dict(r) for r in con.execute(
+                "SELECT * FROM transcript_chunks WHERE lesson_id = ? ORDER BY start_seconds ASC",
+                (lesson_id,),
+            ).fetchall()]
+            from app.services import retrieval_service
+            ranked = retrieval_service.retrieve(
+                lesson["title"], lesson_id=lesson_id, top_k=4, con=con)
+            context = ranked if ranked else chunks
+            questions = groq_service.generate_quiz_questions(lesson, context, num_questions=5)
+            if questions:
+                _persist_ai_quiz(con, lesson, questions)
+        except Exception:
+            pass  # prewarm is best-effort; the quiz endpoint regenerates on demand
+        finally:
+            if con is not None:
+                con.close()
+            with _prewarm_lock:
+                _prewarm_inflight.discard(lesson_id)
+
+    threading.Thread(target=_job, daemon=True).start()
 
 
 def _quiz_notice(lang: str, ai_generated: bool) -> str:
@@ -83,17 +138,20 @@ def get_practice_quiz_for_lesson(
         )
         quiz = q_cur.fetchone()
 
-        # 2. No cache -> generate live with Groq (never leaves the learner without a quiz)
+        # 2. No cache -> generate live via Groq (never leaves the learner without a quiz)
         if not quiz:
-            c_cur = con.execute(
+            from app.services import retrieval_service
+            ranked = retrieval_service.retrieve(
+                lesson["title"], lesson_id=lesson_id, top_k=4, con=con)
+            chunks = [dict(r) for r in con.execute(
                 "SELECT * FROM transcript_chunks WHERE lesson_id = ? ORDER BY start_seconds ASC",
                 (lesson_id,)
-            )
-            chunks = [dict(r) for r in c_cur.fetchall()]
-            ai_questions = groq_service.generate_quiz_questions(dict(lesson), chunks, num_questions=5)
+            ).fetchall()]
+            ai_questions = groq_service.generate_quiz_questions(
+                dict(lesson), ranked if ranked else chunks, num_questions=5)
             if ai_questions:
-                # Presentation delay: lets judges see the AI "composing" the quiz
-                time.sleep(settings.AI_PRESENTATION_DELAY_SECONDS)
+                if settings.AI_PRESENTATION_DELAY_SECONDS > 0:
+                    time.sleep(settings.AI_PRESENTATION_DELAY_SECONDS)
                 generated_quiz_id = _persist_ai_quiz(con, dict(lesson), ai_questions)
                 quiz = con.execute(
                     "SELECT * FROM practice_quizzes WHERE quiz_id = ?", (generated_quiz_id,)

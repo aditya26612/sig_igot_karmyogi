@@ -1,8 +1,6 @@
 import json
 import sqlite3
-from typing import List, Dict, Any, Optional
 from datetime import datetime, timezone
-from app.config import settings
 
 SEED_PRACTICE_QUIZZES = [
     {
@@ -805,71 +803,3 @@ def seed_practice_data(con: sqlite3.Connection):
                 qn["question_text"], json.dumps(qn["options"]), qn["correct_option"],
                 qn["explanation"], qn.get("chunk_id"), qn.get("timestamp_label"), qn.get("difficulty", "MEDIUM")
             ))
-
-def generate_ai_quiz_questions(transcript_text: str, topic: str, count: int = 3) -> Optional[List[Dict[str, Any]]]:
-    """
-    Generates structured practice questions using Groq llama-3.3-70b-versatile.
-    Rotates through available API keys in settings.groq_keys.
-    """
-    keys = settings.groq_keys
-    if not keys:
-        return None
-        
-    for key in keys:
-        try:
-            from groq import Groq
-            client = Groq(api_key=key)
-            prompt = f"""
-You are an expert assessment author for the Indian Official Statistical System (MoSPI).
-Based strictly on the following lesson transcript text, generate {count} high-quality, practical multiple-choice questions.
-
-Topic: {topic}
-Transcript:
-\"\"\"{transcript_text}\"\"\"
-
-Requirements:
-1. Every question must be directly answerable from the transcript.
-2. Provide exactly 4 options labeled A, B, C, D.
-3. Mark exactly one correct option.
-4. Provide a clear, educational explanation.
-5. Provide a short citation snippet from the text.
-6. Return ONLY valid JSON in this exact structure without markdown or backticks:
-[
-  {{
-    "question_text": "...",
-    "options": [
-      {{"option_id": "A", "text": "..."}},
-      {{"option_id": "B", "text": "..."}},
-      {{"option_id": "C", "text": "..."}},
-      {{"option_id": "D", "text": "..."}}
-    ],
-    "correct_option": "A",
-    "explanation": "...",
-    "citation_snippet": "...",
-    "difficulty": "MEDIUM"
-  }}
-]
-"""
-            completion = client.chat.completions.create(
-                model=settings.GROQ_PRIMARY_MODEL,
-                messages=[
-                    {"role": "system", "content": "You output only valid, parseable JSON arrays."},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.2,
-                response_format={"type": "json_object"} if hasattr(client.chat.completions, "response_format") else None
-            )
-            raw = completion.choices[0].message.content.strip()
-            # Parse json
-            if raw.startswith("```"):
-                raw = raw.strip("`").removeprefix("json").strip()
-            data = json.loads(raw)
-            if isinstance(data, dict) and "questions" in data:
-                return data["questions"]
-            elif isinstance(data, list):
-                return data
-        except Exception as e:
-            # Try next key
-            continue
-            
-    return None

@@ -12,6 +12,17 @@ export function clearAuthToken() {
   localStorage.removeItem('sih_auth_token');
 }
 
+/** Current UI language ('en' | 'hi') sent to the backend for bilingual strings. */
+export function getLang(): 'en' | 'hi' {
+  return (window.localStorage.getItem('igot_lang') === 'hi' || document.documentElement.lang === 'hi') ? 'hi' : 'en';
+}
+
+/** Appends ?lang= (or &lang=) for endpoints that serve bilingual dynamic strings. */
+function withLang(endpoint: string): string {
+  const sep = endpoint.includes('?') ? '&' : '?';
+  return `${endpoint}${sep}lang=${getLang()}`;
+}
+
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const token = getAuthToken();
   const headers: Record<string, string> = {
@@ -52,13 +63,13 @@ export const api = {
   getMe: () => request<any>('/api/auth/me'),
 
   // Learner
-  getDashboard: (userId?: string) => request<any>(`/api/learner/dashboard${userId ? `?user_id=${userId}` : ''}`),
-  getGaps: (scope: 'TARGET' | 'CURRENT' = 'TARGET', userId?: string) => 
-    request<any[]>(`/api/learner/gaps?scope=${scope}${userId ? `&user_id=${userId}` : ''}`),
-  getLearningPath: (userId?: string) => 
-    request<any>(`/api/learner/learning-path${userId ? `?user_id=${userId}` : ''}`),
-  getCareerReadiness: (userId?: string) => 
-    request<any>(`/api/learner/career-readiness${userId ? `?user_id=${userId}` : ''}`),
+  getDashboard: (userId?: string) => request<any>(withLang(`/api/learner/dashboard${userId ? `?user_id=${userId}` : ''}`)),
+  getGaps: (scope: 'TARGET' | 'CURRENT' = 'TARGET', userId?: string) =>
+    request<any[]>(withLang(`/api/learner/gaps?scope=${scope}${userId ? `&user_id=${userId}` : ''}`)),
+  getLearningPath: (userId?: string) =>
+    request<any>(withLang(`/api/learner/learning-path${userId ? `?user_id=${userId}` : ''}`)),
+  getCareerReadiness: (userId?: string) =>
+    request<any>(withLang(`/api/learner/career-readiness${userId ? `?user_id=${userId}` : ''}`)),
   getLearnerProfile: (userId?: string) => 
     request<any>(`/api/learner/me${userId ? `?user_id=${userId}` : ''}`),
 
@@ -74,19 +85,19 @@ export const api = {
     }),
 
   // Practice
-  getPracticeQuiz: (lessonId: string) => request<any>(`/api/practice/${lessonId}`),
+  getPracticeQuiz: (lessonId: string) => request<any>(withLang(`/api/practice/${lessonId}`)),
   submitPracticeQuiz: (quizId: string, answers: { question_id: string; selected_option: string }[]) =>
-    request<any>(`/api/practice/${quizId}/submit`, {
+    request<any>(withLang(`/api/practice/${quizId}/submit`), {
       method: 'POST',
       body: JSON.stringify({ answers })
     }),
   getPracticeHistory: (userId: string) => request<any[]>(`/api/practice/history/${userId}`),
 
   // Assessment
-  getAssessments: () => request<any[]>('/api/assessments'),
-  getAssessmentDetail: (id: string) => request<any>(`/api/assessments/${id}`),
+  getAssessments: () => request<any[]>(withLang('/api/assessments')),
+  getAssessmentDetail: (id: string) => request<any>(withLang(`/api/assessments/${id}`)),
   submitAssessment: (id: string, competencyId: string, answers: any, score: number = 86.0) =>
-    request<any>(`/api/assessments/${id}/submit`, {
+    request<any>(withLang(`/api/assessments/${id}/submit`), {
       method: 'POST',
       body: JSON.stringify({
         assessment_id: id,
@@ -109,17 +120,18 @@ export const api = {
     }),
 
   // Assistant
-  askAssistant: (question: string, contextType: string = 'LESSON', lessonId?: string, competencyId?: string) =>
-    request<any>('/api/assistant/ask', {
+  askAssistant: (question: string, contextType: string = 'LESSON', lessonId?: string | null, competencyId?: string | null) =>
+    request<any>(withLang('/api/assistant/ask'), {
       method: 'POST',
       body: JSON.stringify({
         question,
         context_type: contextType,
-        lesson_id: lessonId,
-        competency_id: competencyId
+        lesson_id: lessonId ?? null,
+        competency_id: competencyId ?? null
       })
     }),
-  getQuickPrompts: () => request<any[]>('/api/assistant/prompts'),
+  getQuickPrompts: (lessonId?: string | null) =>
+    request<any[]>(withLang(`/api/assistant/prompts${lessonId ? `&lesson_id=${encodeURIComponent(lessonId)}` : ''}`)),
 
   // Admin
   getAdminDashboard: () => request<any>('/api/admin/dashboard'),
@@ -138,6 +150,8 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ is_approved: isApproved, review_status: status })
     }),
+  getAuditLogs: (limit: number = 50) => request<any[]>(`/api/admin/audit-logs?limit=${limit}`),
+  getPlaylistsAdmin: () => request<any[]>('/api/content/playlists'),
 
   // Integrations
   getProviders: () => request<any[]>('/api/integrations/providers'),

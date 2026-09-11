@@ -10,6 +10,19 @@ from app.engine import find, recompute, row
 
 router = APIRouter(prefix="/api/admin", tags=["Admin Portal & Governance"])
 
+
+def _index_uploaded_chunk(con, chunk_id: str) -> None:
+    """Indexes an admin-uploaded chunk into transcript_fts inside the caller's
+    transaction, so uploads are searchable immediately (not only after a full
+    rebuild)."""
+    con.execute(
+        "INSERT INTO transcript_fts (chunk_id, text_content, topic) "
+        "SELECT chunk_id, text_content, COALESCE(topic, '') "
+        "FROM transcript_chunks WHERE chunk_id = ?",
+        (chunk_id,),
+    )
+
+
 class AdminDashboardMetrics(BaseModel):
     total_learners: int
     learners_with_critical_gaps: int
@@ -266,6 +279,7 @@ def upload_transcript(
                 req.end_seconds, req.timestamp_label, req.text_content,
                 req.text_content[:80] + "..."
             ))
+            _index_uploaded_chunk(con, chunk_id)
             con.execute("""
             INSERT INTO audit_logs (log_id, actor_id, action, entity_type, entity_id, details, timestamp)
             VALUES (?, ?, 'TRANSCRIPT_INDEXED', 'TRANSCRIPT_CHUNK', ?, ?, ?)

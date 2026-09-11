@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { api } from '../../api/client';
 import { ReviewQueueItemDTO } from '../../types';
 import { ReviewModal } from '../../components/ReviewModal';
@@ -19,6 +20,7 @@ const BigCheckIcon: React.FC = () => (
 );
 
 export const ReviewerDashboardView: React.FC = () => {
+  const { t } = useTranslation();
   const [queue, setQueue] = useState<ReviewQueueItemDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<ReviewQueueItemDTO | null>(null);
@@ -45,12 +47,12 @@ export const ReviewerDashboardView: React.FC = () => {
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
-          <span className="badge badge-saffron">Lead Assessor Authority</span>
-          <span style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>National Sample Survey Office (NSSO)</span>
+          <span className="badge badge-saffron">{t('review.eyebrow')}</span>
+          <span style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>{t('review.org')}</span>
         </div>
-        <h1 className="page-title">Supervisor Evidence Evaluation Queue</h1>
+        <h1 className="page-title">{t('review.title')}</h1>
         <p className="meta-line">
-          Review practical task evidence and authorize official competency level promotions. Max 1 level promotion per approved assessment.
+          {t('review.hint')}
         </p>
       </div>
 
@@ -67,17 +69,17 @@ export const ReviewerDashboardView: React.FC = () => {
         <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
           <div>
             <div className="readiness-label">
-              Submissions Awaiting Verification
+              {t('review.awaiting')}
             </div>
             <div className="stat-chip" style={{ boxShadow: 'none', padding: '4px 0', background: 'transparent' }}>
               <div className="stat-value" style={{ fontSize: '26px', color: queue.length > 0 ? 'var(--orange-700)' : 'var(--color-success)' }}>
-                {queue.length} Pending
+                {t('review.pendingCount', { count: queue.length })}
               </div>
             </div>
           </div>
           <div>
             <div className="readiness-label">
-              Evaluation Rubric Version
+              {t('review.rubricVersion')}
             </div>
             <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--blue-500)', marginTop: '8px' }}>
               sampling-practical-demo-v1
@@ -86,23 +88,23 @@ export const ReviewerDashboardView: React.FC = () => {
         </div>
 
         <button className="btn btn-secondary btn-sm" onClick={loadQueue}>
-          <RefreshIcon /> Refresh Queue
+          <RefreshIcon /> {t('review.refresh')}
         </button>
       </div>
 
       {/* Queue Items */}
       {loading ? (
         <div style={{ padding: '60px', textAlign: 'center' }}>
-          <div style={{ fontSize: '16px', color: 'var(--color-text-strong)' }}>Loading evaluation queue...</div>
+          <div style={{ fontSize: '16px', color: 'var(--color-text-strong)' }}>{t('review.loadingQueue')}</div>
         </div>
       ) : queue.length === 0 ? (
         <div className="gov-card static" style={{ textAlign: 'center', padding: '60px 20px' }}>
           <div style={{ color: 'var(--color-success)', marginBottom: '12px', display: 'inline-block' }}><BigCheckIcon /></div>
           <h3 style={{ fontSize: '20px', color: '#146B1A', marginBottom: '6px' }}>
-            Assessment Queue is All Caught Up
+            {t('review.allCaughtUp')}
           </h3>
           <p style={{ color: 'var(--color-text-muted)', fontSize: '14px', maxWidth: '520px', margin: '0 auto' }}>
-            There are no pending practical submissions waiting for evaluation. When learners submit assessments in the learning portal, they will appear here for review.
+            {t('review.allCaughtUpBody')}
           </p>
         </div>
       ) : (
@@ -121,9 +123,9 @@ export const ReviewerDashboardView: React.FC = () => {
             >
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
-                  <span className="badge badge-saffron">PENDING REVIEW</span>
+                  <span className="badge badge-saffron">{t('review.pendingBadge')}</span>
                   <span style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>
-                    Submitted: {new Date(item.submitted_at).toLocaleDateString()}
+                    {t('review.submitted', { date: new Date(item.submitted_at).toLocaleDateString() })}
                   </span>
                 </div>
 
@@ -132,14 +134,14 @@ export const ReviewerDashboardView: React.FC = () => {
                 </h3>
 
                 <div style={{ fontSize: '14px', color: 'var(--color-text-primary)', marginTop: '4px' }}>
-                  Competency: <strong>{item.competency_label}</strong> ({item.competency_id})
+                  {t('review.competency')} <strong>{item.competency_label}</strong> ({item.competency_id})
                 </div>
 
                 <div style={{ display: 'flex', gap: '20px', fontSize: '13px', color: 'var(--color-text-muted)', marginTop: '8px', flexWrap: 'wrap' }}>
-                  <span>Current: <strong>Level {item.current_level}</strong></span>
-                  <span>Evaluated Target: <strong style={{ color: '#146B1A' }}>Level {item.proposed_level}</strong></span>
-                  <span>Score: <strong style={{ color: 'var(--blue-600)' }}>{item.overall_score}%</strong></span>
-                  <span>Confidence: <strong>{Math.round(item.confidence * 100)}%</strong></span>
+                  <span>{t('review.currentLabel')} <strong>{t('common.level')} {item.current_level}</strong></span>
+                  <span>{t('review.evaluatedTarget')} <strong style={{ color: '#146B1A' }}>{t('common.level')} {item.proposed_level}</strong></span>
+                  <span>{t('review.scoreLabel')} <strong style={{ color: 'var(--blue-600)' }}>{item.overall_score}%</strong></span>
+                  <span>{t('review.confidence')} <strong>{Math.round(item.confidence * 100)}%</strong></span>
                 </div>
               </div>
 
@@ -148,7 +150,7 @@ export const ReviewerDashboardView: React.FC = () => {
                   className="btn btn-primary"
                   onClick={() => setSelectedItem(item)}
                 >
-                  Evaluate Evidence & Rubric →
+                  {t('review.evaluate')}
                 </button>
               </div>
             </div>

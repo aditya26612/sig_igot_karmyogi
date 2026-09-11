@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import heroImg from '../assets/landing-hero.jpg';
 
@@ -100,15 +102,7 @@ function useCountUp(target: number, start: boolean, durationMs = 1200) {
    Static content
    ========================================================================== */
 
-const TYPEWORDS = ['Learning', 'Competency', 'Practising', 'Verifying', 'Growing'];
-
-const STATS = [
-  { n: 20, suffix: '', label: 'Officers Onboarded (demo registry)' },
-  { n: 40, suffix: '+', label: 'Competency Domains' },
-  { n: 200, suffix: '+', label: 'Curated Courses' },
-  { n: 26, suffix: '', label: 'iGOT Integration Tables' },
-  { n: 100, suffix: '%', label: 'Rubric-Verified Promotions' },
-];
+/* (stats content moved into HomeStatsBand for i18n) */
 
 const StatIcon: React.FC<{ idx: number }> = ({ idx }) => {
   const p = { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true };
@@ -133,8 +127,11 @@ const ArrowIcon: React.FC = () => (
    ========================================================================== */
 
 export const HomeHero: React.FC = () => {
-  const typed = useTypewriter(TYPEWORDS);
-  const { setActiveView, switchDemoUser } = useAuth();
+  const { t } = useTranslation();
+  const typedWords = t('landing.typedWords').split(',');
+  const typed = useTypewriter(typedWords);
+  const navigate = useNavigate();
+  const { switchDemoUser } = useAuth();
 
   return (
     <div className="gov-container" style={{ paddingTop: '24px' }}>
@@ -146,30 +143,29 @@ export const HomeHero: React.FC = () => {
           width={1600}
           height={639}
           loading="eager"
-          // @ts-expect-error fetchPriority is valid HTML, typing lag in React 18
           fetchPriority="high"
           decoding="async"
         />
         <div className="hero-wash" aria-hidden="true" />
         <div className="hero-content">
-          <div className="hero-intro">iGOT Karmayogi for India's Official Statistical System</div>
+          <div className="hero-intro">{t('landing.heroIntro')}</div>
           <h1 className="hero-headline">
             iGOT <span className="typed-word">{typed}</span>
             <span className="typewriter-caret" aria-hidden="true" />
           </h1>
           <p className="hero-sub">
-            AI-curated learning paths, searchable transcripts, and supervisor-verified competency growth for MoSPI officers.
+            {t('landing.heroSub')}
           </p>
           <div className="hero-cta-row">
             <button className="btn btn-pill-fill" onClick={() => switchDemoUser('USR-001')}>
-              Begin Your Learning Journey <ArrowIcon />
+              {t('landing.beginJourney')} <ArrowIcon />
             </button>
-            <button className="btn btn-pill-outline" onClick={() => setActiveView('gaps')}>
-              Explore the Platform
+            <button className="btn btn-pill-outline" onClick={() => switchDemoUser('USR-001').then(() => navigate('/gaps'))}>
+              {t('landing.explore')}
             </button>
           </div>
           <div className="hero-trust">
-            Aligned to Karmayogi Bharat competency principles · 100% rubric-verified promotions
+            {t('landing.trust')}
           </div>
         </div>
       </section>
@@ -181,6 +177,14 @@ export const HomeHero: React.FC = () => {
 
 const HomeStatsBand: React.FC = () => {
   const { ref, inView } = useInView<HTMLDivElement>(0.4);
+  const { t } = useTranslation();
+  const STATS = [
+    { n: 20, suffix: '', label: t('landing.stat1') },
+    { n: 40, suffix: '+', label: t('landing.stat2') },
+    { n: 200, suffix: '+', label: t('landing.stat3') },
+    { n: 26, suffix: '', label: t('landing.stat4') },
+    { n: 100, suffix: '%', label: t('landing.stat5') },
+  ];
   return (
     <div style={{ marginTop: '24px' }}>
       <div ref={ref} className="stats-band" role="list" aria-label="Platform statistics">
@@ -188,7 +192,7 @@ const HomeStatsBand: React.FC = () => {
           <HomeStatItem key={s.label} {...s} idx={i} start={inView} />
         ))}
       </div>
-      <div className="stats-band-caption">Registry, domain, and course counts from the Smart India Hackathon demo dataset.</div>
+      <div className="stats-band-caption">{t('landing.statsCaption')}</div>
     </div>
   );
 };

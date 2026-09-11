@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from app.database import get_db_connection, load_db
 from app.auth import get_current_user
 from app.engine import find
+from app.services import retrieval_service
 from app.services.transcript_service import search_transcripts
 from app.models.content_schemas import (
     CuratedPlaylistDTO,
@@ -177,6 +178,12 @@ def get_lesson_detail(lesson_id: str, current_user: Dict[str, Any] = Depends(get
             provider_badge="Curated YouTube Resource"
         )
         
+        # Background quiz pre-generation (spec section 9): fire-and-forget so
+        # the learner's Practice click is a cache hit. Local import avoids
+        # import-order issues; practice_router never imports content_router.
+        from app.routers.practice_router import prewarm_quiz_for_lesson
+        prewarm_quiz_for_lesson(lesson_id)
+
         return LessonDetailResponse(
             lesson=lesson_dto,
             playlist=playlist_dto,
@@ -213,6 +220,39 @@ def get_lesson_transcripts(lesson_id: str, current_user: Dict[str, Any] = Depend
     finally:
         con.close()
 
+def _search_chunks(con, q: str) -> List[Dict[str, Any]]:
+    """FTS5-first transcript search with LIKE fallback (spec section 12)."""
+    try:
+        fts_hits = retrieval_service.fts5_search(con, q, limit=10)
+    except Exception:
+        fts_hits = []
+    results: List[Dict[str, Any]] = []
+    for h in (fts_hits or []):
+        text = h.get("text_content") or ""
+        q_pos = text.lower().find(q.strip().lower())
+        if q_pos != -1:
+            start = max(0, q_pos - 40)
+            end = min(len(text), q_pos + len(q) + 60)
+            snippet = ("..." if start > 0 else "") + text[start:end] + \
+                      ("..." if end < len(text) else "")
+        else:
+            snippet = text[:100] + "..."
+        results.append({
+            "chunk_id": h.get("chunk_id"),
+            "lesson_id": h.get("lesson_id"),
+            "lesson_title": h.get("lesson_title") or "Curated Lesson",
+            "playlist_title": h.get("playlist_title") or "Curated Playlist",
+            "competency_id": h.get("competency_id"),
+            "topic": h.get("topic"),
+            "timestamp_label": h.get("timestamp_label"),
+            "start_seconds": h.get("start_seconds"),
+            "matching_snippet": snippet,
+        })
+    if not results:
+        return search_transcripts(con, q)
+    return results
+
+
 @router.get("/search", response_model=TranscriptSearchResponse)
 def search_transcript_content(
     q: str = Query(..., min_length=2, description="Search keyword across lesson transcripts"),
@@ -221,7 +261,7 @@ def search_transcript_content(
     """Full-text search across all lesson transcripts with topic and timestamp references."""
     con = get_db_connection()
     try:
-        matches = search_transcripts(con, q)
+        matches = _search_chunks(con, q)
         items = [
             TranscriptSearchResultItem(
                 chunk_id=m["chunk_id"],

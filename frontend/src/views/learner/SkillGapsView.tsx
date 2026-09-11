@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../api/client';
 import { CompetencyGapItem } from '../../types';
@@ -7,6 +8,7 @@ import { useReveal } from '../../hooks/useReveal';
 
 export const SkillGapsView: React.FC = () => {
   const { currentUser } = useAuth();
+  const { t } = useTranslation();
   const [gaps, setGaps] = useState<CompetencyGapItem[]>([]);
   const [scope, setScope] = useState<'TARGET' | 'CURRENT'>('TARGET');
   const [filterStatus, setFilterStatus] = useState<string>('ALL');
@@ -45,10 +47,10 @@ export const SkillGapsView: React.FC = () => {
     <div className="gov-container" style={{ padding: '36px 0' }}>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
-        <span className="eyebrow-meta">Diagnostic & Cadre Evaluation</span>
-        <h1 className="page-title">Official Competency Gap Analysis</h1>
+        <span className="eyebrow-meta">{t('gaps.eyebrow')}</span>
+        <h1 className="page-title">{t('gaps.title')}</h1>
         <p className="meta-line">
-          Gaps are derived deterministically by calculating unmet proficiency levels: <code>max(required_level - supported_level, 0)</code>.
+          {t('gaps.hint')}
         </p>
       </div>
 
@@ -56,21 +58,21 @@ export const SkillGapsView: React.FC = () => {
       <div ref={summaryReveal} className="reveal">
         <div className="grid-3" style={{ marginBottom: '32px' }}>
           <div className="stat-chip" style={{ borderTop: 'none' }}>
-            <div className="stat-label" style={{ color: 'var(--color-danger)' }}>Priority Gaps (High)</div>
+            <div className="stat-label" style={{ color: 'var(--color-danger)' }}>{t('gaps.highCardLabel')}</div>
             <div className="stat-value" style={{ color: 'var(--color-danger)' }}>{highCount}</div>
-            <div className="section-sub" style={{ fontSize: '12px' }}>Unmet gap ≥ 2 levels. Structured training required.</div>
+            <div className="section-sub" style={{ fontSize: '12px' }}>{t('gaps.highCardHint')}</div>
           </div>
 
           <div className="stat-chip">
-            <div className="stat-label" style={{ color: 'var(--orange-700)' }}>Moderate Gaps (Medium)</div>
+            <div className="stat-label" style={{ color: 'var(--orange-700)' }}>{t('gaps.mediumCardLabel')}</div>
             <div className="stat-value" style={{ color: 'var(--orange-700)' }}>{mediumCount}</div>
-            <div className="section-sub" style={{ fontSize: '12px' }}>Unmet gap = 1 level. Practice and assessment recommended.</div>
+            <div className="section-sub" style={{ fontSize: '12px' }}>{t('gaps.mediumCardHint')}</div>
           </div>
 
           <div className="stat-chip">
-            <div className="stat-label" style={{ color: '#146B1A' }}>Requirements Satisfied</div>
+            <div className="stat-label" style={{ color: '#146B1A' }}>{t('gaps.metCardLabel')}</div>
             <div className="stat-value" style={{ color: 'var(--color-success)' }}>{metCount}</div>
-            <div className="section-sub" style={{ fontSize: '12px' }}>Demonstrated evidence meets or exceeds target level.</div>
+            <div className="section-sub" style={{ fontSize: '12px' }}>{t('gaps.metCardHint')}</div>
           </div>
         </div>
       </div>
@@ -89,23 +91,23 @@ export const SkillGapsView: React.FC = () => {
         gap: '16px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Evaluation Scope:</span>
+          <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-secondary)' }}>{t('gaps.evaluationScope')}</span>
           <button
             className={`btn btn-sm ${scope === 'TARGET' ? 'btn-navy' : 'btn-secondary'}`}
             onClick={() => setScope('TARGET')}
           >
-            Target Role Requirements (Supervisory)
+            {t('gaps.targetRoleReq')}
           </button>
           <button
             className={`btn btn-sm ${scope === 'CURRENT' ? 'btn-navy' : 'btn-secondary'}`}
             onClick={() => setScope('CURRENT')}
           >
-            Current Role Requirements
+            {t('gaps.currentRoleReq')}
           </button>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-secondary)' }}>Filter:</span>
+          <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-secondary)' }}>{t('gaps.filterLabel')}</span>
           {['ALL', 'HIGH', 'MEDIUM', 'NO_GAP'].map(status => (
             <button
               key={status}
@@ -122,7 +124,7 @@ export const SkillGapsView: React.FC = () => {
                 cursor: 'pointer'
               }}
             >
-              {status === 'ALL' ? 'All Skills' : status.replace('_', ' ')}
+              {status === 'ALL' ? t('gaps.allSkills') : status.replace('_', ' ')}
             </button>
           ))}
         </div>
@@ -131,11 +133,11 @@ export const SkillGapsView: React.FC = () => {
       {/* Gaps Grid */}
       {loading ? (
         <div style={{ padding: '60px', textAlign: 'center' }}>
-          <div style={{ fontSize: '16px', color: 'var(--color-text-strong)' }}>Loading competency gap matrix...</div>
+          <div style={{ fontSize: '16px', color: 'var(--color-text-strong)' }}>{t('gaps.loadingMatrix')}</div>
         </div>
       ) : filteredGaps.length === 0 ? (
         <div className="gov-card" style={{ padding: '60px', textAlign: 'center' }}>
-          <p className="section-sub">No competency gaps match the selected filter.</p>
+          <p className="section-sub">{t('gaps.noMatch')}</p>
         </div>
       ) : (
         <div ref={gridReveal} className="reveal grid-3">

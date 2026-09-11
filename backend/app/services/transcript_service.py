@@ -600,14 +600,71 @@ _STOPWORDS = {
     "can", "you", "please", "explain", "tell", "me", "about", "in", "on", "of",
     "for", "to", "and", "or", "do", "i", "my", "it", "this", "that", "with",
     "give", "show", "help", "need", "want", "know", "does", "did", "should",
-    "kya", "hai", "ka", "ki", "ke", "kaise", "kyon", "mujhe", "batao", "samjhao"
+    "kya", "hai", "ka", "ki", "ke", "kaise", "kyon", "mujhe", "batao", "samjhao",
+    # Hindi interrogatives/particles that carry no domain meaning
+    "क्या", "है", "हैं", "का", "की", "के", "कैसे", "क्यों", "मुझे", "बताओ", "समझाओ",
+    "करें", "कर", "सकते", "वहीं", "होता", "होती", "होते", "था", "थी", "थे"
+}
+
+# Hindi -> English domain-term map: transcripts are stored in English, so a Hindi
+# question must also search its English equivalents (groq_service then answers in Hindi).
+_HI_TO_EN_TERMS = {
+    "प्रतिदर्श": ["sampling", "sample"],
+    "सर्वेक्षण": ["survey"],
+    "स्तरित": ["stratified", "strata", "stratum"],
+    "अभिकल्पना": ["design"],
+    "भार": ["weight", "weights"],
+    "सूत्र": ["formula"],
+    "जनसंख्या": ["population"],
+    "इकाई": ["unit", "units"],
+    "ढाँचा": ["frame"],
+    "फ्रेम": ["frame"],
+    "गुणवत्ता": ["quality"],
+    "डेटा": ["data"],
+    "आँकड़े": ["data", "statistics"],
+    "सांख्यिकी": ["statistics", "statistical"],
+    "अनुमान": ["estimate", "estimation"],
+    "विचरण": ["variance"],
+    "प्रसारण": ["variance"],
+    "यादृच्छिक": ["random"],
+    "समंवय": ["coordination"],
+    "अनुपात": ["proportional", "allocation", "ratio"],
+    "आवंटन": ["allocation"],
+    "क्वेरी": ["query", "sql"],
+    "जुड़ने": ["join"],
+    "जोड़": ["join"],
+    "सफाई": ["cleaning"],
+    "लापता": ["missing"],
+    "मूल्य": ["value", "imputation"],
+    "मान": ["value"],
+    "गणना": ["calculation", "calculate"],
+    "त्रुटि": ["error", "bias"],
+    "पक्षपात": ["bias"],
+    "विश्वसनीयता": ["confidence"],
+    "आत्मविश्वास": ["confidence"],
+    "स्तर": ["level"],
+    "पद्धति": ["method", "methodology"],
+    "पद्धतिों": ["methods"],
+    "सीखने": ["learning", "learn"],
+    "पाठ": ["lesson"],
+    "पाठ्यक्रम": ["course", "curriculum"],
+    "उदाहरण": ["example"],
+    "ग्रामीण": ["village", "rural"],
+    "क्षेत्र": ["field", "area", "region"],
+    "कार्य": ["task", "work"],
+    "मूल": ["core", "basic"],
 }
 
 
 def extract_question_keywords(question: str, max_terms: int = 4) -> List[str]:
-    """Extracts meaningful lowercase keywords from a natural-language question (EN/HI)."""
+    """Extracts meaningful lowercase keywords from a natural-language question (EN/HI).
+
+    Hindi domain terms are additionally mapped to their English equivalents so the
+    search also matches the English-stored transcripts.
+    """
     words = [w.strip(".,?!;:'\"()[]").lower() for w in question.split()]
     keywords = [w for w in words if len(w) > 2 and w not in _STOPWORDS and not w.isdigit()]
+
     # Preserve order, dedupe
     seen = set()
     ordered = []
@@ -615,7 +672,15 @@ def extract_question_keywords(question: str, max_terms: int = 4) -> List[str]:
         if w not in seen:
             seen.add(w)
             ordered.append(w)
-    return ordered[:max_terms]
+
+    # Expand Hindi keywords with English equivalents (keep Hindi originals too)
+    expanded = list(ordered)
+    for w in ordered:
+        for en in _HI_TO_EN_TERMS.get(w, []):
+            if en not in seen:
+                seen.add(en)
+                expanded.append(en)
+    return expanded[:max_terms * 2]
 
 
 def search_transcripts_keywords(con: sqlite3.Connection, question: str, limit: int = 5) -> List[Dict[str, Any]]:

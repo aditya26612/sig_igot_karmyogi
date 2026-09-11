@@ -21,6 +21,23 @@ class Settings:
     GROQ_PRIMARY_MODEL: str = os.getenv("GROQ_PRIMARY_MODEL", "openai/gpt-oss-20b")
     GROQ_FAST_MODEL: str = os.getenv("GROQ_FAST_MODEL", "openai/gpt-oss-20b")
 
+    # ---- RAG / LLM routing ----
+    OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+    OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "qwen2.5:1.5b")
+    RAG_RERANKER_ENABLED: bool = os.getenv("RAG_RERANKER_ENABLED", "1").lower() in ("1", "true", "yes")
+    RAG_EMBEDDING_MODEL: str = os.getenv("RAG_EMBEDDING_MODEL", "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+    RAG_RERANKER_MODEL: str = os.getenv("RAG_RERANKER_MODEL", "BAAI/bge-reranker-v2-m3")
+    RAG_CHUNK_TARGET_CHARS: int = int(os.getenv("RAG_CHUNK_TARGET_CHARS", "900"))
+    RAG_CHUNK_OVERLAP_CHARS: int = int(os.getenv("RAG_CHUNK_OVERLAP_CHARS", "225"))
+    GROQ_ASSISTANT_TIMEOUT_S: float = float(os.getenv("GROQ_ASSISTANT_TIMEOUT_S", "8"))
+    GROQ_QUIZ_TIMEOUT_S: float = float(os.getenv("GROQ_QUIZ_TIMEOUT_S", "20"))
+
+    # Background quiz pre-generation kill-switch (spec section 9): set
+    # PREWARM_ENABLED=0 to disable fire-and-forget prewarm threads entirely
+    # (e.g. during tests, where daemon jobs would otherwise hold the shared
+    # demo.sqlite open and trigger real model loads).
+    PREWARM_ENABLED: bool = os.getenv("PREWARM_ENABLED", "1").lower() in ("1", "true", "yes")
+
     # Perceived generation delay: makes AI quiz/assessment generation feel like live synthesis in demos
     AI_PRESENTATION_DELAY_SECONDS: float = float(os.getenv("AI_PRESENTATION_DELAY_SECONDS", "3"))
     

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../api/client';
 import { LearnerDashboardResponse } from '../../types';
@@ -34,7 +36,9 @@ const AwardIcon: React.FC = () => (
 );
 
 export const LearnerHomeView: React.FC = () => {
-  const { currentUser, setActiveView } = useAuth();
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [dashboard, setDashboard] = useState<LearnerDashboardResponse | null>(null);
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -65,7 +69,7 @@ export const LearnerHomeView: React.FC = () => {
   if (loading) {
     return (
       <div className="gov-container" style={{ padding: '60px 0', textAlign: 'center' }}>
-        <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--color-text-strong)' }}>Loading your personalized learning plan...</div>
+        <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--color-text-strong)' }}>{t('home.loadingDashboard')}</div>
       </div>
     );
   }
@@ -73,7 +77,7 @@ export const LearnerHomeView: React.FC = () => {
   if (!dashboard) {
     return (
       <div className="gov-container" style={{ padding: '40px 0' }}>
-        <p>Could not retrieve dashboard data.</p>
+        <p>{t('home.noData')}</p>
       </div>
     );
   }
@@ -83,18 +87,18 @@ export const LearnerHomeView: React.FC = () => {
       {/* Officer Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '28px' }}>
         <div>
-          <span className="eyebrow-meta">Officer Competency Journey</span>
+          <span className="eyebrow-meta">{t('home.journeyBadge')}</span>
           <h1 className="page-title">{dashboard.greeting}</h1>
           <div className="meta-line">
-            Current Role: <strong className="strong-ink">{dashboard.current_role}</strong>
+            {t('home.currentRole')}: <strong className="strong-ink">{dashboard.current_role}</strong>
             <span style={{ margin: '0 8px', color: 'var(--color-border-strong)' }}>•</span>
-            Target Role: <strong className="strong-orange">{dashboard.target_role}</strong>
+            {t('home.targetRole')}: <strong className="strong-orange">{dashboard.target_role}</strong>
           </div>
         </div>
 
         {/* Readiness Badge */}
         <div className="readiness-chip">
-          <div className="readiness-label">Learning Readiness Status</div>
+          <div className="readiness-label">{t('home.readiness')}</div>
           <div className="readiness-value">{dashboard.readiness_status.replace(/_/g, ' ')}</div>
         </div>
       </div>
@@ -107,10 +111,10 @@ export const LearnerHomeView: React.FC = () => {
               <span className="promotion-banner-icon"><AwardIcon /></span>
               <div>
                 <div className="promotion-title">
-                  Official Competency Upgraded: {profile.recent_promotions[0].label}
+                  {t('home.upgraded', { name: profile.recent_promotions[0].label })}
                 </div>
                 <div className="promotion-sub">
-                  Supervisor-verified promotion to <strong>{profile.recent_promotions[0].level_label}</strong> — your official MoSPI registry record has been updated.
+                  {t('home.upgradedDetail', { level: profile.recent_promotions[0].level_label })}
                 </div>
               </div>
             </div>
@@ -120,13 +124,13 @@ export const LearnerHomeView: React.FC = () => {
             <div className="gov-card static" style={{ padding: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
                 <div>
-                  <h2 style={{ fontSize: '18px', margin: 0 }}>Official Competency Levels</h2>
+                  <h2 style={{ fontSize: '18px', margin: 0 }}>{t('home.competencyLevels')}</h2>
                   <p className="section-sub">
-                    Verified levels in the MoSPI registry. Levels change only through supervisor-approved assessments.
+                    {t('home.competencyLevelsHint')}
                   </p>
                 </div>
                 <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>
-                  Target: <strong className="strong-orange">{profile.target_position_name}</strong>
+                  {t('home.target')}: <strong className="strong-orange">{profile.target_position_name}</strong>
                 </span>
               </div>
 
@@ -140,7 +144,7 @@ export const LearnerHomeView: React.FC = () => {
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                         <span className="competency-tile-level">{c.level_label}</span>
                         {c.required_level !== null && (
-                          <span className="competency-tile-need">needs L{c.required_level}</span>
+                          <span className="competency-tile-need">{t('home.needsLevel', { level: c.required_level })}</span>
                         )}
                       </div>
                       {pct !== null && (
@@ -166,17 +170,17 @@ export const LearnerHomeView: React.FC = () => {
       <div style={{ marginBottom: '40px' }} ref={gapsReveal} className="reveal">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h2 className="section-heading">Priority Skills to Strengthen</h2>
+            <h2 className="section-heading">{t('home.prioritySkills')}</h2>
             <p className="section-sub">
-              Identified by comparing your current verified evidence against {dashboard.target_role} requirements.
+              {t('home.prioritySkillsHint', { role: dashboard.target_role })}
             </p>
           </div>
 
           <button
             className="btn btn-secondary btn-sm"
-            onClick={() => setActiveView('gaps')}
+            onClick={() => navigate('/gaps')}
           >
-            View All Gaps ({dashboard.total_gaps_count}) →
+            {t('home.viewGaps', { count: dashboard.total_gaps_count })}
           </button>
         </div>
 
@@ -191,17 +195,17 @@ export const LearnerHomeView: React.FC = () => {
       <div ref={journeyReveal} className="reveal">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h2 className="section-heading">Your Structured Learning Journey</h2>
+            <h2 className="section-heading">{t('home.learningJourney')}</h2>
             <p className="section-sub">
-              Step-by-step career path progression from foundation concepts to verified practical assessments.
+              {t('home.learningJourneyHint')}
             </p>
           </div>
 
           <button
             className="btn btn-secondary btn-sm"
-            onClick={() => setActiveView('career')}
+            onClick={() => navigate('/career')}
           >
-            View Full Pathway →
+            {t('home.viewPathway')}
           </button>
         </div>
 
@@ -219,16 +223,16 @@ export const LearnerHomeView: React.FC = () => {
                     <span className="journey-label">{item.action_label}</span>
                   </div>
                   <div className="journey-meta">
-                    Competency: {item.competency_label} {item.course_title ? `• Course: ${item.course_title}` : ''}
+                    {t('home.competency')}: {item.competency_label} {item.course_title ? `• ${t('home.course')}: ${item.course_title}` : ''}
                   </div>
                 </div>
 
                 <div>
                   <button
                     className={`btn btn-sm ${idx === 0 ? 'btn-primary' : 'btn-secondary'}`}
-                    onClick={() => setActiveView('learning')}
+                    onClick={() => navigate(`/learning?lesson=${encodeURIComponent('sampling-lesson-3')}`)}
                   >
-                    {idx === 0 ? 'Start Now →' : 'View Module'}
+                    {idx === 0 ? t('home.startNow') : t('home.viewModule')}
                   </button>
                 </div>
               </div>

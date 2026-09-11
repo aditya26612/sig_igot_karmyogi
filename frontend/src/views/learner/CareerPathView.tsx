@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../api/client';
 import { CareerReadinessResponse, LearningPathDTO, LearningPathItemDTO } from '../../types';
@@ -22,7 +24,9 @@ const ArrowRightIcon: React.FC = () => (
 );
 
 export const CareerPathView: React.FC = () => {
-  const { currentUser, setActiveView, setSelectedLessonId, setActiveAssessmentId } = useAuth();
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [readiness, setReadiness] = useState<CareerReadinessResponse | null>(null);
   const [learningPath, setLearningPath] = useState<LearningPathDTO | null>(null);
   const [loading, setLoading] = useState(true);
@@ -76,7 +80,7 @@ export const CareerPathView: React.FC = () => {
   if (loading) {
     return (
       <div className="gov-container" style={{ padding: '60px', textAlign: 'center' }}>
-        <div style={{ fontSize: '18px', color: 'var(--color-text-strong)' }}>Evaluating career learning pathway...</div>
+        <div style={{ fontSize: '18px', color: 'var(--color-text-strong)' }}>{t('career.evaluating')}</div>
       </div>
     );
   }
@@ -84,7 +88,7 @@ export const CareerPathView: React.FC = () => {
   if (!readiness || !learningPath) {
     return (
       <div className="gov-container" style={{ padding: '40px' }}>
-        <p>Career readiness profile unavailable.</p>
+        <p>{t('career.unavailable')}</p>
       </div>
     );
   }
@@ -93,10 +97,10 @@ export const CareerPathView: React.FC = () => {
     <div className="gov-container" style={{ padding: '36px 0' }}>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
-        <span className="eyebrow-meta">Career Progression & Readiness</span>
-        <h1 className="page-title">Cadre Transition Pathway</h1>
+        <span className="eyebrow-meta">{t('career.eyebrow')}</span>
+        <h1 className="page-title">{t('career.title')}</h1>
         <p className="meta-line">
-          Structured competency progression for officers transitioning from field survey roles to supervisory responsibilities.
+          {t('career.hint')}
         </p>
       </div>
 
@@ -113,7 +117,7 @@ export const CareerPathView: React.FC = () => {
         <div style={{ color: 'var(--blue-500)', lineHeight: 1 }}><ScalesIcon /></div>
         <div>
           <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--blue-600)' }}>
-            Official Notice on Career & Promotion Governance:
+            {t('career.governanceNotice')}
           </div>
           <div style={{ fontSize: '12px', color: 'var(--color-text-primary)', marginTop: '2px', lineHeight: 1.5 }}>
             {readiness.notice}
@@ -127,31 +131,31 @@ export const CareerPathView: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '24px' }}>
             {/* Current Position */}
             <div style={{ flex: 1, minWidth: '260px' }}>
-              <span className="badge badge-gray" style={{ marginBottom: '8px' }}>Current Substantive Role</span>
+              <span className="badge badge-gray" style={{ marginBottom: '8px' }}>{t('career.currentSubstantive')}</span>
               <h3 style={{ fontSize: '20px', marginTop: '4px' }}>
                 {readiness.current_position}
               </h3>
               <p className="section-sub" style={{ marginTop: '4px' }}>
-                Field Operations Division • NSSO
+                {t('career.fieldOps')}
               </p>
             </div>
 
             <div style={{ textAlign: 'center', padding: '0 20px' }}>
               <div style={{ color: 'var(--orange-500)', display: 'inline-flex' }}><ArrowRightIcon /></div>
-              <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>Cadre Advancement</div>
+              <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 700, textTransform: 'uppercase' }}>{t('career.cadreAdvancement')}</div>
             </div>
 
             {/* Target Position */}
             <div style={{ flex: 1, minWidth: '260px', backgroundColor: 'var(--wash-cream)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--orange-100)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '6px' }}>
-                <span className="badge badge-saffron">Target Promotional Role</span>
+                <span className="badge badge-saffron">{t('career.targetPromotional')}</span>
                 <span className="badge badge-navy">{readiness.plain_readiness_label.split(':')[1]}</span>
               </div>
               <h3 style={{ fontSize: '20px', marginTop: '4px' }}>
                 {readiness.target_position}
               </h3>
               <p className="section-sub" style={{ marginTop: '4px' }}>
-                Requires Level 4 Sampling, Supervisory Auditing, and Data Validation.
+                {t('career.targetHint')}
               </p>
             </div>
           </div>
@@ -159,9 +163,9 @@ export const CareerPathView: React.FC = () => {
           {/* Readiness Progress Bar */}
           <div style={{ marginTop: '28px', borderTop: '1px solid var(--color-border)', paddingTop: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', marginBottom: '8px', flexWrap: 'wrap', gap: '6px' }}>
-              <span style={{ fontWeight: 700, color: 'var(--color-text-strong)' }}>Competency Requirements Fulfilled</span>
+              <span style={{ fontWeight: 700, color: 'var(--color-text-strong)' }}>{t('career.requirementsFulfilled')}</span>
               <span style={{ fontWeight: 700, color: 'var(--orange-700)' }}>
-                {readiness.met_competencies_count} of {readiness.total_required_competencies} Competencies Verified
+                {t('career.competenciesVerified', { met: readiness.met_competencies_count, total: readiness.total_required_competencies })}
               </span>
             </div>
             <div className="progress-track">
@@ -178,10 +182,10 @@ export const CareerPathView: React.FC = () => {
       <div ref={pathReveal} className="reveal">
         <div style={{ marginBottom: '20px' }}>
           <h2 className="section-heading" style={{ fontSize: '22px' }}>
-            Sequential Pathway Progression
+            {t('career.sequentialTitle')}
           </h2>
           <p className="section-sub">
-            Vertical curriculum sequenced to resolve foundational dependencies before practical evaluation.
+            {t('career.sequentialHint')}
           </p>
         </div>
 
@@ -201,10 +205,10 @@ export const CareerPathView: React.FC = () => {
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px', flexWrap: 'wrap' }}>
                   <span className={`badge ${isFirst ? 'badge-green' : 'badge-gray'}`} style={{ fontSize: '11px' }}>
-                    Stage: {item.stage}
+                    {t('career.stageLabel', { stage: item.stage })}
                   </span>
                   <span style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>
-                    Status: <strong>{item.status.replace(/_/g, ' ')}</strong>
+                    {t('career.statusLabel', { status: item.status.replace(/_/g, ' ') })}
                   </span>
                 </div>
 
@@ -213,8 +217,8 @@ export const CareerPathView: React.FC = () => {
                 </h3>
 
                 <div style={{ fontSize: '13px', color: 'var(--color-text-secondary)', marginTop: '4px' }}>
-                  Competency: <strong>{item.competency_label}</strong>
-                  {item.course_title && ` • Course: ${item.course_title}`}
+                  {t('home.competency')}: <strong>{item.competency_label}</strong>
+                  {item.course_title && ` • ${t('home.course')}: ${item.course_title}`}
                 </div>
 
                 <div style={{ marginTop: '14px' }}>
@@ -222,14 +226,13 @@ export const CareerPathView: React.FC = () => {
                     className={`btn btn-sm ${isFirst ? 'btn-primary' : 'btn-secondary'}`}
                     onClick={() => {
                       if (item.stage === 'PRACTICAL' || item.stage === 'ASSESSMENT') {
-                        setActiveAssessmentId('ASS-DEMO-PRACTICAL-001');
+                        navigate('/learning?assessment=ASS-DEMO-PRACTICAL-001');
                       } else {
-                        setSelectedLessonId('sampling-lesson-3');
+                        navigate(`/learning?lesson=${encodeURIComponent('sampling-lesson-3')}`);
                       }
-                      setActiveView('learning');
                     }}
                   >
-                    {isFirst ? 'Continue Now →' : 'View Module'}
+                    {isFirst ? t('career.continueNow') : t('career.viewModule')}
                   </button>
                 </div>
               </div>
